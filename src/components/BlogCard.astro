@@ -1,0 +1,76 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  slug: string;
+  image?: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, category, slug, image, tags = [] } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(pubDate);
+
+const categoryColors = {
+  'business-tips': 'bg-blue-100 text-blue-800',
+  'technical-guides': 'bg-green-100 text-green-800',
+  'industry-news': 'bg-purple-100 text-purple-800',
+  'case-studies': 'bg-yellow-100 text-yellow-800',
+};
+
+const categoryColor = categoryColors[category as keyof typeof categoryColors] || 'bg-gray-100 text-gray-800';
+---
+
+<article class="card overflow-hidden group">
+  <a href={`/blog/${slug}`} class="block">
+    {image && (
+      <div class="aspect-video overflow-hidden bg-gray-200">
+        <img 
+          src={image} 
+          alt={title}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+    )}
+    
+    <div class="p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class={`px-3 py-1 text-xs font-semibold rounded-full ${categoryColor}`}>
+          {category.replace('-', ' ').toUpperCase()}
+        </span>
+        <time class="text-sm text-gray-500">{formattedDate}</time>
+      </div>
+      
+      <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-pink-500 transition-colors line-clamp-2">
+        {title}
+      </h3>
+      
+      <p class="text-gray-600 mb-4 line-clamp-3">
+        {description}
+      </p>
+      
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.slice(0, 3).map((tag) => (
+            <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+      
+      <div class="mt-4 flex items-center text-pink-500 font-semibold text-sm group-hover:text-pink-600">
+        Read More
+        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PodcastCard from '../../components/PodcastCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get all podcasts, sorted by episode number (newest first)
+const allPodcasts = await getCollection('podcasts');
+const sortedPodcasts = allPodcasts.sort((a, b) => b.data.episode - a.data.episode);
+
+// Get featured episode (latest or specifically marked)
+const featuredEpisode = sortedPodcasts.find(p => p.data.featured) || sortedPodcasts[0];
+---
+
+<BaseLayout title="Podcast" description="Behind the Signs Podcast - Conversations with sign industry professionals">
+  <!-- Page Header -->
+  <section class="bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 py-20">
+    <div class="container-custom text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 font-['Bebas_Neue']">
+        Behind the Signs <span class="text-yellow-400">Podcast</span>
+      </h1>
+      <p class="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+        Weekly conversations with sign industry professionals, sharing ideas, growth tips, and trade hacks to elevate your business
+      </p>
+      
+      <!-- Podcast Platform Links -->
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="https://www.youtube.com/@BehindTheSigns" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          YouTube
+        </a>
+        <a href="#" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 8.137l-.915 4.327c-.07.319-.295.541-.602.588l-3.975.657v4.836c0 1.276-1.365 2.455-3.029 2.455-1.664 0-3.029-1.179-3.029-2.455s1.365-2.455 3.029-2.455c.587 0 1.129.158 1.593.419V7.576c0-.319.247-.588.564-.616l5.718-.946c.381-.063.744.228.744.616v1.012c0 .276-.186.495-.448.495z"/>
+          </svg>
+          Spotify
+        </a>
+        <a href="#" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.977 14.963c.315 0 .63-.047.917-.142A4.02 4.02 0 0112 13.001a4.02 4.02 0 013.106 1.82c.287.095.602.142.917.142 1.165 0 2.108-.944 2.108-2.108 0-.022-.002-.043-.002-.065l-.004-.097c-.06-1.086-.478-2.08-1.156-2.88a5.94 5.94 0 00-2.268-1.734 5.942 5.942 0 00-2.7-.652 5.94 5.94 0 00-2.7.652 5.94 5.94 0 00-2.27 1.734c-.677.8-1.095 1.794-1.155 2.88l-.004.097c0 .022-.002.043-.002.065 0 1.164.943 2.108 2.108 2.108zm4.023-9.49c1.334 0 2.414 1.08 2.414 2.414 0 1.333-1.08 2.413-2.414 2.413-1.333 0-2.413-1.08-2.413-2.413 0-1.334 1.08-2.414 2.413-2.414zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.872 16.461c0 .894-.723 1.617-1.617 1.617a1.61 1.61 0 01-.926-.296 5.968 5.968 0 01-4.329 1.86 5.968 5.968 0 01-4.328-1.86 1.61 1.61 0 01-.927.296 1.616 1.616 0 01-1.617-1.617c0-.033.002-.065.004-.097l.015-.289c.075-1.43.63-2.743 1.525-3.809a7.562 7.562 0 012.885-2.209 7.566 7.566 0 013.443-.831c1.226 0 2.4.29 3.444.831a7.562 7.562 0 012.884 2.209c.896 1.066 1.45 2.379 1.525 3.809l.015.289c.002.032.004.064.004.097z"/>
+          </svg>
+          Apple Podcasts
+        </a>
+        <a href="#" class="inline-flex items-center px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg hover:bg-yellow-600 transition-colors font-semibold">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm1-17.25v6.806l4.375-3.431L13 6.75zm-2 0l-4.375 3.375L11 13.556V6.75z"/>
+          </svg>
+          RSS Feed
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Featured Episode -->
+  {featuredEpisode && (
+    <section class="py-16 bg-white">
+      <div class="container-custom">
+        <div class="text-center mb-8">
+          <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Featured Episode</span>
+          <h2 class="text-3xl md:text-4xl font-bold mt-2 font-['Bebas_Neue']">
+            Latest <span class="text-gradient">Release</span>
+          </h2>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-gray-100 rounded-2xl overflow-hidden">
+            <div class="aspect-video">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src={`https://www.youtube.com/embed/${featuredEpisode.data.youtubeId}`}
+                title={featuredEpisode.data.title}
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="p-8">
+              <div class="flex items-center gap-4 mb-4">
+                <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">
+                  EP {featuredEpisode.data.episode}
+                </span>
+                <time class="text-gray-500">
+                  {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(featuredEpisode.data.pubDate)}
+                </time>
+                {featuredEpisode.data.guest && (
+                  <>
+                    <span class="text-gray-400">•</span>
+                    <span class="text-teal-600 font-semibold">Guest: {featuredEpisode.data.guest}</span>
+                  </>
+                )}
+              </div>
+              
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                {featuredEpisode.data.title}
+              </h3>
+              
+              <p class="text-gray-600 mb-6">
+                {featuredEpisode.data.description}
+              </p>
+              
+              {featuredEpisode.data.keyTakeaways && featuredEpisode.data.keyTakeaways.length > 0 && (
+                <div class="border-t pt-6">
+                  <h4 class="font-bold text-gray-900 mb-3">Key Takeaways:</h4>
+                  <ul class="space-y-2">
+                    {featuredEpisode.data.keyTakeaways.map((takeaway: string) => (
+                      <li class="flex items-start">
+                        <svg class="w-5 h-5 text-pink-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-gray-700">{takeaway}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+  
+  <!-- All Episodes -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-['Bebas_Neue']">
+          All <span class="text-gradient">Episodes</span>
+        </h2>
+        <p class="text-gray-600 mt-2">
+          Browse our complete library of conversations with industry leaders
+        </p>
+      </div>
+      
+      {sortedPodcasts.length === 0 ? (
+        <div class="text-center py-12">
+          <div class="max-w-md mx-auto">
+            <svg class="w-24 h-24 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+            </svg>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">No episodes yet</h2>
+            <p class="text-gray-600 mb-6">
+              We're preparing amazing content for you. Check back soon!
+            </p>
+            <a href="/" class="btn-primary">
+              Return Home
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedPodcasts.map((podcast) => (
+            <PodcastCard 
+              title={podcast.data.title}
+              description={podcast.data.description}
+              episode={podcast.data.episode}
+              pubDate={podcast.data.pubDate}
+              youtubeId={podcast.data.youtubeId}
+              duration={podcast.data.duration}
+              guest={podcast.data.guest}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+  
+  <!-- Subscribe CTA -->
+  <section class="py-16 bg-gradient-to-br from-pink-500 to-pink-600">
+    <div class="container-custom text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-['Bebas_Neue']">
+        Never Miss an Episode
+      </h2>
+      <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+        Subscribe on your favorite platform and get notified when new episodes drop.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a href="https://www.youtube.com/@BehindTheSigns" target="_blank" rel="noopener noreferrer" 
+           class="btn-secondary text-lg">
+          Subscribe on YouTube
+        </a>
+        <button class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg hover:bg-white/30 transition-colors text-lg">
+          Get Email Updates
+        </button>
+      </div>
+      
+      <!-- Newsletter Form -->
+      <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input 
+          type="email" 
+          placeholder="Enter your email for episode alerts" 
+          required
+          class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/30"
+        />
+        <button type="submit" class="px-6 py-3 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

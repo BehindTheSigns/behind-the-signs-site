@@ -1,0 +1,97 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  episode: number;
+  pubDate: Date;
+  youtubeId: string;
+  duration: string;
+  guest?: string;
+}
+
+const { title, description, episode, pubDate, youtubeId, duration, guest } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+}).format(pubDate);
+
+const thumbnailUrl = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+---
+
+<article class="card overflow-hidden group">
+  <a href={`/podcast/${episode}`} class="block">
+    <div class="relative aspect-video overflow-hidden bg-gray-900">
+      <img 
+        src={thumbnailUrl} 
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      
+      <!-- Play Button Overlay -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center group-hover:bg-pink-600 transition-colors shadow-2xl">
+          <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Duration Badge -->
+      <div class="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded text-sm font-semibold">
+        {duration}
+      </div>
+      
+      <!-- Episode Number -->
+      <div class="absolute bottom-4 left-4 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">
+        EP {episode}
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div class="flex items-center gap-3 mb-3 text-sm text-gray-500">
+        {guest && (
+          <>
+            <span class="font-semibold text-teal-600">Guest: {guest}</span>
+            <span>•</span>
+          </>
+        )}
+        <time>{formattedDate}</time>
+      </div>
+      
+      <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-pink-500 transition-colors line-clamp-2">
+        {title}
+      </h3>
+      
+      <p class="text-gray-600 line-clamp-3">
+        {description}
+      </p>
+      
+      <div class="mt-4 flex items-center justify-between">
+        <span class="flex items-center text-pink-500 font-semibold text-sm group-hover:text-pink-600">
+          Watch Episode
+          <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </span>
+        
+        <div class="flex items-center gap-2">
+          <button 
+            class="p-2 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Share episode"
+            onclick="event.preventDefault(); event.stopPropagation(); navigator.share && navigator.share({title: this.dataset.title, url: this.dataset.url})"
+            data-title={title}
+            data-url={`/podcast/${episode}`}
+          >
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 0m9.032-4.026A9.001 9.001 0 0112 3c-4.474 0-8.268 3.12-9.032 7.326m0 0A9.001 9.001 0 0012 21c4.474 0 8.268-3.12 9.032-7.326"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>

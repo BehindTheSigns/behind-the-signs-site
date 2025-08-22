@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+
+const guides = [
+  {
+    title: 'Sign Pricing Calculator',
+    description: 'Stop leaving money on the table. Our comprehensive pricing calculator helps you account for all costs and achieve healthy margins.',
+    category: 'Business Tools',
+    type: 'Calculator',
+    featured: true,
+  },
+  {
+    title: 'Channel Letter Installation Guide',
+    description: 'Step-by-step guide to perfect channel letter installation, including electrical requirements and troubleshooting tips.',
+    category: 'Technical Guides',
+    type: 'PDF Guide',
+    featured: true,
+  },
+  {
+    title: 'Vehicle Wrap Templates',
+    description: 'Professional templates for the most common vehicle types, saving hours of design time.',
+    category: 'Design Resources',
+    type: 'Templates',
+    featured: false,
+  },
+  {
+    title: 'Client Consultation Checklist',
+    description: 'Never miss important details again. Our comprehensive checklist ensures you capture all requirements upfront.',
+    category: 'Business Tools',
+    type: 'Checklist',
+    featured: false,
+  },
+  {
+    title: 'Material Comparison Chart',
+    description: 'Compare durability, cost, and applications of different vinyl, substrate, and lighting options.',
+    category: 'Technical Guides',
+    type: 'Reference',
+    featured: false,
+  },
+  {
+    title: 'Social Media Templates for Sign Shops',
+    description: 'Ready-to-use social media posts and graphics to showcase your work and attract new clients.',
+    category: 'Marketing',
+    type: 'Templates',
+    featured: false,
+  },
+];
+
+const suppliers = [
+  {
+    name: 'Grimco',
+    description: 'Wide selection of sign supplies, equipment, and materials with nationwide distribution.',
+    category: 'General Supplies',
+    website: 'grimco.com',
+  },
+  {
+    name: 'N. Glantz & Son',
+    description: 'Premium sign materials and equipment supplier serving professionals since 1935.',
+    category: 'General Supplies',
+    website: 'nglantz.com',
+  },
+  {
+    name: '3M Commercial Graphics',
+    description: 'Industry-leading vinyl films, wraps, and adhesive solutions.',
+    category: 'Materials',
+    website: '3m.com',
+  },
+  {
+    name: 'Gemini',
+    description: 'Dimensional letters, plaques, and custom signage components.',
+    category: 'Fabrication',
+    website: 'geminisignproducts.com',
+  },
+  {
+    name: 'Principal LED',
+    description: 'High-quality LED modules and power supplies for illuminated signage.',
+    category: 'Lighting',
+    website: 'principal-led.com',
+  },
+  {
+    name: 'Roland DGA',
+    description: 'Professional printing and cutting equipment for sign production.',
+    category: 'Equipment',
+    website: 'rolanddga.com',
+  },
+];
+
+const tools = [
+  {
+    title: 'Project Timeline Calculator',
+    description: 'Estimate realistic completion times based on project complexity and shop capacity.',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'ROI Calculator for Sign Buyers',
+    description: 'Help clients understand the value of their signage investment.',
+    icon: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  },
+  {
+    title: 'Permit Requirements Checker',
+    description: 'Quick reference for common permit requirements by sign type and location.',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    title: 'Color Contrast Checker',
+    description: 'Ensure your designs meet ADA compliance and readability standards.',
+    icon: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
+  },
+];
+
+const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resources', 'Marketing'];
+---
+
+<BaseLayout 
+  title="Resources - Behind the Signs" 
+  description="Free tools, guides, and resources to help sign professionals grow their business and improve their craft."
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-gray-900 via-yellow-900/20 to-gray-900 py-20">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-['Bebas_Neue'] tracking-wider">
+          Resources & Tools
+        </h1>
+        <p class="text-xl text-gray-300 leading-relaxed">
+          Everything you need to run a more profitable sign business. Free guides, calculators, and industry resources curated from 30+ years of experience.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Resources -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-4xl font-bold mb-8 font-['Bebas_Neue'] text-gray-900">
+        Featured Resources
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {guides.filter(g => g.featured).map((guide) => (
+          <div class="bg-gradient-to-br from-pink-500 to-yellow-400 p-1 rounded-xl">
+            <div class="bg-white rounded-xl p-8 h-full">
+              <div class="flex items-start justify-between mb-4">
+                <span class="px-3 py-1 bg-pink-100 text-pink-600 text-sm font-semibold rounded-full">
+                  {guide.category}
+                </span>
+                <span class="text-gray-500 text-sm">{guide.type}</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 text-gray-900">{guide.title}</h3>
+              <p class="text-gray-600 mb-6">{guide.description}</p>
+              <button class="w-full py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white font-bold rounded-lg hover:shadow-lg transition-shadow">
+                Download Free Resource
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- All Resources Grid -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-gray-900 mb-4 md:mb-0">
+          All Resources
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {categories.map((cat) => (
+            <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors hover:bg-pink-500 hover:text-white bg-white text-gray-700">
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {guides.filter(g => !g.featured).map((guide) => (
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+            <div class="flex items-start justify-between mb-3">
+              <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded">
+                {guide.category}
+              </span>
+              <span class="text-gray-400 text-xs">{guide.type}</span>
+            </div>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">{guide.title}</h3>
+            <p class="text-sm text-gray-600 mb-4">{guide.description}</p>
+            <button class="text-pink-500 font-semibold text-sm hover:text-pink-600">
+              Get Resource →
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry Calculators -->
+  <section class="py-16">
+    <div class="container-custom">
+      <h2 class="text-4xl font-bold mb-8 font-['Bebas_Neue'] text-gray-900">
+        Industry Calculators & Tools
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {tools.map((tool) => (
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+            <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-pink-500 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={tool.icon}></path>
+              </svg>
+            </div>
+            <h3 class="font-bold mb-2 text-gray-900">{tool.title}</h3>
+            <p class="text-sm text-gray-600 mb-3">{tool.description}</p>
+            <button class="text-pink-500 font-semibold text-sm hover:text-pink-600">
+              Launch Tool →
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended Suppliers -->
+  <section class="py-16 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-4xl font-bold mb-4 font-['Bebas_Neue'] text-gray-900">
+        Recommended Suppliers & Partners
+      </h2>
+      <p class="text-gray-600 mb-8">
+        Trusted suppliers we've worked with for years. Quality products and reliable service guaranteed.
+      </p>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {suppliers.map((supplier) => (
+          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="text-lg font-bold text-gray-900">{supplier.name}</h3>
+              <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded">
+                {supplier.category}
+              </span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">{supplier.description}</p>
+            <a 
+              href={`https://${supplier.website}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="text-pink-500 font-semibold text-sm hover:text-pink-600 inline-flex items-center"
+            >
+              Visit {supplier.website}
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-12">
+        <div class="max-w-3xl">
+          <h2 class="text-4xl font-bold text-white mb-4 font-['Bebas_Neue']">
+            Sign Industry Education Hub
+          </h2>
+          <p class="text-gray-300 mb-8">
+            Master your craft with our comprehensive educational content. From beginner basics to advanced techniques, we've got you covered.
+          </p>
+          <div class="grid md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white/10 rounded-lg p-4">
+              <div class="text-3xl font-bold text-yellow-400 mb-1">50+</div>
+              <div class="text-gray-400 text-sm">Video Tutorials</div>
+            </div>
+            <div class="bg-white/10 rounded-lg p-4">
+              <div class="text-3xl font-bold text-pink-400 mb-1">100+</div>
+              <div class="text-gray-400 text-sm">How-To Articles</div>
+            </div>
+            <div class="bg-white/10 rounded-lg p-4">
+              <div class="text-3xl font-bold text-yellow-400 mb-1">25+</div>
+              <div class="text-gray-400 text-sm">Case Studies</div>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/blog" class="px-6 py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white font-bold rounded-lg text-center hover:shadow-lg transition-shadow">
+              Browse Learning Library
+            </a>
+            <a href="/podcast" class="px-6 py-3 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-colors">
+              Listen to Podcast
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="py-16">
+    <div class="container-custom">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-4 font-['Bebas_Neue'] text-gray-900">
+          Get Exclusive Resources
+        </h2>
+        <p class="text-gray-600 mb-8">
+          Join our newsletter for premium resources, industry insights, and member-only tools delivered weekly.
+        </p>
+        <div class="max-w-md mx-auto">
+          <NewsletterForm 
+            variant="inline"
+            buttonText="Get Free Resources"
+            placeholder="Your email address"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
