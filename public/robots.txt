@@ -1,0 +1,40 @@
+# Robots.txt for Behind the Signs
+# https://behindthesigns.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_astro/
+
+# Sitemaps
+Sitemap: https://behindthesigns.com/sitemap.xml
+
+# Crawl-delay (in seconds) for bots that support it
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

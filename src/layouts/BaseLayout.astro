@@ -7,10 +7,25 @@ export interface Props {
   title: string;
   description?: string;
   image?: string;
+  keywords?: string;
+  author?: string;
+  type?: 'website' | 'article' | 'podcast';
+  publishDate?: string;
+  modifiedDate?: string;
 }
 
-const { title, description = 'Behind the Signs - Elevating the sign industry through conversations, insights, and expertise', image = '/og-image.jpg' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { 
+  title, 
+  description = 'Behind the Signs - Elevating the sign industry through conversations, insights, and expertise. Learn from 30+ years of experience in signage, design, fabrication, and business growth.',
+  image = '/og-image.jpg',
+  keywords = 'sign industry, signage business, sign shop, vehicle wraps, channel letters, digital signage, sign fabrication, sign design, business growth, industry podcast',
+  author = 'Behind the Signs',
+  type = 'website',
+  publishDate,
+  modifiedDate
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://behindthesigns.com');
+const imageURL = new URL(image, Astro.site || 'https://behindthesigns.com');
 ---
 
 <!DOCTYPE html>
@@ -22,31 +37,192 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     
     <!-- Primary Meta Tags -->
-    <title>{title} | Behind the Signs</title>
-    <meta name="title" content={`${title} | Behind the Signs`} />
+    <title>{title} | Behind the Signs - Sign Industry Podcast & Resources</title>
+    <meta name="title" content={`${title} | Behind the Signs - Sign Industry Podcast & Resources`} />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | Behind the Signs`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Behind the Signs" />
+    <meta property="og:locale" content="en_US" />
+    {publishDate && <meta property="article:published_time" content={publishDate} />}
+    {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={`${title} | Behind the Signs`} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+    <meta property="twitter:image" content={imageURL} />
+    <meta property="twitter:creator" content="@BehindTheSigns" />
+    <meta property="twitter:site" content="@BehindTheSigns" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Additional SEO -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Behind the Signs Blog RSS Feed" href="/rss.xml" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Behind the Signs",
+        "alternateName": "Behind the Signs Podcast",
+        "url": canonicalURL.origin,
+        "logo": new URL("/logo.png", canonicalURL.origin).toString(),
+        "description": "Behind the Signs is a leading podcast and content platform dedicated to elevating the sign industry through expert conversations, technical guides, and business insights.",
+        "founder": {
+          "@type": "Person",
+          "name": "Behind the Signs Host",
+          "jobTitle": "Host & Industry Expert",
+          "knowsAbout": ["Sign Industry", "Sign Fabrication", "Business Growth", "Digital Signage", "Vehicle Wraps"]
+        },
+        "sameAs": [
+          "https://www.youtube.com/@BehindTheSigns",
+          "https://www.facebook.com/BehindTheSigns",
+          "https://twitter.com/BehindTheSigns"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Service",
+          "email": "contact@behindthesigns.com"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "United States"
+        },
+        "knowsAbout": [
+          "Sign Industry",
+          "Sign Manufacturing",
+          "Digital Signage",
+          "Vehicle Wraps",
+          "Channel Letters",
+          "Business Growth",
+          "Industry Trends"
+        ]
+      })}
+    </script>
+    
+    {type === 'website' && (
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Behind the Signs",
+          "url": canonicalURL.origin,
+          "description": description,
+          "publisher": {
+            "@type": "Organization",
+            "name": "Behind the Signs"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": `${canonicalURL.origin}/search?q={search_term_string}`
+            },
+            "query-input": "required name=search_term_string"
+          }
+        })}
+      </script>
+    )}
+    
+    {type === 'article' && (
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": title,
+          "description": description,
+          "image": imageURL.toString(),
+          "author": {
+            "@type": "Person",
+            "name": author
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Behind the Signs",
+            "logo": {
+              "@type": "ImageObject",
+              "url": new URL("/logo.png", canonicalURL.origin).toString()
+            }
+          },
+          "datePublished": publishDate || new Date().toISOString(),
+          "dateModified": modifiedDate || publishDate || new Date().toISOString(),
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": canonicalURL.toString()
+          }
+        })}
+      </script>
+    )}
+    
+    {type === 'podcast' && (
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "PodcastEpisode",
+          "name": title,
+          "description": description,
+          "url": canonicalURL.toString(),
+          "datePublished": publishDate || new Date().toISOString(),
+          "partOfSeries": {
+            "@type": "PodcastSeries",
+            "name": "Behind the Signs Podcast",
+            "url": `${canonicalURL.origin}/podcast`
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Behind the Signs",
+            "logo": {
+              "@type": "ImageObject",
+              "url": new URL("/logo.png", canonicalURL.origin).toString()
+            }
+          }
+        })}
+      </script>
+    )}
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": canonicalURL.origin
+          },
+          ...(Astro.url.pathname !== '/' ? [{
+            "@type": "ListItem",
+            "position": 2,
+            "name": title,
+            "item": canonicalURL.toString()
+          }] : [])
+        ]
+      })}
+    </script>
   </head>
   <body>
     <Header />
