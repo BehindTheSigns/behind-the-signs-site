@@ -42,9 +42,12 @@ const imageURL = new URL(image, Astro.site || 'https://behindthesigns.com');
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content={author} />
-    <meta name="robots" content="index, follow" />
+    <!-- PREVENT INDEXING - WORK IN PROGRESS SITE -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, nocache" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
     <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
+    <meta name="revisit-after" content="365 days" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -71,9 +74,9 @@ const imageURL = new URL(image, Astro.site || 'https://behindthesigns.com');
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
     
-    <!-- Additional SEO -->
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="alternate" type="application/rss+xml" title="Behind the Signs Blog RSS Feed" href="/rss.xml" />
+    <!-- Additional SEO - DISABLED FOR DEVELOPMENT -->
+    <!-- <link rel="sitemap" type="application/xml" href="/sitemap.xml" /> -->
+    <!-- <link rel="alternate" type="application/rss+xml" title="Behind the Signs Blog RSS Feed" href="/rss.xml" /> -->
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,6 +225,64 @@ const imageURL = new URL(image, Astro.site || 'https://behindthesigns.com');
           }] : [])
         ]
       })}
+    </script>
+    
+    <!-- Bot Detection and Blocking Script -->
+    <script>
+      (function() {
+        // Detect common bot user agents
+        const botPatterns = [
+          /bot/i, /crawl/i, /spider/i, /scraper/i, /facebookexternalhit/i,
+          /WhatsApp/i, /Slack/i, /Twitter/i, /LinkedIn/i, /Pinterest/i,
+          /Googlebot/i, /Bingbot/i, /Slurp/i, /DuckDuckBot/i, /Baiduspider/i,
+          /YandexBot/i, /SemrushBot/i, /AhrefsBot/i, /DataForSeoBot/i,
+          /Chrome-Lighthouse/i, /HeadlessChrome/i, /PhantomJS/i, /SlimerJS/i
+        ];
+        
+        const userAgent = navigator.userAgent;
+        const isBot = botPatterns.some(pattern => pattern.test(userAgent));
+        
+        // Check for headless browser indicators
+        const isHeadless = navigator.webdriver || 
+                          navigator.plugins.length === 0 ||
+                          !navigator.languages || navigator.languages.length === 0;
+        
+        if (isBot || isHeadless) {
+          // Show a blocked message for bots
+          document.documentElement.innerHTML = `
+            <html>
+              <head>
+                <meta name="robots" content="noindex, nofollow">
+                <title>Access Restricted</title>
+              </head>
+              <body style="font-family: sans-serif; text-align: center; padding: 50px;">
+                <h1>Access Restricted</h1>
+                <p>This site is currently under development and not available for public access.</p>
+              </body>
+            </html>
+          `;
+          // Stop all further script execution
+          throw new Error('Bot detected - access blocked');
+        }
+        
+        // Additional check for developer tools (optional, can be annoying for legitimate developers)
+        // Uncomment if you want extra protection but it might affect your own development
+        /*
+        let devtools = {open: false, orientation: null};
+        const threshold = 160;
+        setInterval(function() {
+          if (window.outerHeight - window.innerHeight > threshold || 
+              window.outerWidth - window.innerWidth > threshold) {
+            if (!devtools.open) {
+              devtools.open = true;
+              console.log('%cThis site is under development', 'color: red; font-size: 30px; font-weight: bold;');
+            }
+          } else {
+            devtools.open = false;
+          }
+        }, 500);
+        */
+      })();
     </script>
   </head>
   <body>

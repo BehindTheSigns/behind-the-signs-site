@@ -1,0 +1,14 @@
+# Netlify Headers Configuration
+# Prevents search engines from indexing the work-in-progress site
+
+/*
+  # Prevent indexing by search engines
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  
+  # Security headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  
+  # Cache control for development
+  Cache-Control: no-cache, no-store, must-revalidate

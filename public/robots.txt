@@ -1,32 +1,31 @@
-# Robots.txt for Behind the Signs
-# https://behindthesigns.com
+# Robots.txt - WORK IN PROGRESS SITE
+# This site is under development and should not be indexed
 
+# Block ALL web crawlers and bots
 User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /_astro/
+Disallow: /
+Crawl-delay: 86400
 
-# Sitemaps
-Sitemap: https://behindthesigns.com/sitemap.xml
-
-# Crawl-delay (in seconds) for bots that support it
-Crawl-delay: 1
-
-# Specific bot rules
+# Explicitly block major search engines
 User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
+Disallow: /
 
 User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
+Disallow: /
 
 User-agent: Slurp
-Allow: /
-Crawl-delay: 1
+Disallow: /
 
-# Block bad bots
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+# Block SEO and analysis bots
 User-agent: AhrefsBot
 Disallow: /
 
@@ -38,3 +37,24 @@ Disallow: /
 
 User-agent: MJ12bot
 Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: TwitterBot
+Disallow: /
+
+User-agent: LinkedInBot
+Disallow: /
+
+User-agent: WhatsApp
+Disallow: /
+
+User-agent: Applebot
+Disallow: /
+
+# No sitemap provided (site is private)
+# Sitemap: (none)
