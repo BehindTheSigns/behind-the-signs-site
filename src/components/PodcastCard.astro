@@ -20,77 +20,77 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 const thumbnailUrl = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
 ---
 
-<article class="card overflow-hidden group">
+<article class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-pink-200">
   <a href={`/podcast/${episode}`} class="block">
-    <div class="relative aspect-video overflow-hidden bg-gray-900">
-      <img 
-        src={thumbnailUrl} 
+    <div class="relative aspect-video overflow-hidden bg-slate-900">
+      <img
+        src={thumbnailUrl}
         alt={title}
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
       />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-      
-      <!-- Play Button Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+
+      <!-- Play Button Overlay with glow effect -->
       <div class="absolute inset-0 flex items-center justify-center">
-        <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center group-hover:bg-pink-600 transition-colors shadow-2xl">
-          <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-pink-500 rounded-full flex items-center justify-center group-hover:bg-pink-400 transition-all duration-300 shadow-xl group-hover:shadow-pink-500/50">
+          <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
           </svg>
         </div>
       </div>
-      
+
       <!-- Duration Badge -->
-      <div class="absolute top-4 right-4 bg-black/80 text-white px-2 py-1 rounded text-sm font-semibold">
+      <div class="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-900/90 backdrop-blur-sm text-white px-2 py-1 rounded-md text-xs sm:text-sm font-medium">
         {duration}
       </div>
-      
+
       <!-- Episode Number -->
-      <div class="absolute bottom-4 left-4 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-sm font-bold">
+      <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-yellow-400 text-slate-900 px-3 py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg">
         EP {episode}
       </div>
     </div>
-    
-    <div class="p-6">
-      <div class="flex items-center gap-3 mb-3 text-sm text-gray-500">
+
+    <div class="p-5 sm:p-6">
+      <div class="flex items-center flex-wrap gap-2 mb-3 text-sm">
         {guest && (
-          <>
-            <span class="font-semibold text-teal-600">Guest: {guest}</span>
-            <span>•</span>
-          </>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-600 border border-cyan-500/20">
+            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+            </svg>
+            {guest}
+          </span>
         )}
-        <time>{formattedDate}</time>
+        <time class="text-slate-400 text-xs sm:text-sm">{formattedDate}</time>
       </div>
-      
-      <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-pink-500 transition-colors line-clamp-2">
+
+      <h3 class="text-lg sm:text-xl font-bold text-slate-800 mb-2 group-hover:text-pink-500 transition-colors line-clamp-2">
         {title}
       </h3>
-      
-      <p class="text-gray-600 line-clamp-3">
+
+      <p class="text-slate-500 text-sm sm:text-base line-clamp-2 sm:line-clamp-3 mb-4">
         {description}
       </p>
-      
-      <div class="mt-4 flex items-center justify-between">
+
+      <div class="flex items-center justify-between">
         <span class="flex items-center text-pink-500 font-semibold text-sm group-hover:text-pink-600">
           Watch Episode
           <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </span>
-        
-        <div class="flex items-center gap-2">
-          <button 
-            class="p-2 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="Share episode"
-            onclick="event.preventDefault(); event.stopPropagation(); navigator.share && navigator.share({title: this.dataset.title, url: this.dataset.url})"
-            data-title={title}
-            data-url={`/podcast/${episode}`}
-          >
-            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 0m9.032-4.026A9.001 9.001 0 0112 3c-4.474 0-8.268 3.12-9.032 7.326m0 0A9.001 9.001 0 0012 21c4.474 0 8.268-3.12 9.032-7.326"></path>
-            </svg>
-          </button>
-        </div>
+
+        <button
+          class="p-2 rounded-full hover:bg-pink-50 text-slate-400 hover:text-pink-500 transition-colors"
+          aria-label="Share episode"
+          onclick="event.preventDefault(); event.stopPropagation(); navigator.share && navigator.share({title: this.dataset.title, url: this.dataset.url})"
+          data-title={title}
+          data-url={`/podcast/${episode}`}
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 0m9.032-4.026A9.001 9.001 0 0112 3c-4.474 0-8.268 3.12-9.032 7.326m0 0A9.001 9.001 0 0012 21c4.474 0 8.268-3.12 9.032-7.326"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </a>
