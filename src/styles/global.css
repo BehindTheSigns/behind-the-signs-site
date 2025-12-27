@@ -2,19 +2,12 @@
 
 @layer base {
   :root {
-    /* Core brand colors */
-    --color-primary: 6 182 212; /* Cyan/Teal - brighter for neon effect */
-    --color-accent: 236 72 153; /* Hot Pink/Magenta */
+    /* Core brand colors - simplified for white theme */
+    --color-primary: 236 72 153; /* Pink - matches logo */
+    --color-accent: 236 72 153; /* Pink accent */
     --color-highlight: 251 191 36; /* Yellow/Gold */
-    --color-dark: 15 23 42; /* Slate 900 - deep blue-black */
-    --color-light: 248 250 252; /* Slate 50 - crisp white */
-
-    /* Extended palette for depth */
-    --color-bg-deep: 2 6 23; /* Near black with blue tint */
-    --color-bg-dark: 15 23 42; /* Dark blue-gray */
-    --color-bg-medium: 30 41 59; /* Slate 800 */
-    --color-neon-pink: 244 114 182; /* Brighter pink for glows */
-    --color-neon-cyan: 34 211 238; /* Bright cyan for glows */
+    --color-dark: 17 24 39; /* Gray 900 - near black */
+    --color-light: 255 255 255; /* Pure white */
   }
 
   html {
@@ -22,117 +15,51 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    @apply bg-white text-slate-900;
+    font-family: 'Roboto', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    @apply tracking-tight;
   }
 }
 
 @layer components {
-  /* Enhanced neon text effect - pink glow */
-  .neon-text {
-    text-shadow:
-      0 0 7px rgb(var(--color-neon-pink)),
-      0 0 10px rgb(var(--color-neon-pink)),
-      0 0 21px rgb(var(--color-neon-pink)),
-      0 0 42px rgb(var(--color-accent)),
-      0 0 82px rgb(var(--color-accent) / 0.8),
-      0 0 92px rgb(var(--color-accent) / 0.6);
-  }
-
-  /* Cyan neon text variant */
-  .neon-text-cyan {
-    text-shadow:
-      0 0 7px rgb(var(--color-neon-cyan)),
-      0 0 10px rgb(var(--color-neon-cyan)),
-      0 0 21px rgb(var(--color-neon-cyan)),
-      0 0 42px rgb(var(--color-primary)),
-      0 0 82px rgb(var(--color-primary) / 0.8);
-  }
-
-  /* Enhanced neon border with glow */
-  .neon-border {
-    box-shadow:
-      0 0 5px rgb(var(--color-neon-pink)),
-      0 0 10px rgb(var(--color-neon-pink)),
-      0 0 20px rgb(var(--color-accent) / 0.8),
-      0 0 40px rgb(var(--color-accent) / 0.4),
-      inset 0 0 15px rgb(var(--color-accent) / 0.3);
-  }
-
-  /* Cyan neon border variant */
-  .neon-border-cyan {
-    box-shadow:
-      0 0 5px rgb(var(--color-neon-cyan)),
-      0 0 10px rgb(var(--color-neon-cyan)),
-      0 0 20px rgb(var(--color-primary) / 0.8),
-      0 0 40px rgb(var(--color-primary) / 0.4),
-      inset 0 0 15px rgb(var(--color-primary) / 0.3);
-  }
-
-  /* Dark atmospheric background with subtle gradient */
-  .gradient-bg {
-    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900;
-  }
-
-  /* Hero background - deep blue with cyan accent */
-  .hero-bg {
-    background: linear-gradient(135deg,
-      rgb(var(--color-bg-deep)) 0%,
-      rgb(var(--color-bg-dark)) 50%,
-      rgb(15 40 60) 100%);
-  }
-
-  /* Bokeh-style background effect */
-  .bokeh-bg {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .bokeh-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 20% 80%, rgb(var(--color-primary) / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgb(var(--color-neon-cyan) / 0.1) 0%, transparent 40%),
-      radial-gradient(circle at 40% 40%, rgb(var(--color-accent) / 0.08) 0%, transparent 35%),
-      radial-gradient(circle at 90% 70%, rgb(var(--color-primary) / 0.12) 0%, transparent 45%);
-    filter: blur(40px);
-    z-index: 0;
-  }
-
-  /* Primary button - pink with glow on hover */
+  /* Primary button - pink with subtle shadow */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-pink-500 rounded-lg transition-all duration-200 hover:scale-105;
-    box-shadow: 0 4px 14px rgb(var(--color-accent) / 0.4);
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-pink-500 rounded-lg transition-all duration-200 hover:bg-pink-600 hover:scale-105;
+    box-shadow: 0 4px 14px rgb(var(--color-primary) / 0.3);
   }
 
   .btn-primary:hover {
-    @apply bg-pink-400;
-    box-shadow:
-      0 4px 14px rgb(var(--color-accent) / 0.6),
-      0 0 20px rgb(var(--color-neon-pink) / 0.5);
+    box-shadow: 0 6px 20px rgb(var(--color-primary) / 0.4);
   }
 
-  /* Secondary button - outlined style for dark backgrounds */
+  /* Secondary button - outlined for light backgrounds */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-transparent border-2 border-white/30 rounded-lg transition-all duration-200 hover:scale-105 hover:border-white/60 hover:bg-white/10;
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold text-slate-700 bg-transparent border-2 border-slate-300 rounded-lg transition-all duration-200 hover:scale-105 hover:border-pink-500 hover:text-pink-500;
   }
 
   /* Yellow solid button variant */
   .btn-highlight {
     @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold text-slate-900 bg-yellow-400 rounded-lg transition-all duration-200 hover:scale-105 hover:bg-yellow-300;
-    box-shadow: 0 4px 14px rgb(var(--color-highlight) / 0.4);
+    box-shadow: 0 4px 14px rgb(var(--color-highlight) / 0.3);
   }
 
   .btn-highlight:hover {
-    box-shadow:
-      0 4px 14px rgb(var(--color-highlight) / 0.6),
-      0 0 20px rgb(var(--color-highlight) / 0.4);
+    box-shadow: 0 6px 20px rgb(var(--color-highlight) / 0.4);
+  }
+
+  /* White button variant - for use on dark/image backgrounds */
+  .btn-white {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold text-slate-900 bg-white rounded-lg transition-all duration-200 hover:scale-105;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+  }
+
+  .btn-white:hover {
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
   }
 
   /* Card styles */
@@ -140,51 +67,64 @@
     @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300;
   }
 
-  /* Dark card variant */
-  .card-dark {
-    @apply bg-slate-800/80 backdrop-blur-sm rounded-xl border border-white/10 transition-all duration-300;
+  /* Card with border for subtle definition */
+  .card-bordered {
+    @apply bg-white rounded-xl border border-slate-200 hover:border-slate-300 transition-colors duration-300;
   }
 
-  .card-dark:hover {
-    @apply border-white/20;
-    box-shadow: 0 8px 32px rgb(0 0 0 / 0.3);
-  }
-
+  /* Container */
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Sign board effect - like the banner */
-  .sign-board {
-    @apply relative rounded-2xl;
-    background: linear-gradient(145deg, rgb(var(--color-accent)), rgb(190 50 120));
-    box-shadow:
-      0 0 30px rgb(var(--color-neon-pink) / 0.6),
-      0 0 60px rgb(var(--color-accent) / 0.4),
-      0 20px 40px rgb(0 0 0 / 0.4),
-      inset 0 2px 0 rgb(255 255 255 / 0.2);
+  /* Header styles - transparent and solid states */
+  .header-transparent {
+    @apply bg-transparent;
+    border-bottom: 1px solid transparent;
   }
 
-  /* Header style - glass effect on dark */
-  .header-glass {
-    @apply bg-slate-900/90 backdrop-blur-md border-b border-white/10;
+  .header-solid {
+    @apply bg-white/95 backdrop-blur-md shadow-sm;
+    border-bottom: 1px solid rgb(226 232 240); /* slate-200 */
   }
 
-  /* Section header backgrounds */
-  .section-header-bg {
-    @apply bg-gradient-to-b from-slate-900 to-slate-800;
+  /* Text gradient utility - pink to yellow */
+  .text-gradient {
+    @apply bg-gradient-to-r from-pink-500 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  /* Section backgrounds */
+  .section-white {
+    @apply bg-white;
+  }
+
+  .section-gray {
+    @apply bg-slate-50;
+  }
+
+  /* Feature card with icon */
+  .feature-icon {
+    @apply flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg;
+  }
+
+  .feature-icon-pink {
+    @apply bg-pink-500 text-white;
+    box-shadow: 0 4px 14px rgb(var(--color-primary) / 0.3);
+  }
+
+  .feature-icon-yellow {
+    @apply bg-yellow-400 text-slate-900;
+    box-shadow: 0 4px 14px rgb(var(--color-highlight) / 0.3);
+  }
+
+  .feature-icon-cyan {
+    @apply bg-cyan-500 text-white;
+    box-shadow: 0 4px 14px rgb(6 182 212 / 0.3);
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-pink-500 to-yellow-400 bg-clip-text text-transparent;
-  }
-
-  .text-gradient-cyan {
-    @apply bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent;
-  }
-
+  /* Float animation for badges */
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
@@ -194,44 +134,17 @@
     50% { transform: translateY(-10px); }
   }
 
+  /* Subtle pulse */
   .animate-pulse-slow {
-    animation: pulse 3s ease-in-out infinite;
+    animation: pulse-slow 3s ease-in-out infinite;
   }
 
-  @keyframes pulse {
+  @keyframes pulse-slow {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.8; }
   }
 
-  /* Neon flicker effect */
-  .animate-neon-flicker {
-    animation: neon-flicker 4s ease-in-out infinite;
-  }
-
-  @keyframes neon-flicker {
-    0%, 100% { opacity: 1; }
-    92% { opacity: 1; }
-    93% { opacity: 0.8; }
-    94% { opacity: 1; }
-    96% { opacity: 0.9; }
-    97% { opacity: 1; }
-  }
-
-  /* Glow pulse for neon elements */
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes glow {
-    from {
-      filter: drop-shadow(0 0 5px rgb(var(--color-neon-pink) / 0.8));
-    }
-    to {
-      filter: drop-shadow(0 0 20px rgb(var(--color-neon-pink)));
-    }
-  }
-
-  /* Relative z-index for bokeh background children */
+  /* Relative z-index utility */
   .relative-content {
     position: relative;
     z-index: 1;

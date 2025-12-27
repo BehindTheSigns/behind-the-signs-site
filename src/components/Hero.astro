@@ -1,121 +1,85 @@
 ---
+import { Image } from 'astro:assets';
+import bgImage from '../assets/BTS_background.jpg';
+import logo from '../assets/BTS_Sign.png';
+
 export interface Props {
-  title?: string;
   subtitle?: string;
   ctaText?: string;
   ctaLink?: string;
 }
 
 const {
-  title = "Welcome to Behind the Signs",
   subtitle = "Elevating the sign industry together.",
   ctaText = "Start Listening",
   ctaLink = "/podcast"
 } = Astro.props;
 ---
 
-<section class="relative min-h-[90vh] flex items-center hero-bg bokeh-bg overflow-hidden">
-  <!-- Additional atmospheric bokeh orbs -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-pink-500/8 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-cyan-400/10 rounded-full blur-2xl"></div>
-  </div>
+<section class="relative min-h-[500px] lg:min-h-[600px] flex items-center overflow-hidden">
+  <!-- Background Image -->
+  <Image
+    src={bgImage}
+    alt=""
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+  />
 
-  <div class="container-custom relative-content w-full">
-    <div class="py-16 md:py-24 lg:py-32">
-      <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
+  <!-- Subtle dark overlay for better contrast -->
+  <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30"></div>
 
-        <!-- Sign Board - The Hero Element (like the banner) -->
-        <div class="relative flex-shrink-0">
-          <!-- Sign post -->
-          <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full w-4 h-24 bg-gradient-to-b from-slate-700 to-slate-800 rounded-b-lg shadow-xl"></div>
+  <!-- Content -->
+  <div class="container-custom relative z-10 py-16 lg:py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+      <!-- Logo - Left 2/5 -->
+      <div class="lg:col-span-2 flex justify-center lg:justify-start">
+        <Image
+          src={logo}
+          alt="Behind the Signs"
+          class="w-full max-w-sm md:max-w-md lg:max-w-full h-auto drop-shadow-2xl"
+          loading="eager"
+        />
+      </div>
 
-          <!-- Main sign board -->
-          <div class="sign-board p-1 sm:p-1.5 transform hover:scale-[1.02] transition-transform duration-300">
-            <div class="bg-pink-600 rounded-xl sm:rounded-2xl px-6 sm:px-10 md:px-12 py-6 sm:py-8 md:py-10 border-4 border-pink-400/50">
-              <!-- Sign content -->
-              <div class="text-center">
-                <h1 class="font-['Bebas_Neue'] leading-none">
-                  <span class="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-lg tracking-wide">
-                    BEHIND
-                  </span>
-                  <span class="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-lg tracking-wide -mt-1 sm:-mt-2">
-                    THE SIGNS
-                  </span>
-                </h1>
-                <div class="mt-2 sm:mt-4">
-                  <span class="text-white/90 text-lg sm:text-xl md:text-2xl font-light italic tracking-wider">
-                    Podcast
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- Text & Buttons - Right 3/5 -->
+      <div class="lg:col-span-3 text-center lg:text-left">
+        <!-- Tagline -->
+        <h1 class="text-white text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight drop-shadow-lg mb-6">
+          {subtitle}
+        </h1>
 
-          <!-- Floating badge -->
-          <div class="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 bg-yellow-400 text-slate-900 px-3 py-1 sm:px-4 sm:py-2 rounded-full font-bold text-xs sm:text-sm animate-float shadow-lg">
-            NEW EPISODE
-          </div>
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
+          <a href={ctaLink} class="btn-primary text-lg group">
+            <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+            </svg>
+            {ctaText}
+          </a>
+          <a href="/blog" class="btn-white text-lg">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            Read the Blog
+          </a>
         </div>
 
-        <!-- Content area -->
-        <div class="text-center lg:text-left max-w-xl">
-          <!-- Tagline -->
-          <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-light leading-relaxed mb-8">
-            {subtitle}
-          </p>
-
-          <!-- CTAs -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
-            <a href={ctaLink} class="btn-primary text-lg group">
-              <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-              </svg>
-              {ctaText}
-            </a>
-            <a href="/blog" class="btn-secondary text-lg">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-              Read the Blog
-            </a>
+        <!-- Stats row -->
+        <div class="flex flex-wrap justify-center lg:justify-start gap-8 lg:gap-12">
+          <div class="text-center lg:text-left">
+            <div class="text-2xl sm:text-3xl font-black text-white drop-shadow-lg">100+</div>
+            <div class="text-sm text-white/80 uppercase tracking-wider">Episodes</div>
           </div>
-
-          <!-- Stats -->
-          <div class="grid grid-cols-3 gap-6 lg:gap-8">
-            <div class="text-center lg:text-left">
-              <div class="text-2xl sm:text-3xl font-bold text-cyan-400 neon-text-cyan">100+</div>
-              <div class="text-sm text-white/60 uppercase tracking-wider">Episodes</div>
-            </div>
-            <div class="text-center lg:text-left">
-              <div class="text-2xl sm:text-3xl font-bold text-cyan-400 neon-text-cyan">50K+</div>
-              <div class="text-sm text-white/60 uppercase tracking-wider">Followers</div>
-            </div>
-            <div class="text-center lg:text-left">
-              <div class="text-2xl sm:text-3xl font-bold text-cyan-400 neon-text-cyan">30+</div>
-              <div class="text-sm text-white/60 uppercase tracking-wider">Years Exp.</div>
-            </div>
+          <div class="text-center lg:text-left">
+            <div class="text-2xl sm:text-3xl font-black text-white drop-shadow-lg">50K+</div>
+            <div class="text-sm text-white/80 uppercase tracking-wider">Followers</div>
           </div>
-
-          <!-- Social proof badge -->
-          <div class="mt-8 flex items-center justify-center lg:justify-start gap-3">
-            <span class="inline-flex items-center px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-white/80">
-              <svg class="w-4 h-4 mr-2 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-              Industry expertise since 1990
-            </span>
+          <div class="text-center lg:text-left">
+            <div class="text-2xl sm:text-3xl font-black text-white drop-shadow-lg">30+</div>
+            <div class="text-sm text-white/80 uppercase tracking-wider">Years Exp.</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-    <svg class="w-6 h-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-    </svg>
   </div>
 </section>
