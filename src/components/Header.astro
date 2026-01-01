@@ -1,6 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/BTS_Sign.png';
+import logo from '../assets/bts-sign-logo.svg?raw';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -20,10 +19,9 @@ const currentPath = Astro.url.pathname;
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center group">
-        <Image
-          src={logo}
-          alt="Behind the Signs"
-          class="h-10 lg:h-14 w-auto transition-transform duration-200 group-hover:scale-105"
+        <div
+          class="h-12 lg:h-16 w-auto transition-transform duration-200 group-hover:scale-105 [&>svg]:h-full [&>svg]:w-auto"
+          set:html={logo}
         />
       </a>
 

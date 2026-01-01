@@ -20,7 +20,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 // Updated category colors to match brand palette
 const categoryColors = {
   'business-tips': 'bg-cyan-500/10 text-cyan-600 border border-cyan-500/20',
-  'technical-guides': 'bg-pink-500/10 text-pink-600 border border-pink-500/20',
+  'technical-guides': 'bg-pink-500/10 text-pink-500 border border-pink-500/20',
   'industry-news': 'bg-yellow-500/10 text-yellow-600 border border-yellow-500/20',
   'case-studies': 'bg-slate-500/10 text-slate-600 border border-slate-500/20',
 };
@@ -67,7 +67,7 @@ const categoryColor = categoryColors[category as keyof typeof categoryColors] ||
         </div>
       )}
 
-      <div class="flex items-center text-pink-500 font-semibold text-sm group-hover:text-pink-600">
+      <div class="flex items-center text-pink-500 font-semibold text-sm group-hover:text-pink-500">
         Read More
         <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

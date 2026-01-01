@@ -3,7 +3,7 @@
 @layer base {
   :root {
     /* Core brand colors - simplified for white theme */
-    --color-primary: 236 72 153; /* Pink - matches logo */
+    --color-primary: 236 72 153; /* Pink-500 */
     --color-accent: 236 72 153; /* Pink accent */
     --color-highlight: 251 191 36; /* Yellow/Gold */
     --color-dark: 17 24 39; /* Gray 900 - near black */
@@ -90,7 +90,7 @@
 
   /* Text gradient utility - pink to yellow */
   .text-gradient {
-    @apply bg-gradient-to-r from-pink-500 to-pink-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-pink-500 to-pink-500 bg-clip-text text-transparent;
   }
 
   /* Section backgrounds */
