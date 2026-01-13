@@ -149,4 +149,44 @@
     position: relative;
     z-index: 1;
   }
+
+  /* Hero background - dark gradient for page headers */
+  .hero-bg {
+    @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900;
+  }
+
+  /* Bokeh effect overlay for hero sections */
+  .bokeh-bg {
+    position: relative;
+  }
+
+  .bokeh-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgb(236 72 153 / 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 30%, rgb(251 191 36 / 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 40% 80%, rgb(6 182 212 / 0.1) 0%, transparent 45%);
+    pointer-events: none;
+  }
+
+  /* Sign board texture pattern for CTA sections */
+  .sign-board {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgb(255 255 255 / 0.03) 2px,
+        rgb(255 255 255 / 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgb(255 255 255 / 0.02) 2px,
+        rgb(255 255 255 / 0.02) 4px
+      );
+  }
 }

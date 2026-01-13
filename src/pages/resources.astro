@@ -112,18 +112,19 @@ const tools = [
 const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resources', 'Marketing'];
 ---
 
-<BaseLayout 
-  title="Resources - Behind the Signs" 
+<BaseLayout
+  title="Resources - Behind the Signs"
   description="Free tools, guides, and resources to help sign professionals grow their business and improve their craft."
 >
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-gray-900 via-yellow-900/20 to-gray-900 py-20">
-    <div class="container-custom">
+  <section class="hero-bg bokeh-bg py-20 lg:py-24">
+    <div class="container-custom relative-content">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-['Bebas_Neue'] tracking-wider">
+        <span class="text-pink-400 font-bold text-sm uppercase tracking-wider">Free Downloads</span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl text-white mt-2 mb-6">
           Resources & Tools
         </h1>
-        <p class="text-xl text-gray-300 leading-relaxed">
+        <p class="text-xl text-slate-300 leading-relaxed">
           Everything you need to run a more profitable sign business. Free guides, calculators, and industry resources curated from 30+ years of experience.
         </p>
       </div>
@@ -131,11 +132,14 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
   </section>
 
   <!-- Featured Resources -->
-  <section class="py-16">
+  <section class="py-16 lg:py-20 bg-white">
     <div class="container-custom">
-      <h2 class="text-4xl font-bold mb-8 font-['Bebas_Neue'] text-gray-900">
-        Featured Resources
-      </h2>
+      <div class="text-center mb-12">
+        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Most Popular</span>
+        <h2 class="text-3xl md:text-4xl mt-2 text-slate-900">
+          Featured <span class="text-gradient">Resources</span>
+        </h2>
+      </div>
       <div class="grid md:grid-cols-2 gap-8">
         {guides.filter(g => g.featured).map((guide) => (
           <div class="bg-gradient-to-br from-pink-500 to-yellow-400 p-1 rounded-xl">
@@ -144,11 +148,11 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
                 <span class="px-3 py-1 bg-pink-100 text-pink-600 text-sm font-semibold rounded-full">
                   {guide.category}
                 </span>
-                <span class="text-gray-500 text-sm">{guide.type}</span>
+                <span class="text-slate-500 text-sm">{guide.type}</span>
               </div>
-              <h3 class="text-2xl font-bold mb-3 text-gray-900">{guide.title}</h3>
-              <p class="text-gray-600 mb-6">{guide.description}</p>
-              <button class="w-full py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white font-bold rounded-lg hover:shadow-lg transition-shadow">
+              <h3 class="text-2xl font-bold mb-3 text-slate-900">{guide.title}</h3>
+              <p class="text-slate-600 mb-6">{guide.description}</p>
+              <button class="btn-primary w-full">
                 Download Free Resource
               </button>
             </div>
@@ -159,15 +163,18 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
   </section>
 
   <!-- All Resources Grid -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 lg:py-20 bg-slate-50">
     <div class="container-custom">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h2 class="text-4xl font-bold font-['Bebas_Neue'] text-gray-900 mb-4 md:mb-0">
-          All Resources
-        </h2>
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <div>
+          <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Browse All</span>
+          <h2 class="text-3xl md:text-4xl mt-2 text-slate-900">
+            All <span class="text-gradient">Resources</span>
+          </h2>
+        </div>
         <div class="flex flex-wrap gap-2">
-          {categories.map((cat) => (
-            <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors hover:bg-pink-500 hover:text-white bg-white text-gray-700">
+          {categories.map((cat, index) => (
+            <button class={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${index === 0 ? 'bg-pink-500 text-white' : 'bg-white text-slate-700 hover:bg-pink-500 hover:text-white'}`}>
               {cat}
             </button>
           ))}
@@ -176,16 +183,16 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
 
       <div class="grid md:grid-cols-3 gap-6">
         {guides.filter(g => !g.featured).map((guide) => (
-          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-xl p-6 border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all">
             <div class="flex items-start justify-between mb-3">
-              <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded">
+              <span class="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-semibold rounded">
                 {guide.category}
               </span>
-              <span class="text-gray-400 text-xs">{guide.type}</span>
+              <span class="text-slate-400 text-xs">{guide.type}</span>
             </div>
-            <h3 class="text-lg font-bold mb-2 text-gray-900">{guide.title}</h3>
-            <p class="text-sm text-gray-600 mb-4">{guide.description}</p>
-            <button class="text-pink-500 font-semibold text-sm hover:text-pink-600">
+            <h3 class="text-lg font-bold mb-2 text-slate-900">{guide.title}</h3>
+            <p class="text-sm text-slate-600 mb-4">{guide.description}</p>
+            <button class="text-pink-500 font-semibold text-sm hover:text-pink-600 transition-colors">
               Get Resource →
             </button>
           </div>
@@ -195,22 +202,25 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
   </section>
 
   <!-- Industry Calculators -->
-  <section class="py-16">
+  <section class="py-16 lg:py-20 bg-white">
     <div class="container-custom">
-      <h2 class="text-4xl font-bold mb-8 font-['Bebas_Neue'] text-gray-900">
-        Industry Calculators & Tools
-      </h2>
+      <div class="text-center mb-12">
+        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Interactive Tools</span>
+        <h2 class="text-3xl md:text-4xl mt-2 text-slate-900">
+          Industry Calculators & <span class="text-gradient">Tools</span>
+        </h2>
+      </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {tools.map((tool) => (
-          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+          <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all hover:-translate-y-1">
             <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-pink-500 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={tool.icon}></path>
               </svg>
             </div>
-            <h3 class="font-bold mb-2 text-gray-900">{tool.title}</h3>
-            <p class="text-sm text-gray-600 mb-3">{tool.description}</p>
-            <button class="text-pink-500 font-semibold text-sm hover:text-pink-600">
+            <h3 class="font-bold mb-2 text-slate-900">{tool.title}</h3>
+            <p class="text-sm text-slate-600 mb-3">{tool.description}</p>
+            <button class="text-pink-500 font-semibold text-sm hover:text-pink-600 transition-colors">
               Launch Tool →
             </button>
           </div>
@@ -220,30 +230,33 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
   </section>
 
   <!-- Recommended Suppliers -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 lg:py-20 bg-slate-50">
     <div class="container-custom">
-      <h2 class="text-4xl font-bold mb-4 font-['Bebas_Neue'] text-gray-900">
-        Recommended Suppliers & Partners
-      </h2>
-      <p class="text-gray-600 mb-8">
-        Trusted suppliers we've worked with for years. Quality products and reliable service guaranteed.
-      </p>
-      
+      <div class="text-center mb-12">
+        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Trusted Partners</span>
+        <h2 class="text-3xl md:text-4xl mt-2 mb-4 text-slate-900">
+          Recommended <span class="text-gradient">Suppliers</span>
+        </h2>
+        <p class="text-slate-600 max-w-2xl mx-auto">
+          Trusted suppliers we've worked with for years. Quality products and reliable service guaranteed.
+        </p>
+      </div>
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {suppliers.map((supplier) => (
-          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-xl p-6 border border-slate-100 hover:border-pink-200 hover:shadow-lg transition-all">
             <div class="flex items-start justify-between mb-3">
-              <h3 class="text-lg font-bold text-gray-900">{supplier.name}</h3>
+              <h3 class="text-lg font-bold text-slate-900">{supplier.name}</h3>
               <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded">
                 {supplier.category}
               </span>
             </div>
-            <p class="text-sm text-gray-600 mb-4">{supplier.description}</p>
-            <a 
-              href={`https://${supplier.website}`} 
-              target="_blank" 
+            <p class="text-sm text-slate-600 mb-4">{supplier.description}</p>
+            <a
+              href={`https://${supplier.website}`}
+              target="_blank"
               rel="noopener noreferrer"
-              class="text-pink-500 font-semibold text-sm hover:text-pink-600 inline-flex items-center"
+              class="text-pink-500 font-semibold text-sm hover:text-pink-600 inline-flex items-center transition-colors"
             >
               Visit {supplier.website}
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,60 +270,68 @@ const categories = ['All', 'Business Tools', 'Technical Guides', 'Design Resourc
   </section>
 
   <!-- Educational Content -->
-  <section class="py-16">
+  <section class="py-16 lg:py-20 bg-slate-900">
     <div class="container-custom">
-      <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-12">
-        <div class="max-w-3xl">
-          <h2 class="text-4xl font-bold text-white mb-4 font-['Bebas_Neue']">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="text-pink-400 font-bold text-sm uppercase tracking-wider">Learn & Grow</span>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl text-white mt-2 mb-4">
             Sign Industry Education Hub
           </h2>
-          <p class="text-gray-300 mb-8">
+          <p class="text-slate-300 text-lg">
             Master your craft with our comprehensive educational content. From beginner basics to advanced techniques, we've got you covered.
           </p>
-          <div class="grid md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white/10 rounded-lg p-4">
-              <div class="text-3xl font-bold text-yellow-400 mb-1">50+</div>
-              <div class="text-gray-400 text-sm">Video Tutorials</div>
-            </div>
-            <div class="bg-white/10 rounded-lg p-4">
-              <div class="text-3xl font-bold text-pink-400 mb-1">100+</div>
-              <div class="text-gray-400 text-sm">How-To Articles</div>
-            </div>
-            <div class="bg-white/10 rounded-lg p-4">
-              <div class="text-3xl font-bold text-yellow-400 mb-1">25+</div>
-              <div class="text-gray-400 text-sm">Case Studies</div>
-            </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+          <div class="bg-white/10 rounded-lg p-6 text-center">
+            <div class="text-4xl font-black text-yellow-400 mb-1">50+</div>
+            <div class="text-slate-400 text-sm">Video Tutorials</div>
           </div>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/blog" class="px-6 py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white font-bold rounded-lg text-center hover:shadow-lg transition-shadow">
-              Browse Learning Library
-            </a>
-            <a href="/podcast" class="px-6 py-3 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-colors">
-              Listen to Podcast
-            </a>
+          <div class="bg-white/10 rounded-lg p-6 text-center">
+            <div class="text-4xl font-black text-pink-400 mb-1">100+</div>
+            <div class="text-slate-400 text-sm">How-To Articles</div>
           </div>
+          <div class="bg-white/10 rounded-lg p-6 text-center">
+            <div class="text-4xl font-black text-yellow-400 mb-1">25+</div>
+            <div class="text-slate-400 text-sm">Case Studies</div>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/blog" class="btn-primary text-lg">
+            Browse Learning Library
+          </a>
+          <a href="/podcast" class="btn-secondary text-lg border-white/30 text-white hover:border-white hover:bg-white/10 hover:text-white">
+            Listen to Podcast
+          </a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Newsletter CTA -->
-  <section class="py-16">
+  <section class="py-16 lg:py-20 bg-pink-500">
     <div class="container-custom">
       <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-4xl font-bold mb-4 font-['Bebas_Neue'] text-gray-900">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl text-white mb-4">
           Get Exclusive Resources
         </h2>
-        <p class="text-gray-600 mb-8">
+        <p class="text-white/90 text-lg mb-8">
           Join our newsletter for premium resources, industry insights, and member-only tools delivered weekly.
         </p>
-        <div class="max-w-md mx-auto">
-          <NewsletterForm 
-            variant="inline"
-            buttonText="Get Free Resources"
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
             placeholder="Your email address"
+            required
+            class="flex-1 px-6 py-3 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500"
           />
-        </div>
+          <button type="submit" class="px-6 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">
+            Get Free Resources
+          </button>
+        </form>
+        <p class="text-white/70 text-sm mt-4">
+          Unsubscribe anytime. We respect your privacy.
+        </p>
       </div>
     </div>
   </section>

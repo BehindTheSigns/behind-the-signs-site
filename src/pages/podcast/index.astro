@@ -15,8 +15,9 @@ const featuredEpisode = sortedPodcasts.find(p => p.data.featured) || sortedPodca
   <!-- Page Header -->
   <section class="hero-bg bokeh-bg py-20 lg:py-24">
     <div class="container-custom relative-content text-center">
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-['Bebas_Neue']">
-        Behind the Signs <span class="text-pink-400">Podcast</span>
+      <span class="text-pink-400 font-bold text-sm uppercase tracking-wider">Listen & Learn</span>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl text-white mt-2 mb-4">
+        Behind the Signs <span class="text-gradient">Podcast</span>
       </h1>
       <p class="text-xl text-white/80 max-w-3xl mx-auto mb-8">
         Weekly conversations with sign industry professionals, sharing ideas, growth tips, and trade hacks to elevate your business
@@ -59,7 +60,7 @@ const featuredEpisode = sortedPodcasts.find(p => p.data.featured) || sortedPodca
       <div class="container-custom">
         <div class="text-center mb-8">
           <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Featured Episode</span>
-          <h2 class="text-3xl md:text-4xl font-bold mt-2 font-['Bebas_Neue'] text-slate-800">
+          <h2 class="text-3xl md:text-4xl mt-2 text-slate-900">
             Latest <span class="text-gradient">Release</span>
           </h2>
         </div>
@@ -126,7 +127,8 @@ const featuredEpisode = sortedPodcasts.find(p => p.data.featured) || sortedPodca
   <section class="py-16 lg:py-20 bg-white">
     <div class="container-custom">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold font-['Bebas_Neue'] text-slate-800">
+        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Full Library</span>
+        <h2 class="text-3xl md:text-4xl mt-2 text-slate-900">
           All <span class="text-gradient">Episodes</span>
         </h2>
         <p class="text-slate-600 mt-2">
@@ -168,39 +170,41 @@ const featuredEpisode = sortedPodcasts.find(p => p.data.featured) || sortedPodca
   </section>
 
   <!-- Subscribe CTA -->
-  <section class="py-16 lg:py-20 relative overflow-hidden">
-    <div class="absolute inset-0 sign-board"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-pink-600/90 to-pink-500/90"></div>
+  <section class="py-16 lg:py-20 bg-pink-500">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl text-white mb-4">
+          Never Miss an Episode
+        </h2>
+        <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+          Subscribe on your favorite platform and get notified when new episodes drop.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <a href="https://www.youtube.com/@BehindTheSigns" target="_blank" rel="noopener noreferrer"
+             class="btn-highlight text-lg">
+            Subscribe on YouTube
+          </a>
+          <a href="#newsletter-form" class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg hover:bg-white/30 transition-all border border-white/30 hover:border-white/50 text-lg">
+            Get Email Updates
+          </a>
+        </div>
 
-    <div class="container-custom relative text-center">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 font-['Bebas_Neue']">
-        Never Miss an Episode
-      </h2>
-      <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-        Subscribe on your favorite platform and get notified when new episodes drop.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <a href="https://www.youtube.com/@BehindTheSigns" target="_blank" rel="noopener noreferrer"
-           class="btn-highlight text-lg">
-          Subscribe on YouTube
-        </a>
-        <button class="px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg hover:bg-white/30 transition-all border border-white/30 hover:border-white/50 text-lg">
-          Get Email Updates
-        </button>
+        <!-- Newsletter Form -->
+        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email for episode alerts"
+            required
+            class="flex-1 px-6 py-3 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500"
+          />
+          <button type="submit" class="px-6 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">
+            Subscribe
+          </button>
+        </form>
+        <p class="text-white/70 text-sm mt-4">
+          Unsubscribe anytime. We respect your privacy.
+        </p>
       </div>
-
-      <!-- Newsletter Form -->
-      <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-        <input
-          type="email"
-          placeholder="Enter your email for episode alerts"
-          required
-          class="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
-        />
-        <button type="submit" class="btn-highlight">
-          Subscribe
-        </button>
-      </form>
     </div>
   </section>
 </BaseLayout>

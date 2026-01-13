@@ -15,8 +15,9 @@ const categories = ['business-tips', 'technical-guides', 'industry-news', 'case-
   <!-- Page Header -->
   <section class="hero-bg bokeh-bg py-20 lg:py-24">
     <div class="container-custom relative-content text-center">
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-['Bebas_Neue']">
-        The Behind the Signs <span class="text-pink-400">Blog</span>
+      <span class="text-pink-400 font-bold text-sm uppercase tracking-wider">Industry Insights</span>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl text-white mt-2 mb-4">
+        The Behind the Signs <span class="text-gradient">Blog</span>
       </h1>
       <p class="text-xl text-white/80 max-w-3xl mx-auto">
         Practical insights, technical guides, and business strategies from 30+ years in the sign industry
@@ -94,28 +95,30 @@ const categories = ['business-tips', 'technical-guides', 'industry-news', 'case-
   </section>
 
   <!-- Newsletter CTA -->
-  <section class="py-16 lg:py-20 relative overflow-hidden">
-    <div class="absolute inset-0 sign-board"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-pink-600/90 to-pink-500/90"></div>
-
-    <div class="container-custom relative text-center">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-['Bebas_Neue']">
-        Never Miss a Post
-      </h2>
-      <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-        Subscribe to our newsletter and get the latest insights delivered to your inbox every week.
-      </p>
-      <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-        <input
-          type="email"
-          placeholder="Enter your email"
-          required
-          class="flex-1 px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
-        />
-        <button type="submit" class="btn-highlight">
-          Subscribe
-        </button>
-      </form>
+  <section class="py-16 lg:py-20 bg-pink-500">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl text-white mb-4">
+          Never Miss a Post
+        </h2>
+        <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+          Subscribe to our newsletter and get the latest insights delivered to your inbox every week.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            required
+            class="flex-1 px-6 py-3 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500"
+          />
+          <button type="submit" class="px-6 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">
+            Subscribe
+          </button>
+        </form>
+        <p class="text-white/70 text-sm mt-4">
+          Unsubscribe anytime. We respect your privacy.
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
