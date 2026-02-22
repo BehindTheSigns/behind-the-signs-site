@@ -16,7 +16,8 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative min-h-[500px] lg:min-h-[600px] flex items-center overflow-hidden">
+<!-- Hero Section -->
+<section class="relative min-h-[350px] lg:min-h-[480px] flex items-center overflow-hidden">
   <!-- Background Image -->
   <Image
     src={bgImage}
@@ -32,9 +33,9 @@ const {
   <div class="container-custom relative z-10 py-16 lg:py-24">
     <div class="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-10">
 
-      <!-- Sign Image (left side) -->
-      <div class="hidden lg:block lg:w-5/12 relative self-stretch">
-        <div class="absolute bottom-0 left-0 right-0 translate-y-[45%] xl:translate-y-[30%]">
+      <!-- Sign Image — visible on all sizes -->
+      <div class="hero-sign-col w-[60%] max-w-[300px] lg:max-w-none relative lg:self-stretch flex-shrink-0">
+        <div class="relative lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:translate-y-[30%] xl:translate-y-[21%]">
           <Image
             src={signImage}
             alt="Behind the Signs"
@@ -44,15 +45,15 @@ const {
         </div>
       </div>
 
-      <!-- Text & Buttons (right side) -->
-      <div class="lg:w-7/12 text-center lg:text-left">
+      <!-- Text & Buttons (right side — hidden on small, shown on lg+) -->
+      <div class="hidden lg:block flex-1 min-w-0 text-left">
         <!-- Tagline -->
         <h1 class="text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight drop-shadow-lg mb-8">
           {subtitle}
         </h1>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-12">
+        <div class="flex flex-col sm:flex-row justify-start gap-4 mb-12">
           <a href={ctaLink} class="btn-primary text-lg group">
             <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
@@ -68,7 +69,7 @@ const {
         </div>
 
         <!-- Stats row -->
-        <div class="flex flex-wrap justify-center lg:justify-start gap-10 lg:gap-16">
+        <div class="flex flex-wrap justify-start gap-10 lg:gap-16">
           <div>
             <div class="text-3xl sm:text-4xl font-black text-white drop-shadow-lg">100+</div>
             <div class="text-sm text-white/80 uppercase tracking-wider">Episodes</div>
@@ -82,6 +83,53 @@ const {
             <div class="text-sm text-white/80 uppercase tracking-wider">Years Exp.</div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1024px) {
+    .hero-sign-col {
+      width: clamp(280px, 38%, 500px);
+    }
+  }
+</style>
+
+<!-- Mobile hero text (shown below hero on small screens, hidden on lg+) -->
+<section class="lg:hidden bg-slate-900 py-12">
+  <div class="container-custom text-center">
+    <h1 class="text-white text-4xl md:text-5xl font-black tracking-tight drop-shadow-lg mb-8">
+      {subtitle}
+    </h1>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+      <a href={ctaLink} class="btn-primary text-lg group">
+        <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+        </svg>
+        {ctaText}
+      </a>
+      <a href="/blog" class="btn-white text-lg">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+        Read the Blog
+      </a>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-10">
+      <div>
+        <div class="text-3xl sm:text-4xl font-black text-white drop-shadow-lg">100+</div>
+        <div class="text-sm text-white/80 uppercase tracking-wider">Episodes</div>
+      </div>
+      <div>
+        <div class="text-3xl sm:text-4xl font-black text-white drop-shadow-lg">50K+</div>
+        <div class="text-sm text-white/80 uppercase tracking-wider">Followers</div>
+      </div>
+      <div>
+        <div class="text-3xl sm:text-4xl font-black text-white drop-shadow-lg">30+</div>
+        <div class="text-sm text-white/80 uppercase tracking-wider">Years Exp.</div>
       </div>
     </div>
   </div>
