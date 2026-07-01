@@ -1,324 +1,214 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import BlogCard from '../components/BlogCard.astro';
-import PodcastCard from '../components/PodcastCard.astro';
-import { getCollection } from 'astro:content';
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import heroBg from '../assets/coming-soon/hero-bg.jpg';
+import wordmark from '../assets/coming-soon/wordmark.svg';
+import tilePodcast from '../assets/coming-soon/tile-podcast.png';
+import tileShopTours from '../assets/coming-soon/tile-shop-tours.png';
+import tileCommunity from '../assets/coming-soon/tile-community.png';
 
-// Get real podcast episodes from content collection
-const allPodcasts = await getCollection('podcasts');
-const featuredPodcasts = allPodcasts
-  .sort((a, b) => b.data.episode - a.data.episode)
-  .slice(0, 3)
-  .map(p => ({
-    title: p.data.title,
-    description: p.data.description,
-    episode: p.data.episode,
-    pubDate: p.data.pubDate,
-    youtubeId: p.data.youtubeId,
-    duration: p.data.duration,
-    guest: p.data.guest
-  }));
+const links = [
+  {
+    href: 'https://www.youtube.com/playlist?list=PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk',
+    label: 'Watch the Behind the Signs Podcast on YouTube',
+    image: tilePodcast,
+    alt: 'Behind the Signs Podcast with Liz Toynes and Joe Arenella — Elevating The Sign Industry Together',
+  },
+  {
+    href: 'https://www.youtube.com/playlist?list=PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg',
+    label: 'Watch Behind the Signs Shop Tours on YouTube',
+    image: tileShopTours,
+    alt: 'Behind the Signs Shop Tours — Celebrating The People & Their Work',
+  },
+  {
+    href: 'https://www.facebook.com/groups/behindthesigns',
+    label: 'Join the Behind the Signs Facebook Community',
+    image: tileCommunity,
+    alt: 'Join the conversation — Behind the Signs Facebook Community',
+  },
+];
 
-// Get the latest episode for the featured video
-const latestEpisode = allPodcasts.sort((a, b) => b.data.episode - a.data.episode)[0];
-
-// Get real blog posts from content collection
-const allPosts = await getCollection('blog');
-const featuredPosts = allPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3)
-  .map(p => ({
-    title: p.data.title,
-    description: p.data.description,
-    pubDate: p.data.pubDate,
-    category: p.data.category,
-    slug: p.slug,
-    image: p.data.heroImage,
-    tags: p.data.tags
-  }));
+const description =
+  'Behind the Signs — Elevating the sign industry together. Full site coming soon. Watch the podcast and shop tours on YouTube, and join our Facebook community.';
 ---
 
-<BaseLayout title="Home" description="Behind the Signs - Elevating the sign industry through expert conversations, insights, and 30+ years of experience">
-  <Hero />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
 
-  <!-- Latest Video Section -->
-  <section class="py-16 lg:py-20 bg-white">
-    <div class="container-custom">
-      <div class="text-center mb-10">
-        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Watch Now</span>
-        <h2 class="text-4xl md:text-5xl mt-2 mb-4 text-slate-900">
-          Latest <span class="text-gradient">Episode</span>
-        </h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
-          Catch our newest conversation with industry professionals sharing insights and expertise.
-        </p>
-      </div>
+    <title>Behind the Signs | Coming Soon</title>
+    <meta name="description" content={description} />
+    <!-- PREVENT INDEXING - WORK IN PROGRESS SITE -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 
-      <div class="max-w-4xl mx-auto">
-        <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
-          <iframe
-            src={`https://www.youtube.com/embed/${latestEpisode.data.youtubeId}`}
-            title={latestEpisode.data.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            class="absolute inset-0 w-full h-full"
-          ></iframe>
-        </div>
-        <div class="mt-6 text-center">
-          <h3 class="text-xl font-bold text-slate-900 mb-2">EP {latestEpisode.data.episode}: {latestEpisode.data.title}</h3>
-          <a href="https://www.youtube.com/@BehindTheSigns" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-slate-600 hover:text-pink-500 transition-colors font-medium">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-            Subscribe on YouTube for more episodes
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Behind the Signs | Coming Soon" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og-coming-soon.jpg', Astro.site)} />
+    <meta property="og:site_name" content="Behind the Signs" />
+    <meta property="twitter:card" content="summary_large_image" />
 
-  <!-- Featured Podcasts Section -->
-  <section class="py-16 lg:py-20 bg-slate-50">
-    <div class="container-custom">
-      <div class="text-center mb-12">
-        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Latest Episodes</span>
-        <h2 class="text-4xl md:text-5xl mt-2 mb-4 text-slate-900">
-          Fresh from the <span class="text-gradient">Studio</span>
-        </h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
-          Dive into conversations with industry leaders, innovators, and successful sign business owners.
-        </p>
-      </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-10">
-        {featuredPodcasts.map((podcast) => (
-          <PodcastCard {...podcast} />
-        ))}
-      </div>
-
-      <div class="text-center">
-        <a href="/podcast" class="btn-primary">
-          View All Episodes
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter CTA -->
-  <section class="py-16 lg:py-20 bg-pink-500">
-    <div class="container-custom">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-          Join 10,000+ Sign Professionals
-        </h2>
-        <p class="text-white/90 text-lg mb-8">
-          Get weekly insights, industry trends, and exclusive tips delivered straight to your inbox.
-          No spam, just value.
-        </p>
-        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            required
-            class="flex-1 px-6 py-3 rounded-lg bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500"
+  <body class="bg-[#018bb7] min-h-screen">
+    <main>
+      <!-- Hero: sticker-print photo under a teal wash, brand wordmark, Coming Soon -->
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 hero-zoom">
+          <Image
+            src={heroBg}
+            alt=""
+            class="w-full h-full object-cover saturate-[.75]"
+            loading="eager"
+            widths={[768, 1280, 1920, 2560]}
+            sizes="100vw"
           />
-          <button type="submit" class="px-6 py-3 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors">
-            Subscribe
-          </button>
-        </form>
-        <p class="text-white/70 text-sm mt-4">
-          Unsubscribe anytime. We respect your privacy.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Blog Posts -->
-  <section class="py-16 lg:py-20 bg-white">
-    <div class="container-custom">
-      <div class="text-center mb-12">
-        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">From the Blog</span>
-        <h2 class="text-4xl md:text-5xl mt-2 mb-4 text-slate-900">
-          Industry <span class="text-gradient">Insights</span>
-        </h2>
-        <p class="text-slate-600 max-w-2xl mx-auto">
-          Practical tips, technical guides, and business strategies to help you succeed in the sign industry.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-10">
-        {featuredPosts.map((post) => (
-          <BlogCard {...post} />
-        ))}
-      </div>
-
-      <div class="text-center">
-        <a href="/blog" class="btn-highlight">
-          Read More Articles
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About/Features Section -->
-  <section class="py-16 lg:py-20 bg-slate-50">
-    <div class="container-custom">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Why Behind the Signs?</span>
-          <h2 class="text-4xl md:text-5xl mt-2 mb-6 text-slate-900">
-            30+ Years of <span class="text-gradient">Sign Industry Excellence</span>
-          </h2>
-          <p class="text-slate-600 text-lg mb-8">
-            Behind the Signs isn't just another podcast—it's a movement to elevate the entire sign industry.
-            With over three decades of hands-on experience in design, fabrication, and business management,
-            we bring you real insights that work.
-          </p>
-
-          <div class="space-y-5">
-            <div class="flex items-start">
-              <div class="feature-icon feature-icon-yellow">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                  <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h2a2 2 0 100-4h-.5a1 1 0 000-2H8a2 2 0 012 2v11a2 2 0 11-4 0V5z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-bold text-slate-900 mb-1">Expert Interviews</h3>
-                <p class="text-slate-500">Learn from successful sign shop owners and industry innovators.</p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div class="feature-icon feature-icon-pink">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
-                  <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-bold text-slate-900 mb-1">Business Growth</h3>
-                <p class="text-slate-500">Proven strategies to scale your sign business and increase profits.</p>
-              </div>
-            </div>
-
-            <div class="flex items-start">
-              <div class="feature-icon feature-icon-cyan">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <h3 class="text-xl font-bold text-slate-900 mb-1">Technical Mastery</h3>
-                <p class="text-slate-500">Deep dives into fabrication techniques and material innovations.</p>
-              </div>
-            </div>
-          </div>
         </div>
+        <!-- Teal wash + fade into the flat band below -->
+        <div class="absolute inset-0 bg-[#018bb7]/50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#018bb7]"></div>
 
-        <div class="relative">
-          <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-100">
-            <h3 class="text-3xl font-bold mb-4 text-slate-900">Join Our Community</h3>
-            <p class="text-slate-600 mb-6">
-              Connect with thousands of sign professionals sharing knowledge, opportunities, and support.
-            </p>
-            <div class="space-y-3">
-              <a href="https://www.facebook.com/groups/behindthesigns/" class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg hover:border-pink-300 hover:bg-pink-50 transition-all">
-                <span class="font-semibold text-slate-800">Facebook Group</span>
-                <span class="text-pink-500 text-sm font-medium">15K+ Members</span>
-              </a>
-              <a href="https://www.youtube.com/@BehindTheSigns" class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg hover:border-pink-300 hover:bg-pink-50 transition-all">
-                <span class="font-semibold text-slate-800">YouTube Channel</span>
-                <span class="text-pink-500 text-sm font-medium">25K+ Subscribers</span>
-              </a>
-              <a href="#newsletter" class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-lg hover:border-pink-300 hover:bg-pink-50 transition-all">
-                <span class="font-semibold text-slate-800">Newsletter</span>
-                <span class="text-pink-500 text-sm font-medium">10K+ Readers</span>
-              </a>
-            </div>
-          </div>
+        <div class="relative flex flex-col items-center px-6 pt-14 pb-24 sm:pt-20 sm:pb-32 lg:pt-24 lg:pb-40">
+          <img
+            src={wordmark.src}
+            alt="Behind the Signs"
+            class="wordmark-in w-[82vw] max-w-[320px] sm:max-w-[480px] lg:max-w-[630px] h-auto"
+          />
+          <h1
+            class="coming-soon-in text-white font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight mt-10 sm:mt-14 lg:mt-16 drop-shadow-[0_3px_10px_rgba(0,40,55,0.45)]"
+          >
+            Coming Soon
+          </h1>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Testimonials -->
-  <section class="py-16 lg:py-20 bg-white">
-    <div class="container-custom">
-      <div class="text-center mb-12">
-        <span class="text-pink-500 font-bold text-sm uppercase tracking-wider">Testimonials</span>
-        <h2 class="text-4xl md:text-5xl mt-2 mb-4 text-slate-900">
-          What the <span class="text-gradient">Community Says</span>
-        </h2>
-      </div>
+      <!-- The three destinations -->
+      <section aria-label="Where to find us" class="relative px-6 pb-14 sm:pb-16 -mt-8 sm:-mt-12">
+        <ul class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 lg:gap-12 list-none p-0">
+          {
+            links.map((link, i) => (
+              <li class={`tile-in tile-in-${i}`}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  class="tile group block focus-visible:outline-none"
+                >
+                  <Image
+                    src={link.image}
+                    alt={link.alt}
+                    class="w-full h-auto block max-w-[420px] mx-auto"
+                    widths={[420, 840]}
+                    sizes="(min-width: 640px) 33vw, 90vw"
+                    loading="eager"
+                  />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
 
-      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
-        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 hover:border-pink-200 transition-colors">
-          <div class="flex mb-4">
-            {[...Array(5)].map(() => (
-              <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            ))}
-          </div>
-          <p class="text-slate-600 mb-4">
-            "Behind the Signs has transformed how I approach my business. The pricing strategies alone increased our revenue by 40% in 6 months."
-          </p>
-          <div class="font-bold text-slate-900">John Martinez</div>
-          <div class="text-sm text-slate-500">Owner, Martinez Signs</div>
-        </div>
+    <style>
+      html {
+        font-family: 'Roboto', sans-serif;
+      }
 
-        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 hover:border-pink-200 transition-colors">
-          <div class="flex mb-4">
-            {[...Array(5)].map(() => (
-              <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            ))}
-          </div>
-          <p class="text-slate-600 mb-4">
-            "The technical guides are incredibly detailed. I've learned more in 3 months than in my previous 5 years in the industry."
-          </p>
-          <div class="font-bold text-slate-900">Sarah Chen</div>
-          <div class="text-sm text-slate-500">Lead Designer, Bright Signs Co.</div>
-        </div>
+      .tile {
+        box-shadow: 0 14px 34px rgba(0, 35, 48, 0.35);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+        max-width: 420px;
+        margin-inline: auto;
+      }
 
-        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 hover:border-pink-200 transition-colors">
-          <div class="flex mb-4">
-            {[...Array(5)].map(() => (
-              <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            ))}
-          </div>
-          <p class="text-slate-600 mb-4">
-            "Every episode is packed with actionable insights. It's like having a mentor who's been through it all."
-          </p>
-          <div class="font-bold text-slate-900">Mike Thompson</div>
-          <div class="text-sm text-slate-500">Founder, Thompson Graphics</div>
-        </div>
-      </div>
-    </div>
-  </section>
+      .tile:hover,
+      .tile:focus-visible {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow:
+          0 22px 44px rgba(0, 35, 48, 0.45),
+          0 0 0 4px rgba(255, 255, 255, 0.35);
+      }
 
-  <!-- Final CTA -->
-  <section class="py-16 lg:py-20 bg-slate-900">
-    <div class="container-custom text-center">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl text-white mb-4">
-        Ready to Elevate Your Sign Business?
-      </h2>
-      <p class="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
-        Join thousands of sign professionals who are transforming their businesses with Behind the Signs.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/podcast" class="btn-primary text-lg">
-          Start Listening
-        </a>
-        <a href="/blog" class="btn-secondary text-lg border-white/30 text-white hover:border-white hover:bg-white/10 hover:text-white">
-          Explore the Blog
-        </a>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
+      .tile:active {
+        transform: translateY(-2px) scale(1.005);
+      }
+
+      /* Entrance choreography */
+      .hero-zoom {
+        animation: hero-zoom 2s ease-out both;
+      }
+
+      .wordmark-in {
+        animation: drop-in 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+        filter: drop-shadow(0 8px 18px rgba(0, 40, 55, 0.35));
+      }
+
+      .coming-soon-in {
+        animation: rise-in 0.7s ease-out 0.3s both;
+      }
+
+      .tile-in {
+        animation: rise-in 0.7s ease-out both;
+      }
+      .tile-in-0 { animation-delay: 0.5s; }
+      .tile-in-1 { animation-delay: 0.65s; }
+      .tile-in-2 { animation-delay: 0.8s; }
+
+      @keyframes hero-zoom {
+        from { transform: scale(1.06); }
+        to { transform: scale(1); }
+      }
+
+      @keyframes drop-in {
+        from {
+          opacity: 0;
+          transform: translateY(-28px) scale(0.94);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-zoom,
+        .wordmark-in,
+        .coming-soon-in,
+        .tile-in {
+          animation: none;
+        }
+        .tile,
+        .tile:hover,
+        .tile:focus-visible {
+          transition: none;
+          transform: none;
+        }
+      }
+    </style>
+  </body>
+</html>
