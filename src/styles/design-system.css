@@ -1,0 +1,984 @@
+/* ==========================================================================
+   BEHIND THE SIGNS — DESIGN SYSTEM v1
+   "Die-cut vinyl" language: chunky letterforms, hard vinyl-layer shadows,
+   pill sticker buttons, sign-cabinet panels. Colors sampled from the logo
+   artwork (bts-sign-logo.svg) and the coming-soon sticker-print photo.
+
+   Layers:
+     @theme      — design tokens (also generate Tailwind utilities)
+     components  — buttons, forms, panels, badges, alerts, sections
+     utilities   — motion, legacy texture helpers
+
+   Live reference: /design-system
+   ========================================================================== */
+
+@theme {
+  /* ---- Brand color: Surf (teal) — the page wash ---- */
+  --color-surf-50: #eaf7fc;
+  --color-surf-100: #d3eef8;
+  --color-surf-200: #a6ddf1;
+  --color-surf-300: #6ec8e6;
+  --color-surf-400: #2fabd3;
+  --color-surf-500: #0d9ac9;
+  --color-surf-600: #018bb7; /* brand teal (page background) */
+  --color-surf-700: #01719a;
+  --color-surf-800: #045c7d;
+  --color-surf-900: #07485f;
+  --color-surf-950: #032a3a; /* teal ink — shadow base */
+
+  /* ---- Brand color: Pink (sign face) — replaces Tailwind pink ---- */
+  --color-pink-50: #fdeef7;
+  --color-pink-100: #fbdcee;
+  --color-pink-200: #f7b6dd;
+  --color-pink-300: #f28cc9;
+  --color-pink-400: #ef6cb6;
+  --color-pink-500: #ed54a8; /* brand pink (logo sign face) */
+  --color-pink-600: #d63795;
+  --color-pink-700: #a40075; /* brand deep magenta (logo shade) */
+  --color-pink-800: #830c62;
+  --color-pink-900: #5c0a45;
+  --color-pink-950: #3d0630;
+
+  /* ---- Brand color: Gold (bulb glow) ---- */
+  --color-gold-50: #fff8eb;
+  --color-gold-100: #ffedcc;
+  --color-gold-200: #ffdf9e;
+  --color-gold-300: #ffc95c;
+  --color-gold-400: #ffb238;
+  --color-gold-500: #ff9e18; /* brand gold (logo accent) */
+  --color-gold-600: #ef8a00;
+  --color-gold-700: #c56b00;
+  --color-gold-800: #9c5300;
+  --color-gold-900: #7a4100;
+  --color-gold-950: #422100;
+
+  /* ---- Neutrals ---- */
+  --color-ink: #231f20; /* brand near-black (logo cabinet) */
+  --color-paper: #f4f9fb; /* cool off-white section tint */
+
+  /* ---- Type ---- */
+  --font-display: 'Archivo Black', 'Roboto', ui-sans-serif, sans-serif;
+  --font-body: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-marker: 'Permanent Marker', cursive;
+
+  /* ---- Elevation ---- */
+  --shadow-sticker: 0 14px 34px rgb(3 42 58 / 0.35); /* from the tiles */
+  --shadow-sticker-lg: 0 22px 44px rgb(3 42 58 / 0.45);
+  --shadow-panel: 0 10px 30px rgb(3 42 58 / 0.08);
+  --shadow-panel-lg: 0 18px 44px rgb(3 42 58 / 0.14);
+
+  /* ---- Shape ---- */
+  --radius-blob: 1.25rem; /* panel / card corner */
+}
+
+@layer components {
+  /* ======================================================================
+     BUTTONS — vinyl sticker pills. Hard offset shadow = layered vinyl.
+     Hover lifts, active presses flat. Legacy markup uses variant classes
+     alone, so every variant carries the full base.
+     ====================================================================== */
+  .btn-primary,
+  .btn-secondary,
+  .btn-teal,
+  .btn-gold,
+  .btn-highlight,
+  .btn-dark,
+  .btn-white,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8125rem 1.75rem;
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-synthesis: none;
+    font-size: 0.875rem;
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+    white-space: nowrap;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      background-color 0.18s ease,
+      color 0.18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible,
+  .btn-teal:focus-visible,
+  .btn-gold:focus-visible,
+  .btn-highlight:focus-visible,
+  .btn-dark:focus-visible,
+  .btn-white:focus-visible,
+  .btn-ghost:focus-visible {
+    outline: 3px solid var(--color-surf-400);
+    outline-offset: 2px;
+  }
+
+  /* Primary — brand pink over its deep-magenta vinyl layer */
+  .btn-primary {
+    background-color: var(--color-pink-500);
+    color: #fff;
+    box-shadow:
+      0 4px 0 var(--color-pink-700),
+      0 12px 22px rgb(3 42 58 / 0.18);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-pink-400);
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 var(--color-pink-700),
+      0 16px 28px rgb(3 42 58 / 0.22);
+  }
+  .btn-primary:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 var(--color-pink-700),
+      0 6px 12px rgb(3 42 58 / 0.18);
+  }
+
+  /* Secondary — outlined, for quieter actions on light surfaces */
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 3px rgb(35 31 32 / 0.18);
+  }
+  .btn-secondary:hover {
+    color: var(--color-pink-600);
+    box-shadow: inset 0 0 0 3px var(--color-pink-500);
+    transform: translateY(-2px);
+  }
+  .btn-secondary:active {
+    transform: translateY(1px);
+  }
+
+  /* Teal — solid brand-wash action */
+  .btn-teal {
+    background-color: var(--color-surf-600);
+    color: #fff;
+    box-shadow:
+      0 4px 0 var(--color-surf-800),
+      0 12px 22px rgb(3 42 58 / 0.18);
+  }
+  .btn-teal:hover {
+    background-color: var(--color-surf-500);
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 var(--color-surf-800),
+      0 16px 28px rgb(3 42 58 / 0.22);
+  }
+  .btn-teal:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 var(--color-surf-800),
+      0 6px 12px rgb(3 42 58 / 0.18);
+  }
+
+  /* Gold — high-emphasis highlight (legacy alias: .btn-highlight) */
+  .btn-gold,
+  .btn-highlight {
+    background-color: var(--color-gold-500);
+    color: var(--color-ink);
+    box-shadow:
+      0 4px 0 var(--color-gold-700),
+      0 12px 22px rgb(3 42 58 / 0.18);
+  }
+  .btn-gold:hover,
+  .btn-highlight:hover {
+    background-color: var(--color-gold-400);
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 var(--color-gold-700),
+      0 16px 28px rgb(3 42 58 / 0.22);
+  }
+  .btn-gold:active,
+  .btn-highlight:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 var(--color-gold-700),
+      0 6px 12px rgb(3 42 58 / 0.18);
+  }
+
+  /* Dark — ink sticker */
+  .btn-dark {
+    background-color: var(--color-ink);
+    color: #fff;
+    box-shadow:
+      0 4px 0 #000,
+      0 12px 22px rgb(3 42 58 / 0.25);
+  }
+  .btn-dark:hover {
+    background-color: #3a3435;
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 #000,
+      0 16px 28px rgb(3 42 58 / 0.3);
+  }
+  .btn-dark:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 #000,
+      0 6px 12px rgb(3 42 58 / 0.25);
+  }
+
+  /* White — for teal washes, photos, dark sections. Hover gets the
+     die-cut ring from the coming-soon tiles. */
+  .btn-white {
+    background-color: #fff;
+    color: var(--color-surf-700);
+    box-shadow:
+      0 4px 0 rgb(3 42 58 / 0.35),
+      0 12px 22px rgb(3 42 58 / 0.25);
+  }
+  .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 0 rgb(3 42 58 / 0.35),
+      0 16px 28px rgb(3 42 58 / 0.3),
+      0 0 0 4px rgb(255 255 255 / 0.35);
+  }
+  .btn-white:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 rgb(3 42 58 / 0.35),
+      0 6px 12px rgb(3 42 58 / 0.25);
+  }
+
+  /* Ghost — text-only, menus and tertiary actions */
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-ink);
+  }
+  .btn-ghost:hover {
+    background-color: rgb(3 42 58 / 0.06);
+  }
+  .btn-ghost:active {
+    background-color: rgb(3 42 58 / 0.1);
+  }
+
+  /* Sizes (additive) */
+  .btn-sm {
+    padding: 0.5625rem 1.125rem;
+    font-size: 0.75rem;
+  }
+  .btn-lg {
+    padding: 1.0625rem 2.375rem;
+    font-size: 1rem;
+  }
+  .btn-xl {
+    padding: 1.3125rem 3rem;
+    font-size: 1.125rem;
+  }
+  .btn-block {
+    display: flex;
+    width: 100%;
+  }
+  .btn-icon {
+    padding: 0.8125rem;
+  }
+  .btn-icon.btn-sm {
+    padding: 0.5625rem;
+  }
+  .btn-icon.btn-lg {
+    padding: 1.0625rem;
+  }
+
+  /* Disabled — vinyl peeled off */
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .btn-teal:disabled,
+  .btn-gold:disabled,
+  .btn-highlight:disabled,
+  .btn-dark:disabled,
+  .btn-white:disabled,
+  .btn-ghost:disabled,
+  .btn-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+    transform: none;
+    box-shadow: 0 2px 0 rgb(3 42 58 / 0.15);
+  }
+
+  /* ======================================================================
+     FORMS — chunky 2px borders, teal focus ring. Rule of thumb:
+     teal = focus, pink = selected.
+     ====================================================================== */
+  .field {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+  }
+  .label .req {
+    color: var(--color-pink-600);
+  }
+
+  .hint {
+    font-size: 0.8125rem;
+    color: #64748b;
+  }
+
+  .error-text {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-rose-700, #be123c);
+  }
+
+  .input,
+  .textarea,
+  .select {
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid rgb(3 42 58 / 0.16);
+    border-radius: 0.75rem;
+    padding: 0.6875rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--color-ink);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      background-color 0.15s ease;
+  }
+  .input::placeholder,
+  .textarea::placeholder {
+    color: #94a3b8;
+  }
+  .input:hover,
+  .textarea:hover,
+  .select:hover {
+    border-color: rgb(3 42 58 / 0.32);
+  }
+  .input:focus,
+  .textarea:focus,
+  .select:focus {
+    outline: none;
+    border-color: var(--color-surf-500);
+    box-shadow: 0 0 0 4px rgb(13 154 201 / 0.22);
+  }
+  .input:disabled,
+  .textarea:disabled,
+  .select:disabled {
+    background-color: var(--color-paper);
+    color: #94a3b8;
+    cursor: not-allowed;
+    border-color: rgb(3 42 58 / 0.1);
+  }
+
+  /* Invalid state — set aria-invalid (preferred) or .is-invalid */
+  .input[aria-invalid='true'],
+  .textarea[aria-invalid='true'],
+  .select[aria-invalid='true'],
+  .input.is-invalid,
+  .textarea.is-invalid,
+  .select.is-invalid {
+    border-color: var(--color-rose-600, #e11d48);
+  }
+  .input[aria-invalid='true']:focus,
+  .textarea[aria-invalid='true']:focus,
+  .select[aria-invalid='true']:focus,
+  .input.is-invalid:focus,
+  .textarea.is-invalid:focus,
+  .select.is-invalid:focus {
+    box-shadow: 0 0 0 4px rgb(225 29 72 / 0.18);
+  }
+
+  .textarea {
+    min-height: 7rem;
+    resize: vertical;
+  }
+
+  .select {
+    appearance: none;
+    padding-right: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23231f20' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  /* Checkbox + radio — pink when selected */
+  .checkbox,
+  .radio {
+    appearance: none;
+    flex: none;
+    width: 1.375rem;
+    height: 1.375rem;
+    background-color: #fff;
+    border: 2px solid rgb(3 42 58 / 0.28);
+    cursor: pointer;
+    display: inline-grid;
+    place-content: center;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .checkbox {
+    border-radius: 0.4375rem;
+  }
+  .radio {
+    border-radius: 9999px;
+  }
+  .checkbox:hover,
+  .radio:hover {
+    border-color: var(--color-pink-500);
+  }
+  .checkbox:focus-visible,
+  .radio:focus-visible,
+  .switch:focus-visible {
+    outline: 3px solid var(--color-surf-400);
+    outline-offset: 2px;
+  }
+  .checkbox:checked,
+  .radio:checked {
+    background-color: var(--color-pink-500);
+    border-color: var(--color-pink-500);
+  }
+  .checkbox:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 13 4 4L19 7'/%3E%3C/svg%3E");
+    background-size: 0.875rem;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .radio:checked::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background-color: #fff;
+  }
+
+  /* Switch */
+  .switch {
+    appearance: none;
+    flex: none;
+    width: 2.875rem;
+    height: 1.625rem;
+    border-radius: 9999px;
+    background-color: rgb(3 42 58 / 0.22);
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.18s ease;
+  }
+  .switch::before {
+    content: '';
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgb(3 42 58 / 0.3);
+    transition: translate 0.18s ease;
+  }
+  .switch:checked {
+    background-color: var(--color-pink-500);
+  }
+  .switch:checked::before {
+    translate: 1.25rem 0;
+  }
+
+  /* Inline choice row (checkbox/radio/switch + label) */
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  /* ======================================================================
+     PANELS — sign faces
+     ====================================================================== */
+  .panel {
+    background-color: #fff;
+    border: 1px solid rgb(3 42 58 / 0.08);
+    border-radius: var(--radius-blob);
+    box-shadow: var(--shadow-panel);
+  }
+  .panel-hover {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .panel-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-panel-lg);
+  }
+  .panel-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgb(3 42 58 / 0.08);
+  }
+  .panel-body {
+    padding: 1.5rem;
+  }
+  .panel-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid rgb(3 42 58 / 0.08);
+    background-color: var(--color-paper);
+    border-radius: 0 0 var(--radius-blob) var(--radius-blob);
+  }
+
+  /* Die-cut sticker panel — for teal washes / photo backgrounds */
+  .panel-sticker {
+    background-color: #fff;
+    border: 0;
+    border-radius: var(--radius-blob);
+    box-shadow:
+      0 0 0 5px rgb(255 255 255 / 0.4),
+      var(--shadow-sticker);
+  }
+
+  /* Teal callout face */
+  .panel-teal {
+    background-color: var(--color-surf-600);
+    color: #fff;
+    border: 0;
+    border-radius: var(--radius-blob);
+    box-shadow: var(--shadow-sticker);
+  }
+
+  /* Sign cabinet — the showpiece CTA. Ink rim, pink face, neon tube inset
+     (straight from the logo). Put .panel-cabinet-face inside .panel-cabinet. */
+  .panel-cabinet {
+    background-color: var(--color-ink);
+    border-radius: calc(var(--radius-blob) + 0.5rem);
+    padding: 0.5rem;
+    box-shadow: var(--shadow-sticker-lg);
+  }
+  .panel-cabinet-face {
+    background:
+      radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.22) 0%, transparent 55%),
+      var(--color-pink-500);
+    border-radius: var(--radius-blob);
+    color: #fff;
+    padding: 2.5rem 2rem;
+    box-shadow:
+      inset 0 0 0 3px rgb(255 255 255 / 0.85),
+      inset 0 0 18px 4px rgb(255 255 255 / 0.35);
+  }
+  .panel-cabinet-face.face-teal {
+    background:
+      radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.22) 0%, transparent 55%),
+      var(--color-surf-600);
+  }
+
+  /* ======================================================================
+     BADGES — mini stickers
+     ====================================================================== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3125rem 0.75rem;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-weight: 900;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background-color: rgb(3 42 58 / 0.08);
+    color: var(--color-ink);
+  }
+  .badge-pink {
+    background-color: var(--color-pink-500);
+    color: #fff;
+  }
+  .badge-teal {
+    background-color: var(--color-surf-600);
+    color: #fff;
+  }
+  .badge-gold {
+    background-color: var(--color-gold-500);
+    color: var(--color-ink);
+  }
+  .badge-ink {
+    background-color: var(--color-ink);
+    color: #fff;
+  }
+  .badge-outline {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px rgb(3 42 58 / 0.2);
+  }
+  .badge-soft-pink {
+    background-color: var(--color-pink-100);
+    color: var(--color-pink-700);
+  }
+  .badge-soft-teal {
+    background-color: var(--color-surf-100);
+    color: var(--color-surf-800);
+  }
+  .badge-soft-gold {
+    background-color: var(--color-gold-100);
+    color: var(--color-gold-800);
+  }
+
+  /* ======================================================================
+     ALERTS
+     ====================================================================== */
+  .alert {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    border: 2px solid;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .alert-title {
+    font-weight: 900;
+    display: block;
+    margin-bottom: 0.125rem;
+  }
+  .alert-info {
+    background-color: var(--color-surf-50);
+    border-color: rgb(1 139 183 / 0.35);
+    color: var(--color-surf-900);
+  }
+  .alert-success {
+    background-color: #f0fdf4;
+    border-color: rgb(22 163 74 / 0.35);
+    color: #14532d;
+  }
+  .alert-warning {
+    background-color: var(--color-gold-50);
+    border-color: rgb(239 138 0 / 0.4);
+    color: var(--color-gold-900);
+  }
+  .alert-danger {
+    background-color: #fff1f2;
+    border-color: rgb(225 29 72 / 0.35);
+    color: #881337;
+  }
+
+  /* ======================================================================
+     SECTIONS & HEADINGS
+     ====================================================================== */
+  .section {
+    padding-block: 4rem;
+  }
+  @media (min-width: 640px) {
+    .section {
+      padding-block: 6rem;
+    }
+  }
+  .section-white {
+    background-color: #fff;
+  }
+  .section-tint {
+    background-color: var(--color-paper);
+  }
+  .section-gray {
+    background-color: var(--color-paper);
+  }
+  .section-teal {
+    background-color: var(--color-surf-600);
+    color: #fff;
+  }
+  .section-ink {
+    background-color: var(--color-ink);
+    color: #fff;
+  }
+
+  /* Hero pattern: photo + teal wash + fade into the next surface.
+     <section class="hero"> <img class="hero-media anim-zoom-settle">
+     <div class="hero-wash"></div> <div class="hero-fade"></div>
+     <div class="relative ...content"> */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-surf-600);
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.75);
+  }
+  .hero-wash {
+    position: absolute;
+    inset: 0;
+    background-color: rgb(1 139 183 / 0.5);
+  }
+  .hero-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 55%, var(--color-surf-600));
+  }
+
+  /* Headline + eyebrow */
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-synthesis: none;
+    line-height: 1.05;
+    color: var(--color-ink);
+  }
+  .headline-light {
+    color: #fff;
+    text-shadow: 0 3px 10px rgb(0 40 55 / 0.45);
+  }
+  .headline-tilt {
+    transform: rotate(-1.5deg);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--font-marker);
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+    color: var(--color-pink-600);
+    transform: rotate(-2deg);
+  }
+  .eyebrow-gold {
+    color: var(--color-gold-500);
+  }
+  .eyebrow-white {
+    color: #fff;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: #475569;
+  }
+  .lead-light {
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  /* Text link */
+  .link {
+    color: var(--color-surf-700);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgb(1 139 183 / 0.35);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    transition:
+      color 0.15s ease,
+      text-decoration-color 0.15s ease;
+  }
+  .link:hover {
+    color: var(--color-pink-600);
+    text-decoration-color: var(--color-pink-500);
+  }
+
+  .divider {
+    border: 0;
+    height: 2px;
+    background: rgb(3 42 58 / 0.08);
+    border-radius: 1px;
+  }
+
+  /* ======================================================================
+     LEGACY CARRY-OVERS (kept working while old pages migrate)
+     ====================================================================== */
+  .container-custom {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-custom {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-custom {
+      padding-inline: 2rem;
+    }
+  }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid rgb(3 42 58 / 0.08);
+    border-radius: var(--radius-blob);
+    box-shadow: var(--shadow-panel);
+    transition: box-shadow 0.3s ease;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-panel-lg);
+  }
+  .card-bordered {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-blob);
+    transition: border-color 0.3s ease;
+  }
+  .card-bordered:hover {
+    border-color: #cbd5e1;
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(90deg, var(--color-pink-500), var(--color-gold-500));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .header-transparent {
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+  }
+  .header-solid {
+    background-color: rgb(255 255 255 / 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 2px rgb(3 42 58 / 0.05);
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .feature-icon-pink {
+    background-color: var(--color-pink-500);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--color-pink-700);
+  }
+  .feature-icon-yellow {
+    background-color: var(--color-gold-500);
+    color: var(--color-ink);
+    box-shadow: 0 4px 0 var(--color-gold-700);
+  }
+  .feature-icon-cyan {
+    background-color: var(--color-surf-600);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--color-surf-800);
+  }
+}
+
+@layer utilities {
+  /* ======================================================================
+     MOTION — the coming-soon entrance choreography, tokenized.
+     Combine with .anim-delay-* for staggered reveals.
+     ====================================================================== */
+  .anim-zoom-settle {
+    animation: ds-zoom-settle 2s ease-out both;
+  }
+  .anim-drop-in {
+    animation: ds-drop-in 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  }
+  .anim-rise-in {
+    animation: ds-rise-in 0.7s ease-out both;
+  }
+  .anim-delay-1 { animation-delay: 0.15s; }
+  .anim-delay-2 { animation-delay: 0.3s; }
+  .anim-delay-3 { animation-delay: 0.45s; }
+  .anim-delay-4 { animation-delay: 0.6s; }
+  .anim-delay-5 { animation-delay: 0.75s; }
+  .anim-delay-6 { animation-delay: 0.9s; }
+
+  @keyframes ds-zoom-settle {
+    from { transform: scale(1.06); }
+    to { transform: scale(1); }
+  }
+  @keyframes ds-drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-28px) scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes ds-rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float {
+    animation: ds-float 3s ease-in-out infinite;
+  }
+  @keyframes ds-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-pulse-slow {
+    animation: ds-pulse-slow 3s ease-in-out infinite;
+  }
+  @keyframes ds-pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-zoom-settle,
+    .anim-drop-in,
+    .anim-rise-in,
+    .animate-float,
+    .animate-pulse-slow {
+      animation: none;
+    }
+  }
+
+  /* Legacy texture/utility helpers */
+  .relative-content {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-bg {
+    background-image: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a);
+  }
+  .bokeh-bg {
+    position: relative;
+  }
+  .bokeh-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgb(237 84 168 / 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 30%, rgb(255 158 24 / 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 40% 80%, rgb(1 139 183 / 0.12) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .sign-board {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgb(255 255 255 / 0.03) 2px,
+        rgb(255 255 255 / 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgb(255 255 255 / 0.02) 2px,
+        rgb(255 255 255 / 0.02) 4px
+      );
+  }
+}

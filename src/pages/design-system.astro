@@ -1,0 +1,734 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import heroBg from '../assets/coming-soon/hero-bg.jpg';
+import wordmark from '../assets/coming-soon/wordmark.svg';
+
+const ramps = [
+  {
+    name: 'Surf',
+    token: 'surf',
+    note: 'The teal wash. Backgrounds, focus rings, links.',
+    steps: [
+      { step: '50', hex: '#eaf7fc' },
+      { step: '100', hex: '#d3eef8' },
+      { step: '200', hex: '#a6ddf1' },
+      { step: '300', hex: '#6ec8e6' },
+      { step: '400', hex: '#2fabd3' },
+      { step: '500', hex: '#0d9ac9' },
+      { step: '600', hex: '#018bb7', brand: true },
+      { step: '700', hex: '#01719a' },
+      { step: '800', hex: '#045c7d' },
+      { step: '900', hex: '#07485f' },
+      { step: '950', hex: '#032a3a' },
+    ],
+  },
+  {
+    name: 'Pink',
+    token: 'pink',
+    note: 'The sign face. Primary actions, selected states.',
+    steps: [
+      { step: '50', hex: '#fdeef7' },
+      { step: '100', hex: '#fbdcee' },
+      { step: '200', hex: '#f7b6dd' },
+      { step: '300', hex: '#f28cc9' },
+      { step: '400', hex: '#ef6cb6' },
+      { step: '500', hex: '#ed54a8', brand: true },
+      { step: '600', hex: '#d63795' },
+      { step: '700', hex: '#a40075', brand: true },
+      { step: '800', hex: '#830c62' },
+      { step: '900', hex: '#5c0a45' },
+      { step: '950', hex: '#3d0630' },
+    ],
+  },
+  {
+    name: 'Gold',
+    token: 'gold',
+    note: 'The bulb glow. Highlights, warnings, moments of delight.',
+    steps: [
+      { step: '50', hex: '#fff8eb' },
+      { step: '100', hex: '#ffedcc' },
+      { step: '200', hex: '#ffdf9e' },
+      { step: '300', hex: '#ffc95c' },
+      { step: '400', hex: '#ffb238' },
+      { step: '500', hex: '#ff9e18', brand: true },
+      { step: '600', hex: '#ef8a00' },
+      { step: '700', hex: '#c56b00' },
+      { step: '800', hex: '#9c5300' },
+      { step: '900', hex: '#7a4100' },
+      { step: '950', hex: '#422100' },
+    ],
+  },
+];
+
+const neutrals = [
+  { name: 'Ink', token: 'ink', hex: '#231f20', note: 'Text & cabinets' },
+  { name: 'Paper', token: 'paper', hex: '#f4f9fb', note: 'Tinted sections' },
+  { name: 'White', token: 'white', hex: '#ffffff', note: 'Sign faces' },
+];
+
+const navLinks = [
+  ['#foundations', 'Foundations'],
+  ['#buttons', 'Buttons'],
+  ['#forms', 'Forms'],
+  ['#panels', 'Panels'],
+  ['#badges', 'Badges & Alerts'],
+  ['#sections', 'Sections'],
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Behind the Signs — Design System</title>
+    <meta name="description" content="Living design system for the Behind the Signs brand." />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-white text-slate-900">
+    <!-- ================= NAV ================= -->
+    <header class="sticky top-0 z-50 header-solid">
+      <div class="container-custom flex items-center justify-between h-16">
+        <a href="/design-system" class="flex items-center gap-3">
+          <img src={wordmark.src} alt="Behind the Signs" class="h-7 w-auto" />
+          <span class="hidden sm:inline-flex badge badge-gold">Design System v1</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-1">
+          {navLinks.map(([href, label]) => (
+            <a href={href} class="btn-ghost btn-sm">{label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ================= HERO (the pattern itself, live) ================= -->
+      <section class="hero">
+        <div class="absolute inset-0 anim-zoom-settle">
+          <Image
+            src={heroBg}
+            alt=""
+            class="hero-media"
+            loading="eager"
+            widths={[768, 1280, 1920]}
+            sizes="100vw"
+          />
+        </div>
+        <div class="hero-wash"></div>
+        <div class="hero-fade"></div>
+
+        <div class="relative container-custom flex flex-col items-start gap-6 pt-20 pb-28 sm:pt-28 sm:pb-36">
+          <span class="eyebrow eyebrow-gold text-xl sm:text-2xl anim-drop-in">fresh off the plotter</span>
+          <h1 class="headline headline-light text-5xl sm:text-7xl lg:text-8xl anim-drop-in anim-delay-1">
+            Design<br />System
+          </h1>
+          <p class="lead lead-light max-w-xl anim-rise-in anim-delay-2">
+            One kit of parts for the Behind the Signs site and the web apps that come after it.
+            Chunky letterforms, die-cut stickers, vinyl-layer shadows — everything the brand
+            already is, turned into reusable components.
+          </p>
+          <div class="flex flex-wrap gap-4 anim-rise-in anim-delay-3">
+            <a href="#buttons" class="btn-primary btn-lg">Browse components</a>
+            <a href="#foundations" class="btn-white btn-lg">Foundations</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FOUNDATIONS ================= -->
+      <section id="foundations" class="section section-white scroll-mt-16">
+        <div class="container-custom">
+          <span class="eyebrow">the raw materials</span>
+          <h2 class="headline text-4xl sm:text-5xl mt-2">Foundations</h2>
+
+          <!-- Color -->
+          <h3 class="headline text-2xl mt-14">Color</h3>
+          <p class="lead mt-2 max-w-2xl">
+            Sampled straight from the logo artwork. Utilities come free with the tokens:
+            <code class="spec">bg-surf-600</code> <code class="spec">text-pink-700</code>
+            <code class="spec">border-gold-500</code>
+          </p>
+
+          <div class="grid gap-10 mt-8">
+            {ramps.map((ramp) => (
+              <div>
+                <div class="flex items-baseline gap-3 flex-wrap">
+                  <h4 class="font-black text-lg">{ramp.name}</h4>
+                  <code class="spec">--color-{ramp.token}-*</code>
+                  <span class="text-sm text-slate-500">{ramp.note}</span>
+                </div>
+                <div class="grid grid-cols-6 sm:grid-cols-11 gap-1.5 mt-3">
+                  {ramp.steps.map((s) => (
+                    <div>
+                      <div
+                        class:list={['h-14 rounded-lg', s.brand && 'ring-[3px] ring-offset-2 ring-ink/70']}
+                        style={`background:${s.hex}`}
+                        title={`${ramp.token}-${s.step} ${s.hex}`}
+                      >
+                      </div>
+                      <div class="mt-1.5 text-[11px] leading-tight text-slate-600 font-medium">
+                        {s.step}{s.brand && ' ★'}
+                        <span class="block text-slate-400 uppercase">{s.hex}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div>
+              <div class="flex items-baseline gap-3">
+                <h4 class="font-black text-lg">Neutrals</h4>
+                <span class="text-sm text-slate-500">★ = pulled from the logo file</span>
+              </div>
+              <div class="grid grid-cols-3 max-w-md gap-1.5 mt-3">
+                {neutrals.map((n) => (
+                  <div>
+                    <div class="h-14 rounded-lg border border-slate-200" style={`background:${n.hex}`}></div>
+                    <div class="mt-1.5 text-[11px] leading-tight text-slate-600 font-medium">
+                      {n.name}
+                      <span class="block text-slate-400 uppercase">{n.hex}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Typography -->
+          <h3 class="headline text-2xl mt-16">Typography</h3>
+          <div class="grid lg:grid-cols-3 gap-6 mt-6">
+            <div class="panel lg:col-span-2">
+              <div class="panel-body grid gap-6">
+                <div>
+                  <code class="spec">.headline</code>
+                  <span class="text-xs text-slate-400 ml-2">Archivo Black — display & headings</span>
+                  <p class="headline text-5xl sm:text-6xl mt-2">Elevating the sign industry</p>
+                </div>
+                <hr class="divider" />
+                <div>
+                  <code class="spec">.headline .headline-tilt</code>
+                  <span class="text-xs text-slate-400 ml-2">sticker energy, use sparingly</span>
+                  <p class="headline headline-tilt text-3xl mt-3 inline-block bg-gold-500 px-4 py-1 rounded-xl">
+                    Shop tours
+                  </p>
+                </div>
+                <hr class="divider" />
+                <div>
+                  <code class="spec">.eyebrow</code>
+                  <span class="text-xs text-slate-400 ml-2">Permanent Marker — hand-brushed accents only</span>
+                  <p class="eyebrow text-2xl mt-2">straight from the shop floor</p>
+                </div>
+                <hr class="divider" />
+                <div>
+                  <code class="spec">.lead</code> <code class="spec">body</code>
+                  <span class="text-xs text-slate-400 ml-2">Roboto 400 / 500 / 700 / 900</span>
+                  <p class="lead mt-2 max-w-xl">
+                    Body copy stays in Roboto — the same family printed on every tile and
+                    thumbnail the brand ships.
+                  </p>
+                  <p class="mt-3 max-w-xl text-slate-600">
+                    Regular paragraph text with a <a href="#foundations" class="link">standard text link</a> inside
+                    it, plus <strong>bold</strong> and <em>emphasis</em>.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-body">
+                <h4 class="font-black">Rules of thumb</h4>
+                <ul class="mt-3 grid gap-2.5 text-sm text-slate-600 list-disc list-inside">
+                  <li><strong>Archivo Black</strong> for headlines & buttons — never body copy.</li>
+                  <li><strong>Permanent Marker</strong> only for eyebrows & tiny accents. One per screen.</li>
+                  <li><strong>Roboto</strong> everywhere else, weight 400–900.</li>
+                  <li>Teal = focus & links. Pink = primary action & selected. Gold = highlight.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Elevation -->
+          <h3 class="headline text-2xl mt-16">Elevation & shape</h3>
+          <p class="lead mt-2 max-w-2xl">
+            Two shadow families: soft <em>panel</em> shadows for light surfaces, heavy
+            <em>sticker</em> shadows for things sitting on the teal wash. Hard color-matched
+            offsets make buttons read as layered vinyl.
+          </p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+            <div class="rounded-2xl bg-white p-6 text-sm font-medium" style="box-shadow: var(--shadow-panel)">
+              <code class="spec">--shadow-panel</code>
+              <p class="mt-2 text-slate-500">Resting cards on white or paper.</p>
+            </div>
+            <div class="rounded-2xl bg-white p-6 text-sm font-medium" style="box-shadow: var(--shadow-panel-lg)">
+              <code class="spec">--shadow-panel-lg</code>
+              <p class="mt-2 text-slate-500">Hover / raised state.</p>
+            </div>
+            <div class="rounded-2xl bg-surf-600 p-6 text-sm font-medium text-white" style="box-shadow: var(--shadow-sticker)">
+              <code class="spec-light">--shadow-sticker</code>
+              <p class="mt-2 text-white/80">Tiles & stickers on the wash.</p>
+            </div>
+            <div class="rounded-2xl bg-pink-500 p-6 text-sm font-medium text-white" style="box-shadow: 0 4px 0 var(--color-pink-700), 0 12px 22px rgb(3 42 58 / 0.18)">
+              <code class="spec-light">hard offset</code>
+              <p class="mt-2 text-white/80">Color-matched vinyl layer under buttons.</p>
+            </div>
+          </div>
+
+          <!-- Motion -->
+          <h3 class="headline text-2xl mt-16">Motion</h3>
+          <p class="lead mt-2 max-w-2xl">
+            The coming-soon entrance, tokenized: settle the background, drop the headline,
+            rise the content — staggered with <code class="spec">.anim-delay-1…6</code>.
+          </p>
+          <div class="panel mt-6">
+            <div class="panel-body">
+              <div id="motion-stage" class="flex flex-wrap items-center gap-4">
+                <span class="badge badge-teal anim-drop-in text-sm">.anim-drop-in</span>
+                <span class="badge badge-pink anim-rise-in anim-delay-2 text-sm">.anim-rise-in .anim-delay-2</span>
+                <span class="badge badge-gold anim-rise-in anim-delay-4 text-sm">.anim-rise-in .anim-delay-4</span>
+                <span class="badge badge-ink anim-rise-in anim-delay-6 text-sm">.anim-rise-in .anim-delay-6</span>
+              </div>
+            </div>
+            <div class="panel-footer flex items-center justify-between gap-4">
+              <span class="text-sm text-slate-500">All motion respects <code class="spec">prefers-reduced-motion</code>.</span>
+              <button id="replay-motion" class="btn-secondary btn-sm" type="button">Replay</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BUTTONS ================= -->
+      <section id="buttons" class="section section-tint scroll-mt-16">
+        <div class="container-custom">
+          <span class="eyebrow">peel & stick</span>
+          <h2 class="headline text-4xl sm:text-5xl mt-2">Buttons</h2>
+          <p class="lead mt-3 max-w-2xl">
+            Vinyl sticker pills. Every variant lifts on hover and presses flat on click.
+            Focus rings are always surf teal.
+          </p>
+
+          <div class="panel mt-8">
+            <div class="panel-header flex items-center justify-between">
+              <h3 class="font-black">Variants</h3>
+              <span class="text-xs text-slate-400">on light surfaces</span>
+            </div>
+            <div class="panel-body flex flex-wrap items-center gap-4">
+              <button class="btn-primary">Subscribe now</button>
+              <button class="btn-teal">Watch episodes</button>
+              <button class="btn-gold">Get the guide</button>
+              <button class="btn-secondary">Learn more</button>
+              <button class="btn-dark">Contact us</button>
+              <button class="btn-ghost">Skip for now</button>
+            </div>
+            <div class="panel-footer flex flex-wrap gap-2">
+              <code class="spec">.btn-primary</code>
+              <code class="spec">.btn-teal</code>
+              <code class="spec">.btn-gold</code>
+              <code class="spec">.btn-secondary</code>
+              <code class="spec">.btn-dark</code>
+              <code class="spec">.btn-ghost</code>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-6 mt-6">
+            <div class="panel">
+              <div class="panel-header"><h3 class="font-black">Sizes</h3></div>
+              <div class="panel-body flex flex-wrap items-center gap-4">
+                <button class="btn-primary btn-sm">Small</button>
+                <button class="btn-primary">Default</button>
+                <button class="btn-primary btn-lg">Large</button>
+                <button class="btn-primary btn-xl">Hero size</button>
+              </div>
+              <div class="panel-footer flex flex-wrap gap-2">
+                <code class="spec">.btn-sm</code>
+                <code class="spec">.btn-lg</code>
+                <code class="spec">.btn-xl</code>
+                <code class="spec">.btn-block</code>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header"><h3 class="font-black">Icons, loading & disabled</h3></div>
+              <div class="panel-body flex flex-wrap items-center gap-4">
+                <button class="btn-teal">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  Play episode
+                </button>
+                <button class="btn-icon btn-primary" aria-label="Search">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <button class="btn-primary" disabled>Disabled</button>
+                <button class="btn-secondary" disabled>Disabled</button>
+              </div>
+              <div class="panel-footer flex flex-wrap gap-2">
+                <code class="spec">.btn-icon</code>
+                <code class="spec">:disabled</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- On the wash -->
+          <div class="mt-6 rounded-3xl bg-surf-600 p-8 sm:p-10" style="box-shadow: var(--shadow-sticker)">
+            <div class="flex items-baseline justify-between flex-wrap gap-2">
+              <h3 class="font-black text-white">On the teal wash</h3>
+              <span class="text-xs text-white/70">photos & brand sections</span>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center gap-4">
+              <button class="btn-white">Join the community</button>
+              <button class="btn-primary">Subscribe</button>
+              <button class="btn-gold">Free resources</button>
+            </div>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <code class="spec-light">.btn-white</code>
+              <code class="spec-light">.btn-primary</code>
+              <code class="spec-light">.btn-gold</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FORMS ================= -->
+      <section id="forms" class="section section-white scroll-mt-16">
+        <div class="container-custom">
+          <span class="eyebrow">take an order</span>
+          <h2 class="headline text-4xl sm:text-5xl mt-2">Forms</h2>
+          <p class="lead mt-3 max-w-2xl">
+            Chunky 2px borders, teal focus glow, pink selections. Wrap each control in a
+            <code class="spec">.field</code> with a <code class="spec">.label</code>.
+          </p>
+
+          <div class="grid lg:grid-cols-2 gap-6 mt-8">
+            <div class="panel">
+              <div class="panel-header"><h3 class="font-black">Text inputs</h3></div>
+              <div class="panel-body grid gap-5">
+                <div class="field">
+                  <label class="label" for="ds-name">Shop name <span class="req">*</span></label>
+                  <input class="input" id="ds-name" type="text" placeholder="e.g. Fastsigns of Austin" />
+                  <p class="hint">As it should appear in the directory.</p>
+                </div>
+                <div class="field">
+                  <label class="label" for="ds-email">Email</label>
+                  <input class="input" id="ds-email" type="email" value="joe@behindthesigns.com" />
+                </div>
+                <div class="field">
+                  <label class="label" for="ds-bad">Website</label>
+                  <input class="input" id="ds-bad" type="url" value="not-a-url" aria-invalid="true" aria-describedby="ds-bad-err" />
+                  <p class="error-text" id="ds-bad-err">That doesn't look like a URL — try https://…</p>
+                </div>
+                <div class="field">
+                  <label class="label" for="ds-off">Disabled</label>
+                  <input class="input" id="ds-off" type="text" value="Locked field" disabled />
+                </div>
+              </div>
+              <div class="panel-footer flex flex-wrap gap-2">
+                <code class="spec">.field</code>
+                <code class="spec">.label</code>
+                <code class="spec">.input</code>
+                <code class="spec">.hint</code>
+                <code class="spec">aria-invalid + .error-text</code>
+              </div>
+            </div>
+
+            <div class="grid gap-6">
+              <div class="panel">
+                <div class="panel-header"><h3 class="font-black">Select & textarea</h3></div>
+                <div class="panel-body grid gap-5">
+                  <div class="field">
+                    <label class="label" for="ds-topic">What do you do?</label>
+                    <select class="select" id="ds-topic">
+                      <option>Full-service sign shop</option>
+                      <option>Design & permitting</option>
+                      <option>Fabrication</option>
+                      <option>Installation & service</option>
+                      <option>Supplier / vendor</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="ds-msg">Tell us about your shop</label>
+                    <textarea class="textarea" id="ds-msg" placeholder="Crew size, specialties, the work you're proudest of…"></textarea>
+                  </div>
+                </div>
+                <div class="panel-footer flex flex-wrap gap-2">
+                  <code class="spec">.select</code>
+                  <code class="spec">.textarea</code>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-header"><h3 class="font-black">Choices</h3></div>
+                <div class="panel-body grid sm:grid-cols-2 gap-5">
+                  <div class="grid gap-3">
+                    <label class="choice"><input type="checkbox" class="checkbox" checked /> Weekly newsletter</label>
+                    <label class="choice"><input type="checkbox" class="checkbox" /> Shop tour alerts</label>
+                    <label class="choice"><input type="checkbox" class="checkbox" /> Sponsor updates</label>
+                  </div>
+                  <div class="grid gap-3">
+                    <label class="choice"><input type="radio" name="ds-size" class="radio" checked /> 1–5 people</label>
+                    <label class="choice"><input type="radio" name="ds-size" class="radio" /> 6–20 people</label>
+                    <label class="choice"><input type="radio" name="ds-size" class="radio" /> 20+ people</label>
+                  </div>
+                  <label class="choice sm:col-span-2 pt-2 border-t border-slate-100">
+                    <input type="checkbox" class="switch" checked /> Email me when new episodes drop
+                  </label>
+                </div>
+                <div class="panel-footer flex flex-wrap gap-2">
+                  <code class="spec">.choice</code>
+                  <code class="spec">.checkbox</code>
+                  <code class="spec">.radio</code>
+                  <code class="spec">.switch</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PANELS ================= -->
+      <section id="panels" class="section section-tint scroll-mt-16">
+        <div class="container-custom">
+          <span class="eyebrow">sign faces</span>
+          <h2 class="headline text-4xl sm:text-5xl mt-2">Panels</h2>
+
+          <div class="grid lg:grid-cols-3 gap-6 mt-8">
+            <div class="panel panel-hover">
+              <div class="panel-header"><h3 class="font-black">Standard panel</h3></div>
+              <div class="panel-body text-sm text-slate-600">
+                Header, body, footer. Add <code class="spec">.panel-hover</code> for the lift —
+                this one has it, try me.
+              </div>
+              <div class="panel-footer flex flex-wrap gap-2">
+                <code class="spec">.panel</code>
+                <code class="spec">.panel-header/-body/-footer</code>
+              </div>
+            </div>
+
+            <div class="panel panel-hover overflow-hidden">
+              <div class="h-36 bg-surf-600 relative overflow-hidden">
+                <div class="absolute inset-0 bokeh-bg"></div>
+                <span class="absolute top-3 left-3 badge badge-gold">Episode 12</span>
+                <svg class="absolute inset-0 m-auto w-12 h-12 text-white/90" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <div class="panel-body">
+                <h3 class="font-black leading-snug">Media card</h3>
+                <p class="text-sm text-slate-600 mt-1.5">
+                  Image or video header, badge overlay, body copy. The podcast & blog card
+                  pattern.
+                </p>
+                <a href="#panels" class="link text-sm mt-3 inline-block">Watch now →</a>
+              </div>
+            </div>
+
+            <div class="panel-teal p-6 flex flex-col justify-between gap-6">
+              <div>
+                <h3 class="font-black text-white">Teal callout</h3>
+                <p class="text-sm text-white/85 mt-1.5">
+                  Stats, quotes, and brand moments inside light sections.
+                </p>
+              </div>
+              <div class="flex items-end justify-between">
+                <div>
+                  <div class="headline headline-light text-5xl">11</div>
+                  <div class="text-xs uppercase tracking-widest text-white/70 font-bold mt-1">episodes live</div>
+                </div>
+                <code class="spec-light">.panel-teal</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sticker panel on wash -->
+          <div class="mt-6 rounded-3xl bg-surf-600 p-8 sm:p-10 grid sm:grid-cols-2 gap-8 items-center" style="box-shadow: var(--shadow-sticker)">
+            <div>
+              <h3 class="font-black text-white text-xl">Die-cut sticker panel</h3>
+              <p class="text-white/85 mt-2 text-sm max-w-md">
+                White ring + heavy sticker shadow. Made for the teal wash and photo
+                backgrounds — the same treatment as the coming-soon tiles.
+              </p>
+              <code class="spec-light mt-4 inline-block">.panel-sticker</code>
+            </div>
+            <div class="panel-sticker p-6">
+              <span class="eyebrow">did you know?</span>
+              <p class="font-bold text-lg leading-snug mt-1">
+                The Facebook group has the highest engagement of any BTS channel.
+              </p>
+              <button class="btn-primary btn-sm mt-4">Join the group</button>
+            </div>
+          </div>
+
+          <!-- Sign cabinet -->
+          <div class="panel-cabinet mt-6">
+            <div class="panel-cabinet-face text-center flex flex-col items-center gap-4 sm:py-14">
+              <span class="eyebrow eyebrow-white text-2xl">don't miss an episode</span>
+              <h3 class="headline headline-light text-4xl sm:text-5xl max-w-2xl">
+                Get the newsletter
+              </h3>
+              <p class="text-white/90 max-w-xl">
+                Industry insights, shop tours, and trade hacks from 30+ years behind the
+                signs. Once a week, no fluff.
+              </p>
+              <form class="flex flex-col sm:flex-row w-full max-w-md gap-3 mt-2" onsubmit="return false">
+                <input class="input" type="email" placeholder="you@yourshop.com" aria-label="Email address" />
+                <button class="btn-gold shrink-0">Sign me up</button>
+              </form>
+              <code class="spec-light">.panel-cabinet &gt; .panel-cabinet-face</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BADGES & ALERTS ================= -->
+      <section id="badges" class="section section-white scroll-mt-16">
+        <div class="container-custom">
+          <span class="eyebrow">little stickers</span>
+          <h2 class="headline text-4xl sm:text-5xl mt-2">Badges & Alerts</h2>
+
+          <div class="grid lg:grid-cols-2 gap-6 mt-8">
+            <div class="panel">
+              <div class="panel-header"><h3 class="font-black">Badges</h3></div>
+              <div class="panel-body grid gap-4">
+                <div class="flex flex-wrap gap-2.5">
+                  <span class="badge badge-pink">New episode</span>
+                  <span class="badge badge-teal">Shop tour</span>
+                  <span class="badge badge-gold">Featured</span>
+                  <span class="badge badge-ink">Sponsor</span>
+                  <span class="badge">Default</span>
+                  <span class="badge badge-outline">Outline</span>
+                </div>
+                <hr class="divider" />
+                <div class="flex flex-wrap gap-2.5">
+                  <span class="badge badge-soft-pink">Business tips</span>
+                  <span class="badge badge-soft-teal">Technical</span>
+                  <span class="badge badge-soft-gold">Industry news</span>
+                </div>
+              </div>
+              <div class="panel-footer flex flex-wrap gap-2">
+                <code class="spec">.badge</code>
+                <code class="spec">.badge-pink/-teal/-gold/-ink</code>
+                <code class="spec">.badge-soft-*</code>
+              </div>
+            </div>
+
+            <div class="grid gap-4">
+              <div class="alert alert-info">
+                <svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 12v4"/></svg>
+                <div><span class="alert-title">Heads up</span> New episodes drop every Tuesday morning.</div>
+              </div>
+              <div class="alert alert-success">
+                <svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7"/></svg>
+                <div><span class="alert-title">You're in!</span> Check your inbox to confirm your subscription.</div>
+              </div>
+              <div class="alert alert-warning">
+                <svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+                <div><span class="alert-title">Almost done</span> Your shop profile is missing photos.</div>
+              </div>
+              <div class="alert alert-danger">
+                <svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg>
+                <div><span class="alert-title">Payment failed</span> We couldn't process the card ending in 4242.</div>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <code class="spec">.alert</code>
+                <code class="spec">.alert-info/-success/-warning/-danger</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTIONS ================= -->
+      <section id="sections" class="section section-tint scroll-mt-16">
+        <div class="container-custom">
+          <span class="eyebrow">the big picture</span>
+          <h2 class="headline text-4xl sm:text-5xl mt-2">Sections & patterns</h2>
+          <p class="lead mt-3 max-w-2xl">
+            Pages alternate white and paper surfaces, punctuated by a teal wash or an ink
+            band. Heroes layer photo → wash → fade, with the entrance choreography.
+          </p>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+            <div class="rounded-2xl border-2 border-slate-200 bg-white h-28 grid place-content-center text-sm font-bold">.section-white</div>
+            <div class="rounded-2xl border-2 border-slate-200 bg-paper h-28 grid place-content-center text-sm font-bold">.section-tint</div>
+            <div class="rounded-2xl bg-surf-600 h-28 grid place-content-center text-sm font-bold text-white">.section-teal</div>
+            <div class="rounded-2xl bg-ink h-28 grid place-content-center text-sm font-bold text-white">.section-ink</div>
+          </div>
+
+          <!-- Mini hero recipe -->
+          <div class="panel mt-8 overflow-hidden">
+            <div class="panel-header flex items-center justify-between">
+              <h3 class="font-black">Hero recipe</h3>
+              <span class="text-xs text-slate-400">photo → wash → fade → content</span>
+            </div>
+            <div class="hero">
+              <Image src={heroBg} alt="" class="hero-media" widths={[768, 1280]} sizes="100vw" loading="lazy" />
+              <div class="hero-wash"></div>
+              <div class="hero-fade"></div>
+              <div class="relative px-8 py-16 sm:py-20 text-center flex flex-col items-center gap-4">
+                <span class="eyebrow eyebrow-gold text-xl">your next section</span>
+                <h3 class="headline headline-light text-4xl sm:text-5xl">Built with the kit</h3>
+                <button class="btn-white">Call to action</button>
+              </div>
+            </div>
+            <div class="panel-footer flex flex-wrap gap-2">
+              <code class="spec">.hero</code>
+              <code class="spec">.hero-media .anim-zoom-settle</code>
+              <code class="spec">.hero-wash</code>
+              <code class="spec">.hero-fade</code>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="section-ink">
+      <div class="container-custom py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <img src={wordmark.src} alt="Behind the Signs" class="h-8 w-auto" />
+        <p class="text-sm text-white/60">
+          Design System v1 — tokens & components in
+          <code class="spec-light">src/styles/design-system.css</code>
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      /* Page-local chrome for spec chips */
+      .spec {
+        font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+        font-size: 0.75rem;
+        background: rgb(3 42 58 / 0.07);
+        color: #045c7d;
+        border-radius: 0.375rem;
+        padding: 0.1875rem 0.4375rem;
+        white-space: nowrap;
+      }
+      .spec-light {
+        font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+        font-size: 0.75rem;
+        background: rgb(255 255 255 / 0.16);
+        color: #fff;
+        border-radius: 0.375rem;
+        padding: 0.1875rem 0.4375rem;
+        white-space: nowrap;
+      }
+    </style>
+
+    <script>
+      // Replay the motion demo by re-triggering the CSS animations.
+      const replay = document.getElementById('replay-motion');
+      const stage = document.getElementById('motion-stage');
+      replay?.addEventListener('click', () => {
+        stage?.querySelectorAll('span').forEach((el) => {
+          el.style.animation = 'none';
+          void el.offsetWidth;
+          el.style.animation = '';
+        });
+      });
+    </script>
+  </body>
+</html>
