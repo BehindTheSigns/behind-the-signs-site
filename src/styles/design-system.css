@@ -717,6 +717,8 @@
     position: absolute;
     inset: 0;
     background-color: rgb(1 139 183 / 0.5);
+    /* teal-ink scrim keeps the hue but drops luminance for white-text contrast */
+    background-image: linear-gradient(rgb(3 42 58 / 0.32), rgb(3 42 58 / 0.32));
   }
   .hero-fade {
     position: absolute;
