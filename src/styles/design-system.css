@@ -577,6 +577,12 @@
       radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.22) 0%, transparent 55%),
       var(--color-surf-600);
   }
+  .panel-cabinet-face.face-gold {
+    background:
+      radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.3) 0%, transparent 55%),
+      var(--color-gold-500);
+    color: var(--color-ink);
+  }
 
   /* ======================================================================
      BADGES — mini stickers

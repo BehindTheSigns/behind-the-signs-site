@@ -1,35 +1,157 @@
 ---
 import '../styles/global.css';
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import heroBg from '../assets/coming-soon/hero-bg.jpg';
 import wordmark from '../assets/coming-soon/wordmark.svg';
-import tilePodcast from '../assets/coming-soon/tile-podcast.png';
-import tileShopTours from '../assets/coming-soon/tile-shop-tours.png';
-import tileCommunity from '../assets/coming-soon/tile-community.png';
+import signLogo from '../assets/BTS_Sign.png';
+import hostJoe from '../assets/landing/host-joe.png';
+import hostLiz from '../assets/landing/host-liz.png';
+import assocIsa from '../assets/landing/assoc-isa.png';
+import assocTsa from '../assets/landing/assoc-tsa.png';
+import assocMssa from '../assets/landing/assoc-mssa.png';
+import assocSac from '../assets/landing/assoc-sac.png';
+import assocCo from '../assets/landing/assoc-co.png';
+import sponsorSigntracker from '../assets/landing/sponsor-signtracker.png';
+import sponsorReece from '../assets/landing/sponsor-reece.png';
+import sponsorClarity from '../assets/landing/sponsor-clarity.png';
+import sponsorOmg from '../assets/landing/sponsor-omg.png';
+import sponsorPrintavo from '../assets/landing/sponsor-printavo.png';
+import sponsorSbi from '../assets/landing/sponsor-sbi.png';
+import { fetchLatestVideos } from '../lib/youtube';
 
-const links = [
+const YOUTUBE_CHANNEL = 'https://www.youtube.com/@BehindTheSigns';
+const PODCAST_PLAYLIST = 'https://www.youtube.com/playlist?list=PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk';
+const SHOP_TOURS_PLAYLIST = 'https://www.youtube.com/playlist?list=PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg';
+const FACEBOOK_GROUP = 'https://www.facebook.com/groups/behindthesigns';
+
+const videos = await fetchLatestVideos(3);
+
+// Real articles start landing in 2026 (one long-form piece a month). The two
+// 2024-dated files in src/content/blog are dev samples — the date gate keeps
+// them off the landing page and admits real posts as they're published.
+const ARTICLES_LIVE_FROM = new Date('2026-01-01');
+const articles = (await getCollection('blog'))
+  .filter((post) => post.data.pubDate >= ARTICLES_LIVE_FROM)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const sourceMeta = {
+  podcast: { label: 'Podcast', badge: 'badge badge-pink' },
+  'shop-tours': { label: 'Shop Tour', badge: 'badge badge-teal' },
+} as const;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+// Section links under the hero — order and wording from Joe's site plan.
+const sectionLinks = [
+  { href: '#subscribe', label: 'Subscribe', class: 'btn-gold btn-sm' },
+  { href: '#podcast', label: 'Podcast', class: 'btn-white btn-sm' },
+  { href: '#shop-tours', label: 'Shop Tours', class: 'btn-white btn-sm' },
+  { href: '#blog', label: 'Blog', class: 'btn-white btn-sm' },
+  { href: '#about', label: 'About', class: 'btn-white btn-sm' },
+  { href: '#associations', label: 'Associations', class: 'btn-white btn-sm' },
+  { href: '#sponsors', label: 'Sponsors', class: 'btn-white btn-sm' },
+];
+
+const icons: Record<string, string> = {
+  mic: '<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v3.5"/><path d="M8.5 21.5h7"/>',
+  store:
+    '<path d="M4.5 9.5 6 4h12l1.5 5.5"/><path d="M3.5 9.5h17"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-5.5h5V20"/>',
+  chat: '<path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5v8A2.5 2.5 0 0 0 4.5 17H7v4l5-4h7.5a2.5 2.5 0 0 0 2.5-2.5v-8A2.5 2.5 0 0 0 19.5 4Z"/><circle cx="7.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/>',
+};
+
+// "Membership Matters" — association friends from Joe's mockup, each linking
+// to its membership page. ISA gets the featured spot.
+const associations = [
   {
-    href: 'https://www.youtube.com/playlist?list=PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk',
-    label: 'Watch the Behind the Signs Podcast on YouTube',
-    image: tilePodcast,
-    alt: 'Behind the Signs Podcast with Liz Toynes and Joe Arenella — Elevating The Sign Industry Together',
+    name: 'International Sign Association',
+    logo: assocIsa,
+    href: 'https://signs.org/isamembership/',
+    featured: true,
+  },
+  { name: 'Texas Sign Association', logo: assocTsa, href: 'https://txsigns.org/tsa-membership/join-tsa/' },
+  { name: 'Mid-South Sign Association', logo: assocMssa, href: 'https://mssa.memberclicks.net/mssa-membership-app' },
+  { name: 'Sign Association of Canada', logo: assocSac, href: 'https://sac-ace.ca/membership/' },
+  { name: 'CO — by U.S. Chamber of Commerce', logo: assocCo, href: 'https://www.uschamber.com/' },
+];
+
+// Sponsor blurbs come straight from the show's own episode descriptions.
+const sponsors = [
+  {
+    name: 'SignTracker',
+    logo: sponsorSigntracker,
+    href: 'https://www.sign-tracker.com/',
+    blurb: 'Project management & quoting made for sign shops.',
   },
   {
-    href: 'https://www.youtube.com/playlist?list=PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg',
-    label: 'Watch Behind the Signs Shop Tours on YouTube',
-    image: tileShopTours,
-    alt: 'Behind the Signs Shop Tours — Celebrating The People & Their Work',
+    name: 'Reece Supply Company',
+    logo: sponsorReece,
+    href: 'https://www.reecesupply.com/',
+    blurb: 'Supplies for sign and print shops.',
   },
   {
-    href: 'https://www.facebook.com/groups/behindthesigns',
-    label: 'Join the Behind the Signs Facebook Community',
-    image: tileCommunity,
-    alt: 'Join the conversation — Behind the Signs Facebook Community',
+    name: 'ClarityGo',
+    logo: sponsorClarity,
+    href: 'https://clarity-software.com/clarity-go/',
+    blurb: 'Project management & quoting made for sign shops in the UK.',
+  },
+  {
+    name: 'OrderMyGear',
+    logo: sponsorOmg,
+    href: 'https://www.ordermygear.com/',
+    blurb: 'Tools to help you sell more merch.',
+  },
+  {
+    name: 'Printavo',
+    logo: sponsorPrintavo,
+    href: 'https://www.printavo.com/',
+    blurb: 'Business tools for print, promo, and sign professionals.',
+  },
+  {
+    name: 'Sign Builder Illustrated',
+    logo: sponsorSbi,
+    href: 'https://www.signshop.com/',
+    blurb: 'Home of our monthly "Behind the Signs" column.',
+  },
+];
+
+// Footer social row — Joe's channel list, in his order.
+const socialLinks = [
+  {
+    href: FACEBOOK_GROUP,
+    label: 'Facebook community',
+    icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z',
+  },
+  {
+    href: 'https://www.instagram.com/behindthesignspodcast/',
+    label: 'Instagram',
+    icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z',
+  },
+  {
+    href: YOUTUBE_CHANNEL,
+    label: 'YouTube',
+    icon: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+  },
+  {
+    href: 'https://www.tiktok.com/@behind_the_signs',
+    label: 'TikTok',
+    icon: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z',
+  },
+  {
+    href: 'https://podcasts.apple.com/us/podcast/behind-the-signs-podcast/id1813842104',
+    label: 'Apple Podcasts',
+    icon: 'M5.34 0A5.328 5.328 0 0 0 0 5.34v13.32A5.328 5.328 0 0 0 5.34 24h13.32A5.328 5.328 0 0 0 24 18.66V5.34A5.328 5.328 0 0 0 18.66 0zm6.525 2.568c2.336 0 4.448.902 6.056 2.587 1.224 1.272 1.912 2.619 2.264 4.392.12.59.12 2.2.007 2.864a8.506 8.506 0 0 1-3.24 5.296c-.608.46-2.096 1.261-2.336 1.261-.088 0-.096-.091-.056-.46.072-.592.144-.715.48-.856.536-.224 1.448-.874 2.008-1.435a8.046 8.046 0 0 0 2.104-3.544c.208-.744.365-2.32.288-3.264-.24-2.928-2.087-5.535-4.792-6.744-.784-.352-1.344-.512-2.28-.633-2.944-.376-5.795.936-7.483 3.433a7.947 7.947 0 0 0-1.4 6.072c.415 2.352 1.943 4.464 4.031 5.568.408.216.888.44 1.064.496.336.144.408.264.472.856.04.36.03.464-.056.464-.056 0-.464-.176-.896-.384l-.04-.03c-2.472-1.216-4.056-3.274-4.632-6.012-.144-.706-.168-2.392-.03-3.04.36-1.74 1.048-3.1 2.192-4.304 1.649-1.744 3.768-2.664 6.128-2.664zm.134 2.81c.409.004.803.04 1.106.106 2.784.62 4.76 3.408 4.376 6.174-.152 1.114-.536 2.03-1.216 2.88-.336.43-1.152 1.15-1.296 1.15-.023 0-.048-.272-.048-.603v-.605l.416-.496c1.568-1.878 1.456-4.502-.256-6.224-.664-.67-1.432-1.064-2.424-1.246-.64-.118-.776-.118-1.448-.008-1.02.167-1.81.562-2.512 1.256-1.72 1.704-1.834 4.34-.266 6.222l.413.496v.608c0 .336-.027.608-.06.608-.03 0-.264-.16-.512-.36l-.034-.011c-.832-.664-1.568-1.842-1.872-2.997-.184-.698-.184-2.024.008-2.72.504-1.878 1.888-3.335 3.808-4.019.41-.145 1.133-.22 1.817-.211zm-.13 2.99c.31.003.598.06.815.172.465.24.84.61 1.064 1.048.586 1.15.077 2.542-1.088 2.997a1.907 1.907 0 0 1-1.32 0c-1.165-.455-1.674-1.847-1.088-2.997.383-.75 1.037-1.164 1.617-1.22zm-.007 4.943c.72-.005 1.246.25 1.4.686.132.36.084.75-.144 2.312-.156 1.129-.244 1.766-.318 2.06-.12.48-.462.844-.878.935a1.851 1.851 0 0 1-.766-.043c-.415-.09-.757-.455-.877-.934-.074-.295-.162-.932-.318-2.061-.228-1.561-.276-1.952-.144-2.312.15-.427.66-.68 1.36-.686z',
+  },
+  {
+    href: 'https://open.spotify.com/show/53qvCb4Pqj6f5TP35RzJ8A',
+    label: 'Spotify',
+    icon: 'M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z',
   },
 ];
 
 const description =
-  'Behind the Signs — Elevating the sign industry together. Full site coming soon. Watch the podcast and shop tours on YouTube, and join our Facebook community.';
+  'Behind the Signs brings the sign industry together — real conversations with the people shaping the industry, behind-the-scenes shop tours, and a community of thousands of sign professionals.';
 ---
 
 <!DOCTYPE html>
@@ -40,13 +162,13 @@ const description =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>Behind the Signs | Coming Soon</title>
+    <title>Behind the Signs | Elevating the Sign Industry Together</title>
     <meta name="description" content={description} />
     <!-- PREVENT INDEXING - WORK IN PROGRESS SITE -->
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Behind the Signs | Coming Soon" />
+    <meta property="og:title" content="Behind the Signs | Elevating the Sign Industry Together" />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL('/og-coming-soon.jpg', Astro.site)} />
     <meta property="og:site_name" content="Behind the Signs" />
@@ -55,160 +177,486 @@ const description =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
   </head>
 
-  <body class="bg-[#018bb7] min-h-screen">
+  <body class="bg-surf-600 min-h-screen font-body">
     <main>
-      <!-- Hero: sticker-print photo under a teal wash, brand wordmark, Coming Soon -->
-      <section class="relative overflow-hidden">
-        <div class="absolute inset-0 hero-zoom">
+      <!-- ============ HERO — sticker-print photo, wordmark, section links ============ -->
+      <section class="hero">
+        <div class="absolute inset-0 anim-zoom-settle">
           <Image
             src={heroBg}
             alt=""
-            class="w-full h-full object-cover saturate-[.75]"
+            class="hero-media"
             loading="eager"
             widths={[768, 1280, 1920, 2560]}
             sizes="100vw"
           />
         </div>
-        <!-- Teal wash + fade into the flat band below -->
-        <div class="absolute inset-0 bg-[#018bb7]/50"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#018bb7]"></div>
+        <div class="absolute inset-0 bg-surf-600/50"></div>
+        <div class="hero-fade"></div>
 
-        <div class="relative flex flex-col items-center px-6 pt-14 pb-24 sm:pt-20 sm:pb-32 lg:pt-24 lg:pb-40">
+        <div class="relative flex flex-col items-center text-center px-6 pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
           <img
             src={wordmark.src}
             alt="Behind the Signs"
-            class="wordmark-in w-[82vw] max-w-[320px] sm:max-w-[480px] lg:max-w-[630px] h-auto"
+            class="anim-drop-in w-[80vw] max-w-[300px] sm:max-w-[430px] lg:max-w-[540px] h-auto drop-shadow-[0_8px_18px_rgba(0,40,55,0.35)]"
           />
-          <h1
-            class="coming-soon-in text-white font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight mt-10 sm:mt-14 lg:mt-16 drop-shadow-[0_3px_10px_rgba(0,40,55,0.45)]"
-          >
-            Coming Soon
-          </h1>
+          <p class="headline headline-light text-xl sm:text-2xl lg:text-3xl mt-8 sm:mt-10 anim-rise-in anim-delay-2">
+            Elevating the sign industry together.
+          </p>
+
+          <nav aria-label="Sections" class="mt-9 sm:mt-11 anim-rise-in anim-delay-3">
+            <ul class="flex flex-wrap justify-center gap-2.5 sm:gap-3 max-w-md sm:max-w-none">
+              {
+                sectionLinks.map((l) => (
+                  <li>
+                    <a href={l.href} class={l.class}>{l.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
         </div>
       </section>
 
-      <!-- The three destinations -->
-      <section aria-label="Where to find us" class="relative px-6 pb-14 sm:pb-16 -mt-8 sm:-mt-12">
-        <ul class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 lg:gap-12 list-none p-0">
+      <!-- ============ LATEST VIDEOS — refreshed from YouTube on every deploy ============ -->
+      <section class="section section-white" aria-labelledby="latest-heading">
+        <div class="container-custom">
+          <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-5 mb-10 sm:mb-12">
+            <div>
+              <span class="eyebrow">just uploaded</span>
+              <h2 id="latest-heading" class="headline text-3xl sm:text-4xl lg:text-5xl mt-2">The Latest</h2>
+            </div>
+            <a href={YOUTUBE_CHANNEL} target="_blank" rel="noopener noreferrer" class="btn-secondary">
+              View the channel
+            </a>
+          </div>
+
+          <ul class="grid gap-8 md:grid-cols-3">
+            {
+              videos.map((v) => (
+                <li>
+                  <article class="panel panel-hover overflow-hidden h-full flex flex-col">
+                    <a
+                      href={`https://www.youtube.com/watch?v=${v.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group relative block aspect-video overflow-hidden bg-surf-950"
+                      data-video-embed
+                      data-video-id={v.id}
+                      data-video-title={v.title}
+                      aria-label={`Play video: ${v.title}`}
+                    >
+                      <img
+                        src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`}
+                        onerror={`this.onerror=null;this.src='https://i.ytimg.com/vi/${v.id}/hqdefault.jpg';`}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                      />
+                      <span class="absolute inset-0 bg-surf-950/0 transition-colors duration-300 group-hover:bg-surf-950/20"></span>
+                      <span class="absolute inset-0 grid place-items-center">
+                        <span class="grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-full bg-pink-500 text-white shadow-[0_4px_0_var(--color-pink-700),0_12px_22px_rgb(3_42_58/0.3)] transition-transform duration-300 group-hover:scale-110">
+                          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 translate-x-0.5">
+                            <path d="M8 5.5v13l11-6.5z" />
+                          </svg>
+                        </span>
+                      </span>
+                    </a>
+                    <div class="p-5 sm:p-6 flex flex-col gap-3 grow">
+                      <div class="flex items-center gap-2.5">
+                        <span class={sourceMeta[v.source].badge}>{sourceMeta[v.source].label}</span>
+                        <time class="text-sm font-medium text-slate-500" datetime={v.published.toISOString()}>
+                          {fmt(v.published)}
+                        </time>
+                      </div>
+                      <h3 class="font-black text-lg leading-snug">
+                        <a
+                          href={`https://www.youtube.com/watch?v=${v.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="transition-colors hover:text-pink-600"
+                        >
+                          {v.title}
+                        </a>
+                      </h3>
+                    </div>
+                  </article>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ PODCAST · SHOP TOURS · COMMUNITY ============ -->
+      <section class="section section-tint">
+        <h2 class="sr-only">Watch and join</h2>
+        <div class="container-custom grid gap-8 lg:gap-10">
+          <div class="grid gap-8 md:grid-cols-2 lg:gap-10">
+            <a
+              id="podcast"
+              href={PODCAST_PLAYLIST}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="dest block scroll-mt-10 focus-visible:outline-none"
+              aria-label="The Behind the Signs Podcast — watch on YouTube"
+            >
+              <div class="panel-cabinet h-full flex">
+                <div class="panel-cabinet-face w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-8">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-9 w-9 text-white/95" set:html={icons.mic} />
+                  <h3 class="headline headline-light text-2xl sm:text-3xl">The Podcast</h3>
+                  <p class="text-white/90 leading-relaxed max-w-sm">
+                    Real conversations with the people shaping the industry.
+                  </p>
+                  <span class="btn-white btn-sm mt-1.5" aria-hidden="true">Watch on YouTube</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              id="shop-tours"
+              href={SHOP_TOURS_PLAYLIST}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="dest block scroll-mt-10 focus-visible:outline-none"
+              aria-label="Behind the Signs Shop Tours — watch on YouTube"
+            >
+              <div class="panel-cabinet h-full flex">
+                <div class="panel-cabinet-face face-teal w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-8">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-9 w-9 text-white/95" set:html={icons.store} />
+                  <h3 class="headline headline-light text-2xl sm:text-3xl">Shop Tours</h3>
+                  <p class="text-white/90 leading-relaxed max-w-sm">
+                    Behind-the-scenes tours of the industry's best shops.
+                  </p>
+                  <span class="btn-white btn-sm mt-1.5" aria-hidden="true">Watch Shop Tours</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <a
+            id="community"
+            href={FACEBOOK_GROUP}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="dest block scroll-mt-10 focus-visible:outline-none"
+            aria-label="The Behind the Signs community — join the Facebook group"
+          >
+            <div class="panel-cabinet">
+              <div class="panel-cabinet-face face-gold w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-10">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-9 w-9 text-ink/90" set:html={icons.chat} />
+                <span class="eyebrow text-pink-700 text-xl">join the conversation</span>
+                <h3 class="headline text-2xl sm:text-3xl">The Community</h3>
+                <p class="text-ink/80 leading-relaxed max-w-2xl">
+                  Connect with sign shops around the world to ask questions, share your work, and
+                  learn from thousands of industry professionals.
+                </p>
+                <span class="btn-dark btn-sm mt-1.5" aria-hidden="true">Join the Facebook Group</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ BLOG — one long-form article a month, titles only ============ -->
+      <section id="blog" class="section section-white scroll-mt-10" aria-labelledby="blog-heading">
+        <div class="container-custom max-w-3xl">
+          <h2 id="blog-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">The Blog</h2>
+          <p class="lead mt-4">
+            One long-form article a month — straight talk on running and growing a sign business.
+            It goes out as the newsletter, too.
+          </p>
+
           {
-            links.map((link, i) => (
-              <li class={`tile-in tile-in-${i}`}>
+            articles.length > 0 ? (
+              <ul class="mt-10 grid gap-7">
+                {articles.map((post) => (
+                  <li>
+                    <article>
+                      <h3 class="font-black text-xl sm:text-2xl leading-snug">
+                        <a href={`/blog/${post.slug}/`} class="transition-colors hover:text-pink-600">
+                          {post.data.title}
+                        </a>
+                      </h3>
+                      <time class="text-sm font-medium text-slate-500" datetime={post.data.pubDate.toISOString()}>
+                        {fmt(post.data.pubDate)}
+                      </time>
+                    </article>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border-l-4 border-gold-500 bg-gold-50 rounded-r-xl px-6 py-5">
+                <p class="text-slate-700">
+                  The first article is being written right now. Subscribe and it'll land in your inbox.
+                </p>
+                <a href="#subscribe" class="btn-gold btn-sm">Get the newsletter</a>
+              </div>
+            )
+          }
+        </div>
+      </section>
+
+      <!-- ============ ABOUT ============ -->
+      <section id="about" class="section section-tint scroll-mt-10" aria-labelledby="about-heading">
+        <div class="container-custom max-w-3xl">
+          <h2 id="about-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">
+            About Behind the Signs
+          </h2>
+          <div class="lead mt-4 grid gap-4">
+            <p>
+              Behind The Signs brings the sign industry together through a large community of
+              industry professionals. It's a place to ask questions, share ideas, and learn from
+              one another.
+            </p>
+            <p>
+              We also produce educational podcasts and Shop Tours that highlight industry leaders,
+              successful sign shops, and the people behind them.
+            </p>
+          </div>
+
+          <h3 class="font-black text-xl sm:text-2xl mt-12">Your hosts</h3>
+          <div class="mt-7 grid gap-10 sm:grid-cols-2">
+            <div class="flex flex-col items-start gap-4">
+              <Image
+                src={hostJoe}
+                alt="Joe Arenella"
+                class="h-36 w-36 sm:h-40 sm:w-40 rounded-full object-cover shadow-[0_10px_24px_rgb(3_42_58/0.18)]"
+                widths={[160, 320]}
+                sizes="160px"
+              />
+              <div>
+                <h4 class="font-black text-lg">Joe Arenella</h4>
+                <p class="text-slate-600 leading-relaxed mt-1.5">
+                  Founder of Sign Tech International and
+                  <a href="https://www.sign-tracker.com/" target="_blank" rel="noopener noreferrer" class="link">SignTracker</a>,
+                  Joe has spent decades helping sign shops succeed through innovative software,
+                  education, and industry leadership.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col items-start gap-4">
+              <Image
+                src={hostLiz}
+                alt="Liz Toynes"
+                class="h-36 w-36 sm:h-40 sm:w-40 rounded-full object-cover shadow-[0_10px_24px_rgb(3_42_58/0.18)]"
+                widths={[160, 320]}
+                sizes="160px"
+              />
+              <div>
+                <h4 class="font-black text-lg">Elizabeth Arenella Toynes (Liz)</h4>
+                <p class="text-slate-600 leading-relaxed mt-1.5">
+                  Liz grew up in the sign industry and now co-owns
+                  <a href="https://www.studiodzo.com/" target="_blank" rel="noopener noreferrer" class="link">Studio Dzo</a>,
+                  an Austin-based design studio specializing in signage, wayfinding, and branded
+                  environments that create memorable experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MEMBERSHIP MATTERS — association friends ============ -->
+      <section id="associations" class="section section-white scroll-mt-10" aria-labelledby="associations-heading">
+        <div class="container-custom">
+          <div class="max-w-3xl">
+            <h2 id="associations-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">
+              Membership Matters
+            </h2>
+            <p class="font-black text-lg text-pink-600 mt-3">Thank you to our association friends</p>
+            <p class="lead mt-3">
+              Behind The Signs encourages every sign shop to join their local sign association to
+              connect with others, stay current, and continue learning.
+            </p>
+          </div>
+
+          <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {
+              associations.map((a) => (
+                <li class={a.featured ? 'sm:col-span-2 lg:col-span-4' : ''}>
+                  <div class={`panel panel-hover h-full flex items-center gap-6 px-6 py-5 ${a.featured ? 'sm:px-10 sm:py-7 flex-col sm:flex-row sm:justify-between' : 'flex-col text-center py-7'}`}>
+                    <Image
+                      src={a.logo}
+                      alt={`${a.name} logo`}
+                      class={`w-auto object-contain ${a.featured ? 'h-16 sm:h-20 max-w-full' : 'h-[4.5rem] max-w-[230px]'}`}
+                      widths={[a.featured ? 800 : 400]}
+                      sizes={a.featured ? '600px' : '210px'}
+                    />
+                    <a
+                      href={a.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class={`btn-teal shrink-0 ${a.featured ? '' : 'btn-sm'}`}
+                      aria-label={`Join ${a.name}`}
+                    >
+                      Join
+                    </a>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="text-slate-500 text-sm mt-6">
+            More association friends are on the way. Run one we should know about?
+            <a href={FACEBOOK_GROUP} target="_blank" rel="noopener noreferrer" class="link">Tell us in the community.</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ SPONSORS ============ -->
+      <section id="sponsors" class="section section-tint scroll-mt-10" aria-labelledby="sponsors-heading">
+        <div class="container-custom">
+          <h2 id="sponsors-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">
+            Thanks to our sponsors
+          </h2>
+          <p class="lead mt-3 max-w-3xl">
+            The friends who keep the mics on and the cameras rolling.
+          </p>
+
+          <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              sponsors.map((s) => (
+                <li>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="panel panel-hover h-full flex flex-col items-center text-center gap-4 px-6 py-8 no-underline"
+                  >
+                    <span class="grid h-20 place-items-center">
+                      <Image
+                        src={s.logo}
+                        alt={`${s.name} logo`}
+                        class="h-[4.5rem] w-auto max-w-[230px] object-contain"
+                        widths={[460]}
+                        sizes="230px"
+                      />
+                    </span>
+                    <p class="text-slate-600 leading-relaxed">{s.blurb}</p>
+                    <span class="link text-sm mt-auto" aria-hidden="true">Visit {s.name} ↗</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER — subscribe + socials, nothing else ============ -->
+    <footer id="subscribe" class="section-white border-t border-slate-200 scroll-mt-10">
+      <div class="container-custom max-w-2xl flex flex-col items-center text-center pt-16 sm:pt-20 pb-10">
+        <Image src={signLogo} alt="" class="h-24 w-auto" widths={[200, 400]} sizes="100px" />
+        <h2 class="headline text-2xl sm:text-3xl mt-6">Get the newsletter</h2>
+        <p class="lead mt-3 max-w-md">
+          One long-form article a month, plus the latest episodes and shop tours. No fluff.
+        </p>
+
+        <form
+          name="subscribe"
+          method="POST"
+          action="/thanks"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="mt-7 flex w-full max-w-md flex-col sm:flex-row gap-3"
+        >
+          <input type="hidden" name="form-name" value="subscribe" />
+          <p class="hidden" aria-hidden="true">
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+          <label class="sr-only" for="subscribe-email">Email address</label>
+          <input
+            class="input flex-1"
+            type="email"
+            id="subscribe-email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@yourshop.com"
+          />
+          <button type="submit" class="btn-primary shrink-0">Subscribe</button>
+        </form>
+
+        <ul class="mt-10 flex flex-wrap justify-center gap-3">
+          {
+            socialLinks.map((social) => (
+              <li>
                 <a
-                  href={link.href}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={link.label}
-                  class="tile group block focus-visible:outline-none"
+                  aria-label={social.label}
+                  title={social.label}
+                  class="grid h-11 w-11 place-items-center rounded-full bg-slate-100 transition-all hover:bg-pink-500 hover:scale-110 group"
                 >
-                  <Image
-                    src={link.image}
-                    alt={link.alt}
-                    class="w-full h-auto block max-w-[420px] mx-auto"
-                    widths={[420, 840]}
-                    sizes="(min-width: 640px) 33vw, 90vw"
-                    loading="eager"
-                  />
+                  <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 fill-slate-600 group-hover:fill-white transition-colors">
+                    <path d={social.icon} />
+                  </svg>
                 </a>
               </li>
             ))
           }
         </ul>
-      </section>
-    </main>
+
+        <p class="text-slate-400 text-sm mt-10">© 2026 Behind the Signs. All rights reserved.</p>
+      </div>
+    </footer>
 
     <style>
-      html {
-        font-family: 'Roboto', sans-serif;
-      }
-
-      .tile {
-        box-shadow: 0 14px 34px rgba(0, 35, 48, 0.35);
+      /* Cabinet links lift on hover — same die-cut move as the coming-soon tiles */
+      .dest .panel-cabinet {
         transition:
           transform 0.25s ease,
           box-shadow 0.25s ease;
-        max-width: 420px;
-        margin-inline: auto;
       }
-
-      .tile:hover,
-      .tile:focus-visible {
-        transform: translateY(-6px) scale(1.02);
+      .dest:hover .panel-cabinet,
+      .dest:focus-visible .panel-cabinet {
+        transform: translateY(-6px);
         box-shadow:
-          0 22px 44px rgba(0, 35, 48, 0.45),
-          0 0 0 4px rgba(255, 255, 255, 0.35);
+          var(--shadow-sticker-lg),
+          0 0 0 4px rgb(255 255 255 / 0.35);
       }
-
-      .tile:active {
-        transform: translateY(-2px) scale(1.005);
-      }
-
-      /* Entrance choreography */
-      .hero-zoom {
-        animation: hero-zoom 2s ease-out both;
-      }
-
-      .wordmark-in {
-        animation: drop-in 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) both;
-        filter: drop-shadow(0 8px 18px rgba(0, 40, 55, 0.35));
-      }
-
-      .coming-soon-in {
-        animation: rise-in 0.7s ease-out 0.3s both;
-      }
-
-      .tile-in {
-        animation: rise-in 0.7s ease-out both;
-      }
-      .tile-in-0 { animation-delay: 0.5s; }
-      .tile-in-1 { animation-delay: 0.65s; }
-      .tile-in-2 { animation-delay: 0.8s; }
-
-      @keyframes hero-zoom {
-        from { transform: scale(1.06); }
-        to { transform: scale(1); }
-      }
-
-      @keyframes drop-in {
-        from {
-          opacity: 0;
-          transform: translateY(-28px) scale(0.94);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      @keyframes rise-in {
-        from {
-          opacity: 0;
-          transform: translateY(22px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .dest:active .panel-cabinet {
+        transform: translateY(-2px);
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .hero-zoom,
-        .wordmark-in,
-        .coming-soon-in,
-        .tile-in {
-          animation: none;
-        }
-        .tile,
-        .tile:hover,
-        .tile:focus-visible {
+        .dest .panel-cabinet,
+        .dest:hover .panel-cabinet,
+        .dest:focus-visible .panel-cabinet {
           transition: none;
           transform: none;
         }
       }
     </style>
+
+    <script>
+      // Click-to-play video facades: thumbnails link to YouTube (no-JS fallback)
+      // and upgrade to an in-place privacy-enhanced embed when JS is available.
+      document.querySelectorAll<HTMLAnchorElement>('[data-video-embed]').forEach((thumb) => {
+        thumb.addEventListener('click', (event) => {
+          event.preventDefault();
+          const { videoId, videoTitle } = thumb.dataset;
+          const holder = document.createElement('div');
+          holder.className = 'relative aspect-video';
+          const frame = document.createElement('iframe');
+          frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+          frame.title = videoTitle || 'YouTube video';
+          frame.allow =
+            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          frame.allowFullscreen = true;
+          frame.className = 'absolute inset-0 h-full w-full';
+          holder.appendChild(frame);
+          thumb.replaceWith(holder);
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,58 @@
+---
+// Success page for the Netlify subscribe form on the landing page (action="/thanks").
+import '../styles/global.css';
+import wordmark from '../assets/coming-soon/wordmark.svg';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>You're in! | Behind the Signs</title>
+    <meta name="description" content="Thanks for subscribing to Behind the Signs." />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-surf-600 min-h-screen font-body">
+    <main class="min-h-screen flex flex-col items-center justify-center px-6 py-16">
+      <img
+        src={wordmark.src}
+        alt="Behind the Signs"
+        class="anim-drop-in w-[70vw] max-w-[300px] h-auto drop-shadow-[0_8px_18px_rgba(0,40,55,0.35)]"
+      />
+
+      <div class="panel-cabinet w-full max-w-xl mt-10 anim-rise-in anim-delay-2">
+        <div class="panel-cabinet-face text-center px-6 py-10 sm:px-10">
+          <span class="eyebrow eyebrow-white text-xl">you're on the board</span>
+          <h1 class="headline headline-light text-3xl sm:text-4xl mt-2">You're in!</h1>
+          <p class="text-white/90 mt-4 max-w-md mx-auto leading-relaxed">
+            Thanks for subscribing — one long-form article a month, plus the latest episodes
+            and shop tours. Meanwhile, the show rolls on:
+          </p>
+          <div class="flex flex-wrap justify-center gap-3 mt-6">
+            <a href="/" class="btn-white">Back to the site</a>
+            <a
+              href="https://www.youtube.com/@BehindTheSigns"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-gold"
+            >
+              Watch on YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
