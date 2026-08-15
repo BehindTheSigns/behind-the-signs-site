@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import heroBg from '../assets/coming-soon/hero-bg.jpg';
 import wordmark from '../assets/coming-soon/wordmark.svg';
-import signLogo from '../assets/BTS_Sign.png';
+import wordmarkInk from '../assets/wordmark-ink.svg';
 import hostJoe from '../assets/landing/host-joe.png';
 import hostLiz from '../assets/landing/host-liz.png';
 import assocIsa from '../assets/landing/assoc-isa.png';
@@ -43,15 +43,15 @@ const sourceMeta = {
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-// Section links under the hero — order and wording from Joe's site plan.
-const sectionLinks = [
-  { href: '#subscribe', label: 'Subscribe', class: 'btn-gold btn-sm' },
-  { href: '#podcast', label: 'Podcast', class: 'btn-white btn-sm' },
-  { href: '#shop-tours', label: 'Shop Tours', class: 'btn-white btn-sm' },
-  { href: '#blog', label: 'Blog', class: 'btn-white btn-sm' },
-  { href: '#about', label: 'About', class: 'btn-white btn-sm' },
-  { href: '#associations', label: 'Associations', class: 'btn-white btn-sm' },
-  { href: '#sponsors', label: 'Sponsors', class: 'btn-white btn-sm' },
+// Top-nav section links — order and wording from Joe's site plan. Subscribe
+// rides along as the nav's CTA button rather than a list item.
+const navLinks = [
+  { href: '#podcast', label: 'Podcast' },
+  { href: '#shop-tours', label: 'Shop Tours' },
+  { href: '#blog', label: 'Blog' },
+  { href: '#about', label: 'About' },
+  { href: '#associations', label: 'Associations' },
+  { href: '#sponsors', label: 'Sponsors' },
 ];
 
 const icons: Record<string, string> = {
@@ -151,7 +151,7 @@ const socialLinks = [
 ];
 
 const description =
-  'Behind the Signs brings the sign industry together — real conversations with the people shaping the industry, behind-the-scenes shop tours, and a community of thousands of sign professionals.';
+  'Behind the Signs brings the sign industry together. Real conversations with the people shaping the industry, behind-the-scenes shop tours, and a community of thousands of sign professionals.';
 ---
 
 <!DOCTYPE html>
@@ -182,9 +182,64 @@ const description =
     />
   </head>
 
-  <body class="bg-surf-600 min-h-screen font-body">
+  <body id="top" class="bg-surf-600 min-h-screen font-body">
+    <!-- ============ TOP NAV — sticky ink bar per Joe's mockup ============ -->
+    <header class="site-nav">
+      <div class="container-custom flex h-16 items-center justify-between gap-6">
+        <a
+          href="#top"
+          id="nav-brand"
+          class="flex items-center shrink-0 opacity-0 pointer-events-none transition-opacity duration-300 motion-reduce:transition-none"
+          aria-label="Behind the Signs, back to top"
+        >
+          <img src={wordmarkInk.src} alt="" class="h-10 w-auto" />
+        </a>
+        <noscript>
+          <style>
+            #nav-brand { opacity: 1; pointer-events: auto; }
+          </style>
+        </noscript>
+
+        <nav aria-label="Sections" class="hidden lg:flex items-center gap-2">
+          {navLinks.map((l) => <a href={l.href} class="nav-link">{l.label}</a>)}
+          <a href="#subscribe" class="btn-primary btn-sm ml-3">Subscribe</a>
+        </nav>
+
+        <button
+          type="button"
+          id="nav-toggle"
+          class="lg:hidden grid h-10 w-10 place-items-center text-ink/80 hover:text-ink"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <svg data-icon-open viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="h-6 w-6">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg data-icon-close viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" class="hidden h-6 w-6">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <nav id="nav-menu" aria-label="Sections" class="hidden lg:hidden border-t border-slate-200 bg-white">
+        <ul class="container-custom py-4 grid gap-1">
+          {
+            navLinks.map((l) => (
+              <li>
+                <a href={l.href} class="nav-link block py-2.5">{l.label}</a>
+              </li>
+            ))
+          }
+          <li class="pt-3">
+            <a href="#subscribe" class="btn-primary btn-sm btn-block">Subscribe</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
     <main>
-      <!-- ============ HERO — sticker-print photo, wordmark, section links ============ -->
+      <!-- ============ HERO — sticker-print photo, wordmark, tagline ============ -->
       <section class="hero">
         <div class="absolute inset-0 anim-zoom-settle">
           <Image
@@ -201,6 +256,7 @@ const description =
 
         <div class="relative flex flex-col items-center text-center px-6 pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
           <img
+            id="hero-wordmark"
             src={wordmark.src}
             alt="Behind the Signs"
             class="anim-drop-in w-[80vw] max-w-[300px] sm:max-w-[430px] lg:max-w-[540px] h-auto drop-shadow-[0_8px_18px_rgba(0,40,55,0.35)]"
@@ -208,18 +264,9 @@ const description =
           <p class="headline headline-light text-xl sm:text-2xl lg:text-3xl mt-8 sm:mt-10 anim-rise-in anim-delay-2">
             Elevating the sign industry together.
           </p>
-
-          <nav aria-label="Sections" class="mt-9 sm:mt-11 anim-rise-in anim-delay-3">
-            <ul class="flex flex-wrap justify-center gap-2.5 sm:gap-3 max-w-md sm:max-w-none">
-              {
-                sectionLinks.map((l) => (
-                  <li>
-                    <a href={l.href} class={l.class}>{l.label}</a>
-                  </li>
-                ))
-              }
-            </ul>
-          </nav>
+          <a href="#subscribe" class="btn-gold mt-9 sm:mt-10 anim-rise-in anim-delay-3">
+            Get the Newsletter
+          </a>
         </div>
       </section>
 
@@ -257,11 +304,11 @@ const description =
                         alt=""
                         loading="lazy"
                         decoding="async"
-                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                        class="absolute inset-0 h-full w-full object-cover"
                       />
-                      <span class="absolute inset-0 bg-surf-950/0 transition-colors duration-300 group-hover:bg-surf-950/20"></span>
+                      <span class="absolute inset-0 bg-surf-950/0 transition-colors duration-200 group-hover:bg-surf-950/15"></span>
                       <span class="absolute inset-0 grid place-items-center">
-                        <span class="grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-full bg-pink-500 text-white shadow-[0_4px_0_var(--color-pink-700),0_12px_22px_rgb(3_42_58/0.3)] transition-transform duration-300 group-hover:scale-110">
+                        <span class="grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-full bg-pink-500 text-white shadow-md transition-colors duration-200 group-hover:bg-pink-600">
                           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6 translate-x-0.5">
                             <path d="M8 5.5v13l11-6.5z" />
                           </svg>
@@ -304,8 +351,8 @@ const description =
               href={PODCAST_PLAYLIST}
               target="_blank"
               rel="noopener noreferrer"
-              class="dest block scroll-mt-10 focus-visible:outline-none"
-              aria-label="The Behind the Signs Podcast — watch on YouTube"
+              class="dest block scroll-mt-24 focus-visible:outline-none"
+              aria-label="Watch the Behind the Signs Podcast on YouTube"
             >
               <div class="panel-cabinet h-full flex">
                 <div class="panel-cabinet-face w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-8">
@@ -324,8 +371,8 @@ const description =
               href={SHOP_TOURS_PLAYLIST}
               target="_blank"
               rel="noopener noreferrer"
-              class="dest block scroll-mt-10 focus-visible:outline-none"
-              aria-label="Behind the Signs Shop Tours — watch on YouTube"
+              class="dest block scroll-mt-24 focus-visible:outline-none"
+              aria-label="Watch Behind the Signs Shop Tours on YouTube"
             >
               <div class="panel-cabinet h-full flex">
                 <div class="panel-cabinet-face face-teal w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-8">
@@ -345,13 +392,13 @@ const description =
             href={FACEBOOK_GROUP}
             target="_blank"
             rel="noopener noreferrer"
-            class="dest block scroll-mt-10 focus-visible:outline-none"
-            aria-label="The Behind the Signs community — join the Facebook group"
+            class="dest block scroll-mt-24 focus-visible:outline-none"
+            aria-label="Join the Behind the Signs community on Facebook"
           >
             <div class="panel-cabinet">
               <div class="panel-cabinet-face face-gold w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-10">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-9 w-9 text-ink/90" set:html={icons.chat} />
-                <span class="eyebrow text-pink-700 text-xl">join the conversation</span>
+                <span class="eyebrow text-pink-700">Join the conversation</span>
                 <h3 class="headline text-2xl sm:text-3xl">The Community</h3>
                 <p class="text-ink/80 leading-relaxed max-w-2xl">
                   Connect with sign shops around the world to ask questions, share your work, and
@@ -365,12 +412,12 @@ const description =
       </section>
 
       <!-- ============ BLOG — one long-form article a month, titles only ============ -->
-      <section id="blog" class="section section-white scroll-mt-10" aria-labelledby="blog-heading">
+      <section id="blog" class="section section-white scroll-mt-24" aria-labelledby="blog-heading">
         <div class="container-custom max-w-3xl">
           <h2 id="blog-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">The Blog</h2>
           <p class="lead mt-4">
-            One long-form article a month — straight talk on running and growing a sign business.
-            It goes out as the newsletter, too.
+            One long-form article a month. Straight talk on running and growing a sign business,
+            and it goes out as the newsletter, too.
           </p>
 
           {
@@ -392,7 +439,7 @@ const description =
                 ))}
               </ul>
             ) : (
-              <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border-l-4 border-gold-500 bg-gold-50 rounded-r-xl px-6 py-5">
+              <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border-l-4 border-gold-500 bg-gold-50 rounded-r-md px-6 py-5">
                 <p class="text-slate-700">
                   The first article is being written right now. Subscribe and it'll land in your inbox.
                 </p>
@@ -404,7 +451,7 @@ const description =
       </section>
 
       <!-- ============ ABOUT ============ -->
-      <section id="about" class="section section-tint scroll-mt-10" aria-labelledby="about-heading">
+      <section id="about" class="section section-tint scroll-mt-24" aria-labelledby="about-heading">
         <div class="container-custom max-w-3xl">
           <h2 id="about-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">
             About Behind the Signs
@@ -427,7 +474,7 @@ const description =
               <Image
                 src={hostJoe}
                 alt="Joe Arenella"
-                class="h-36 w-36 sm:h-40 sm:w-40 rounded-full object-cover shadow-[0_10px_24px_rgb(3_42_58/0.18)]"
+                class="h-36 w-36 sm:h-40 sm:w-40 rounded-full object-cover ring-1 ring-slate-200 shadow-sm"
                 widths={[160, 320]}
                 sizes="160px"
               />
@@ -445,7 +492,7 @@ const description =
               <Image
                 src={hostLiz}
                 alt="Liz Toynes"
-                class="h-36 w-36 sm:h-40 sm:w-40 rounded-full object-cover shadow-[0_10px_24px_rgb(3_42_58/0.18)]"
+                class="h-36 w-36 sm:h-40 sm:w-40 rounded-full object-cover ring-1 ring-slate-200 shadow-sm"
                 widths={[160, 320]}
                 sizes="160px"
               />
@@ -464,7 +511,7 @@ const description =
       </section>
 
       <!-- ============ MEMBERSHIP MATTERS — association friends ============ -->
-      <section id="associations" class="section section-white scroll-mt-10" aria-labelledby="associations-heading">
+      <section id="associations" class="section section-white scroll-mt-24" aria-labelledby="associations-heading">
         <div class="container-custom">
           <div class="max-w-3xl">
             <h2 id="associations-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">
@@ -511,7 +558,7 @@ const description =
       </section>
 
       <!-- ============ SPONSORS ============ -->
-      <section id="sponsors" class="section section-tint scroll-mt-10" aria-labelledby="sponsors-heading">
+      <section id="sponsors" class="section section-tint scroll-mt-24" aria-labelledby="sponsors-heading">
         <div class="container-custom">
           <h2 id="sponsors-heading" class="headline text-3xl sm:text-4xl lg:text-5xl">
             Thanks to our sponsors
@@ -551,10 +598,10 @@ const description =
     </main>
 
     <!-- ============ FOOTER — subscribe + socials, nothing else ============ -->
-    <footer id="subscribe" class="section-white border-t border-slate-200 scroll-mt-10">
+    <footer id="subscribe" class="section-white border-t border-slate-200 scroll-mt-24">
       <div class="container-custom max-w-2xl flex flex-col items-center text-center pt-16 sm:pt-20 pb-10">
-        <Image src={signLogo} alt="" class="h-24 w-auto" widths={[200, 400]} sizes="100px" />
-        <h2 class="headline text-2xl sm:text-3xl mt-6">Get the newsletter</h2>
+        <img src={wordmarkInk.src} alt="" class="h-16 sm:h-20 w-auto" />
+        <h2 class="headline text-2xl sm:text-3xl mt-8">Get the newsletter</h2>
         <p class="lead mt-3 max-w-md">
           One long-form article a month, plus the latest episodes and shop tours. No fluff.
         </p>
@@ -594,7 +641,7 @@ const description =
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   title={social.label}
-                  class="grid h-11 w-11 place-items-center rounded-full bg-slate-100 transition-all hover:bg-pink-500 hover:scale-110 group"
+                  class="grid h-11 w-11 place-items-center rounded-full bg-slate-100 transition-colors hover:bg-pink-500 group"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 fill-slate-600 group-hover:fill-white transition-colors">
                     <path d={social.icon} />
@@ -610,32 +657,47 @@ const description =
     </footer>
 
     <style>
-      /* Cabinet links lift on hover — same die-cut move as the coming-soon tiles */
+      /* Cabinet links deepen their shadow on hover — no movement */
       .dest .panel-cabinet {
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease;
+        transition: box-shadow 0.2s ease;
       }
       .dest:hover .panel-cabinet,
       .dest:focus-visible .panel-cabinet {
-        transform: translateY(-6px);
-        box-shadow:
-          var(--shadow-sticker-lg),
-          0 0 0 4px rgb(255 255 255 / 0.35);
-      }
-      .dest:active .panel-cabinet {
-        transform: translateY(-2px);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .dest .panel-cabinet,
-        .dest:hover .panel-cabinet,
-        .dest:focus-visible .panel-cabinet {
-          transition: none;
-          transform: none;
-        }
+        box-shadow: var(--shadow-sticker-lg);
       }
     </style>
+
+    <script>
+      // Mobile nav: hamburger toggles the dropdown; any link tap closes it.
+      const toggle = document.getElementById('nav-toggle')!;
+      const menu = document.getElementById('nav-menu')!;
+      const setMenu = (open: boolean) => {
+        menu.classList.toggle('hidden', !open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        toggle.querySelector('[data-icon-open]')!.classList.toggle('hidden', open);
+        toggle.querySelector('[data-icon-close]')!.classList.toggle('hidden', !open);
+      };
+      toggle.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
+      menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+      // Nav wordmark stays hidden while the big hero wordmark is on screen,
+      // then fades in once it scrolls under the bar.
+      const brand = document.getElementById('nav-brand')!;
+      const heroMark = document.getElementById('hero-wordmark');
+      if (heroMark && 'IntersectionObserver' in window) {
+        new IntersectionObserver(
+          ([entry]) => {
+            const hide = entry.isIntersecting;
+            brand.classList.toggle('opacity-0', hide);
+            brand.classList.toggle('pointer-events-none', hide);
+          },
+          { rootMargin: '-64px 0px 0px 0px' }
+        ).observe(heroMark);
+      } else {
+        brand.classList.remove('opacity-0', 'pointer-events-none');
+      }
+    </script>
 
     <script>
       // Click-to-play video facades: thumbnails link to YouTube (no-JS fallback)

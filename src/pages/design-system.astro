@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { Image } from 'astro:assets';
 import heroBg from '../assets/coming-soon/hero-bg.jpg';
 import wordmark from '../assets/coming-soon/wordmark.svg';
+import wordmarkInk from '../assets/wordmark-ink.svg';
 
 const ramps = [
   {
@@ -98,15 +99,15 @@ const navLinks = [
 
   <body class="bg-white text-slate-900">
     <!-- ================= NAV ================= -->
-    <header class="sticky top-0 z-50 header-solid">
-      <div class="container-custom flex items-center justify-between h-16">
+    <header class="site-nav">
+      <div class="container-custom flex items-center justify-between h-16 gap-6">
         <a href="/design-system" class="flex items-center gap-3">
-          <img src={wordmark.src} alt="Behind the Signs" class="h-7 w-auto" />
-          <span class="hidden sm:inline-flex badge badge-gold">Design System v1</span>
+          <img src={wordmarkInk.src} alt="Behind the Signs" class="h-9 w-auto" />
+          <span class="hidden sm:inline-flex badge badge-gold">Design System v1.1</span>
         </a>
         <nav class="hidden md:flex items-center gap-1">
           {navLinks.map(([href, label]) => (
-            <a href={href} class="btn-ghost btn-sm">{label}</a>
+            <a href={href} class="nav-link">{label}</a>
           ))}
         </nav>
       </div>
@@ -129,14 +130,14 @@ const navLinks = [
         <div class="hero-fade"></div>
 
         <div class="relative container-custom flex flex-col items-start gap-6 pt-20 pb-28 sm:pt-28 sm:pb-36">
-          <span class="eyebrow eyebrow-gold text-xl sm:text-2xl anim-drop-in">fresh off the plotter</span>
+          <span class="eyebrow eyebrow-gold anim-drop-in">fresh off the plotter</span>
           <h1 class="headline headline-light text-5xl sm:text-7xl lg:text-8xl anim-drop-in anim-delay-1">
             Design<br />System
           </h1>
           <p class="lead lead-light max-w-xl anim-rise-in anim-delay-2">
             One kit of parts for the Behind the Signs site and the web apps that come after it.
-            Chunky letterforms, die-cut stickers, vinyl-layer shadows — everything the brand
-            already is, turned into reusable components.
+            Chunky letterforms and brand color on flat, square-cornered components —
+            everything the brand already is, turned into reusable parts.
           </p>
           <div class="flex flex-wrap gap-4 anim-rise-in anim-delay-3">
             <a href="#buttons" class="btn-primary btn-lg">Browse components</a>
@@ -218,16 +219,16 @@ const navLinks = [
                 <hr class="divider" />
                 <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
                   <code class="spec">.headline .headline-tilt</code>
-                  <span class="text-xs text-slate-400">sticker energy, use sparingly</span>
-                  <p class="headline headline-tilt text-3xl ml-auto bg-gold-500 px-4 py-1 rounded-xl">
+                  <span class="text-xs text-slate-400">retired in v1.1 — renders flat</span>
+                  <p class="headline headline-tilt text-3xl ml-auto bg-gold-500 px-4 py-1 rounded-md">
                     Shop tours
                   </p>
                 </div>
                 <hr class="divider" />
                 <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
                   <code class="spec">.eyebrow</code>
-                  <span class="text-xs text-slate-400">Permanent Marker — hand-brushed accents only</span>
-                  <p class="eyebrow text-2xl ml-auto">straight from the shop floor</p>
+                  <span class="text-xs text-slate-400">small-caps kicker label</span>
+                  <p class="eyebrow ml-auto">straight from the shop floor</p>
                 </div>
                 <hr class="divider" />
                 <div>
@@ -249,7 +250,7 @@ const navLinks = [
                 <h4 class="font-black">Rules of thumb</h4>
                 <ul class="mt-3 grid gap-2.5 text-sm text-slate-600 list-disc list-inside">
                   <li><strong>Archivo Black</strong> for headlines & buttons — never body copy.</li>
-                  <li><strong>Permanent Marker</strong> only for eyebrows & tiny accents. One per screen.</li>
+                  <li><strong>Permanent Marker</strong> retired from the UI in v1.1 — print/social use only.</li>
                   <li><strong>Roboto</strong> everywhere else, weight 400–900.</li>
                   <li>Teal = focus & links. Pink = primary action & selected. Gold = highlight.</li>
                 </ul>
@@ -260,26 +261,26 @@ const navLinks = [
           <!-- Elevation -->
           <h3 class="headline text-2xl mt-16">Elevation & shape</h3>
           <p class="lead mt-2 max-w-2xl">
-            Two shadow families: soft <em>panel</em> shadows for light surfaces, heavy
-            <em>sticker</em> shadows for things sitting on the teal wash. Hard color-matched
-            offsets make buttons read as layered vinyl.
+            Two quiet shadow families: flat <em>panel</em> shadows for light surfaces, slightly
+            deeper <em>sticker</em> shadows for things sitting on the teal wash. Buttons carry
+            no shadow at all — depth comes from color.
           </p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-            <div class="rounded-2xl bg-white p-6 text-sm font-medium" style="box-shadow: var(--shadow-panel)">
+            <div class="rounded-lg bg-white p-6 text-sm font-medium" style="box-shadow: var(--shadow-panel)">
               <code class="spec">--shadow-panel</code>
               <p class="mt-2 text-slate-500">Resting cards on white or paper.</p>
             </div>
-            <div class="rounded-2xl bg-white p-6 text-sm font-medium" style="box-shadow: var(--shadow-panel-lg)">
+            <div class="rounded-lg bg-white p-6 text-sm font-medium" style="box-shadow: var(--shadow-panel-lg)">
               <code class="spec">--shadow-panel-lg</code>
               <p class="mt-2 text-slate-500">Hover / raised state.</p>
             </div>
-            <div class="rounded-2xl bg-surf-600 p-6 text-sm font-medium text-white" style="box-shadow: var(--shadow-sticker)">
+            <div class="rounded-lg bg-surf-600 p-6 text-sm font-medium text-white" style="box-shadow: var(--shadow-sticker)">
               <code class="spec-light">--shadow-sticker</code>
               <p class="mt-2 text-white/80">Tiles & stickers on the wash.</p>
             </div>
-            <div class="rounded-2xl bg-pink-500 p-6 text-sm font-medium text-white" style="box-shadow: 0 4px 0 var(--color-pink-700), 0 12px 22px rgb(3 42 58 / 0.18)">
-              <code class="spec-light">hard offset</code>
-              <p class="mt-2 text-white/80">Color-matched vinyl layer under buttons.</p>
+            <div class="rounded-lg bg-pink-500 p-6 text-sm font-medium text-white">
+              <code class="spec-light">flat</code>
+              <p class="mt-2 text-white/80">Buttons & badges: solid color, no shadow.</p>
             </div>
           </div>
 
@@ -309,10 +310,10 @@ const navLinks = [
       <!-- ================= BUTTONS ================= -->
       <section id="buttons" class="section section-tint scroll-mt-16">
         <div class="container-custom">
-          <span class="eyebrow">peel & stick</span>
+          <span class="eyebrow">calls to action</span>
           <h2 class="headline text-4xl sm:text-5xl mt-2">Buttons</h2>
           <p class="lead mt-3 max-w-2xl">
-            Vinyl sticker pills. Every variant lifts on hover and presses flat on click.
+            Flat, square-cornered, solid color. Hover darkens one step — no movement.
             Focus rings are always surf teal.
           </p>
 
@@ -377,7 +378,7 @@ const navLinks = [
           </div>
 
           <!-- On the wash -->
-          <div class="mt-6 rounded-3xl bg-surf-600 p-8 sm:p-10" style="box-shadow: var(--shadow-sticker)">
+          <div class="mt-6 rounded-lg bg-surf-600 p-8 sm:p-10" style="box-shadow: var(--shadow-sticker)">
             <div class="flex items-baseline justify-between flex-wrap gap-2">
               <h3 class="font-black text-white">On the teal wash</h3>
               <span class="text-xs text-white/70">photos & brand sections</span>
@@ -402,7 +403,7 @@ const navLinks = [
           <span class="eyebrow">take an order</span>
           <h2 class="headline text-4xl sm:text-5xl mt-2">Forms</h2>
           <p class="lead mt-3 max-w-2xl">
-            Chunky 2px borders, teal focus glow, pink selections. Wrap each control in a
+            Hairline borders, a quiet teal focus ring, pink selections. Wrap each control in a
             <code class="spec">.field</code> with a <code class="spec">.label</code>.
           </p>
 
@@ -502,8 +503,8 @@ const navLinks = [
             <div class="panel panel-hover">
               <div class="panel-header"><h3 class="font-black">Standard panel</h3></div>
               <div class="panel-body text-sm text-slate-600">
-                Header, body, footer. Add <code class="spec">.panel-hover</code> for the lift —
-                this one has it, try me.
+                Header, body, footer. Add <code class="spec">.panel-hover</code> to deepen the
+                border and shadow on hover — this one has it, try me.
               </div>
               <div class="panel-footer flex flex-wrap gap-2">
                 <code class="spec">.panel</code>
@@ -545,12 +546,11 @@ const navLinks = [
           </div>
 
           <!-- Sticker panel on wash -->
-          <div class="mt-6 rounded-3xl bg-surf-600 p-8 sm:p-10 grid sm:grid-cols-2 gap-8 items-center" style="box-shadow: var(--shadow-sticker)">
+          <div class="mt-6 rounded-lg bg-surf-600 p-8 sm:p-10 grid sm:grid-cols-2 gap-8 items-center" style="box-shadow: var(--shadow-sticker)">
             <div>
-              <h3 class="font-black text-white text-xl">Die-cut sticker panel</h3>
+              <h3 class="font-black text-white text-xl">Sticker panel</h3>
               <p class="text-white/85 mt-2 text-sm max-w-md">
-                White ring + heavy sticker shadow. Made for the teal wash and photo
-                backgrounds — the same treatment as the coming-soon tiles.
+                Raised white panel for the teal wash and photo backgrounds.
               </p>
               <code class="spec-light mt-4 inline-block">.panel-sticker</code>
             </div>
@@ -566,7 +566,7 @@ const navLinks = [
           <!-- Sign cabinet -->
           <div class="panel-cabinet mt-6">
             <div class="panel-cabinet-face text-center flex flex-col items-center gap-4 sm:py-14">
-              <span class="eyebrow eyebrow-white text-2xl">don't miss an episode</span>
+              <span class="eyebrow eyebrow-white">don't miss an episode</span>
               <h3 class="headline headline-light text-4xl sm:text-5xl max-w-2xl">
                 Get the newsletter
               </h3>
@@ -586,14 +586,14 @@ const navLinks = [
           <div class="grid sm:grid-cols-2 gap-6 mt-6">
             <div class="panel-cabinet">
               <div class="panel-cabinet-face face-teal text-center flex flex-col items-center gap-3">
-                <span class="eyebrow eyebrow-gold text-xl">variant</span>
+                <span class="eyebrow eyebrow-gold">variant</span>
                 <h3 class="headline headline-light text-2xl">Teal face</h3>
                 <code class="spec-light">.panel-cabinet-face.face-teal</code>
               </div>
             </div>
             <div class="panel-cabinet">
               <div class="panel-cabinet-face face-gold text-center flex flex-col items-center gap-3">
-                <span class="eyebrow text-pink-700 text-xl">variant</span>
+                <span class="eyebrow text-pink-700">variant</span>
                 <h3 class="headline text-2xl">Gold face</h3>
                 <code class="spec-light">.panel-cabinet-face.face-gold</code>
               </div>
@@ -605,7 +605,7 @@ const navLinks = [
       <!-- ================= BADGES & ALERTS ================= -->
       <section id="badges" class="section section-white scroll-mt-16">
         <div class="container-custom">
-          <span class="eyebrow">little stickers</span>
+          <span class="eyebrow">labels & status</span>
           <h2 class="headline text-4xl sm:text-5xl mt-2">Badges & Alerts</h2>
 
           <div class="grid lg:grid-cols-2 gap-6 mt-8">
@@ -671,10 +671,39 @@ const navLinks = [
           </p>
 
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-            <div class="rounded-2xl border-2 border-slate-200 bg-white h-28 grid place-content-center text-sm font-bold">.section-white</div>
-            <div class="rounded-2xl border-2 border-slate-200 bg-paper h-28 grid place-content-center text-sm font-bold">.section-tint</div>
-            <div class="rounded-2xl bg-surf-600 h-28 grid place-content-center text-sm font-bold text-white">.section-teal</div>
-            <div class="rounded-2xl bg-ink h-28 grid place-content-center text-sm font-bold text-white">.section-ink</div>
+            <div class="rounded-lg border-2 border-slate-200 bg-white h-28 grid place-content-center text-sm font-bold">.section-white</div>
+            <div class="rounded-lg border-2 border-slate-200 bg-paper h-28 grid place-content-center text-sm font-bold">.section-tint</div>
+            <div class="rounded-lg bg-surf-600 h-28 grid place-content-center text-sm font-bold text-white">.section-teal</div>
+            <div class="rounded-lg bg-ink h-28 grid place-content-center text-sm font-bold text-white">.section-ink</div>
+          </div>
+
+          <!-- Site nav -->
+          <div class="panel mt-8 overflow-hidden">
+            <div class="panel-header flex items-center justify-between">
+              <h3 class="font-black">Site nav</h3>
+              <span class="text-xs text-slate-400">this page's own header is the live sticky instance</span>
+            </div>
+            <div class="site-nav" style="position: static">
+              <div class="flex items-center justify-between h-16 gap-6 px-6">
+                <img src={wordmarkInk.src} alt="Behind the Signs" class="h-9 w-auto" />
+                <nav class="hidden sm:flex items-center gap-2" aria-label="Demo">
+                  <a href="#sections" class="nav-link">Podcast</a>
+                  <a href="#sections" class="nav-link">Shop Tours</a>
+                  <a href="#sections" class="nav-link">Blog</a>
+                  <a href="#sections" class="btn-primary btn-sm ml-3">Subscribe</a>
+                </nav>
+              </div>
+            </div>
+            <div class="panel-footer flex flex-wrap items-center gap-2">
+              <code class="spec">.site-nav</code>
+              <code class="spec">.nav-link</code>
+              <span class="text-xs text-slate-500 ml-1">
+                Sticky white bar, ink wordmark (<code class="spec">wordmark-ink.svg</code>), black
+                uppercase links with a soft tint on hover, pink subscribe. On the landing page it
+                collapses to a hamburger below <code class="spec">lg</code>, and the wordmark stays
+                hidden until the big hero wordmark scrolls past (IntersectionObserver opacity fade).
+              </span>
+            </div>
           </div>
 
           <!-- Mini hero recipe -->
@@ -688,7 +717,7 @@ const navLinks = [
               <div class="hero-wash"></div>
               <div class="hero-fade"></div>
               <div class="relative px-8 py-16 sm:py-20 text-center flex flex-col items-center gap-4">
-                <span class="eyebrow eyebrow-gold text-xl">your next section</span>
+                <span class="eyebrow eyebrow-gold">your next section</span>
                 <h3 class="headline headline-light text-4xl sm:text-5xl">Built with the kit</h3>
                 <button class="btn-white">Call to action</button>
               </div>
@@ -708,7 +737,7 @@ const navLinks = [
       <div class="container-custom py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
         <img src={wordmark.src} alt="Behind the Signs" class="h-8 w-auto" />
         <p class="text-sm text-white/60">
-          Design System v1 — tokens & components in
+          Design System v1.1 — tokens & components in
           <code class="spec-light">src/styles/design-system.css</code>
         </p>
       </div>

@@ -1,8 +1,9 @@
 /* ==========================================================================
-   BEHIND THE SIGNS — DESIGN SYSTEM v1
-   "Die-cut vinyl" language: chunky letterforms, hard vinyl-layer shadows,
-   pill sticker buttons, sign-cabinet panels. Colors sampled from the logo
-   artwork (bts-sign-logo.svg) and the coming-soon sticker-print photo.
+   BEHIND THE SIGNS — DESIGN SYSTEM v1.1
+   Flat, professional take on the brand: chunky letterforms and sign-cabinet
+   panels, but square-cornered, flat-color components with quiet hover
+   states — no pills, no hard "vinyl layer" offset shadows, no bounce.
+   Colors sampled from the logo artwork (bts-sign-logo.svg).
 
    Layers:
      @theme      — design tokens (also generate Tailwind utilities)
@@ -61,20 +62,21 @@
   --font-body: 'Roboto', ui-sans-serif, system-ui, sans-serif;
   --font-marker: 'Permanent Marker', cursive;
 
-  /* ---- Elevation ---- */
-  --shadow-sticker: 0 14px 34px rgb(3 42 58 / 0.35); /* from the tiles */
-  --shadow-sticker-lg: 0 22px 44px rgb(3 42 58 / 0.45);
-  --shadow-panel: 0 10px 30px rgb(3 42 58 / 0.08);
-  --shadow-panel-lg: 0 18px 44px rgb(3 42 58 / 0.14);
+  /* ---- Elevation — kept quiet; depth comes from color, not drop shadows ---- */
+  --shadow-sticker: 0 6px 20px rgb(3 42 58 / 0.2);
+  --shadow-sticker-lg: 0 10px 28px rgb(3 42 58 / 0.25);
+  --shadow-panel: 0 1px 3px rgb(3 42 58 / 0.07);
+  --shadow-panel-lg: 0 6px 18px rgb(3 42 58 / 0.1);
 
-  /* ---- Shape ---- */
-  --radius-blob: 1.25rem; /* panel / card corner */
+  /* ---- Shape — near-square. --radius-ui for controls, --radius-blob for panels ---- */
+  --radius-ui: 0.25rem;
+  --radius-blob: 0.5rem; /* panel / card corner */
 }
 
 @layer components {
   /* ======================================================================
-     BUTTONS — vinyl sticker pills. Hard offset shadow = layered vinyl.
-     Hover lifts, active presses flat. Legacy markup uses variant classes
+     BUTTONS — flat, square-cornered, solid color. Hover darkens one step;
+     no movement, no offset shadows. Legacy markup uses variant classes
      alone, so every variant carries the full base.
      ====================================================================== */
   .btn-primary,
@@ -89,24 +91,23 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.8125rem 1.75rem;
-    border-radius: 9999px;
+    padding: 0.8125rem 1.625rem;
+    border-radius: var(--radius-ui);
     font-family: var(--font-display);
     font-weight: 900;
     font-synthesis: none;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     line-height: 1.2;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
     border: 0;
     white-space: nowrap;
     transition:
-      transform 0.18s ease,
-      box-shadow 0.18s ease,
-      background-color 0.18s ease,
-      color 0.18s ease;
+      background-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -118,67 +119,46 @@
   .btn-dark:focus-visible,
   .btn-white:focus-visible,
   .btn-ghost:focus-visible {
-    outline: 3px solid var(--color-surf-400);
+    outline: 2px solid var(--color-surf-400);
     outline-offset: 2px;
   }
 
-  /* Primary — brand pink over its deep-magenta vinyl layer */
+  /* Primary — brand pink */
   .btn-primary {
     background-color: var(--color-pink-500);
     color: #fff;
-    box-shadow:
-      0 4px 0 var(--color-pink-700),
-      0 12px 22px rgb(3 42 58 / 0.18);
   }
   .btn-primary:hover {
-    background-color: var(--color-pink-400);
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 0 var(--color-pink-700),
-      0 16px 28px rgb(3 42 58 / 0.22);
+    background-color: var(--color-pink-600);
   }
   .btn-primary:active {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 var(--color-pink-700),
-      0 6px 12px rgb(3 42 58 / 0.18);
+    background-color: var(--color-pink-700);
   }
 
   /* Secondary — outlined, for quieter actions on light surfaces */
   .btn-secondary {
     background-color: transparent;
     color: var(--color-ink);
-    box-shadow: inset 0 0 0 3px rgb(35 31 32 / 0.18);
+    box-shadow: inset 0 0 0 1.5px rgb(35 31 32 / 0.3);
   }
   .btn-secondary:hover {
-    color: var(--color-pink-600);
-    box-shadow: inset 0 0 0 3px var(--color-pink-500);
-    transform: translateY(-2px);
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+    background-color: rgb(3 42 58 / 0.04);
   }
   .btn-secondary:active {
-    transform: translateY(1px);
+    background-color: rgb(3 42 58 / 0.08);
   }
 
   /* Teal — solid brand-wash action */
   .btn-teal {
     background-color: var(--color-surf-600);
     color: #fff;
-    box-shadow:
-      0 4px 0 var(--color-surf-800),
-      0 12px 22px rgb(3 42 58 / 0.18);
   }
   .btn-teal:hover {
-    background-color: var(--color-surf-500);
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 0 var(--color-surf-800),
-      0 16px 28px rgb(3 42 58 / 0.22);
+    background-color: var(--color-surf-700);
   }
   .btn-teal:active {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 var(--color-surf-800),
-      0 6px 12px rgb(3 42 58 / 0.18);
+    background-color: var(--color-surf-800);
   }
 
   /* Gold — high-emphasis highlight (legacy alias: .btn-highlight) */
@@ -186,69 +166,39 @@
   .btn-highlight {
     background-color: var(--color-gold-500);
     color: var(--color-ink);
-    box-shadow:
-      0 4px 0 var(--color-gold-700),
-      0 12px 22px rgb(3 42 58 / 0.18);
   }
   .btn-gold:hover,
   .btn-highlight:hover {
-    background-color: var(--color-gold-400);
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 0 var(--color-gold-700),
-      0 16px 28px rgb(3 42 58 / 0.22);
+    background-color: var(--color-gold-600);
   }
   .btn-gold:active,
   .btn-highlight:active {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 var(--color-gold-700),
-      0 6px 12px rgb(3 42 58 / 0.18);
+    background-color: var(--color-gold-700);
+    color: #fff;
   }
 
-  /* Dark — ink sticker */
+  /* Dark — ink */
   .btn-dark {
     background-color: var(--color-ink);
     color: #fff;
-    box-shadow:
-      0 4px 0 #000,
-      0 12px 22px rgb(3 42 58 / 0.25);
   }
   .btn-dark:hover {
     background-color: #3a3435;
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 0 #000,
-      0 16px 28px rgb(3 42 58 / 0.3);
   }
   .btn-dark:active {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 #000,
-      0 6px 12px rgb(3 42 58 / 0.25);
+    background-color: #000;
   }
 
-  /* White — for teal washes, photos, dark sections. Hover gets the
-     die-cut ring from the coming-soon tiles. */
+  /* White — for teal washes, photos, dark sections */
   .btn-white {
     background-color: #fff;
-    color: var(--color-surf-700);
-    box-shadow:
-      0 4px 0 rgb(3 42 58 / 0.35),
-      0 12px 22px rgb(3 42 58 / 0.25);
+    color: var(--color-surf-800);
   }
   .btn-white:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 0 rgb(3 42 58 / 0.35),
-      0 16px 28px rgb(3 42 58 / 0.3),
-      0 0 0 4px rgb(255 255 255 / 0.35);
+    background-color: var(--color-surf-50);
   }
   .btn-white:active {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 rgb(3 42 58 / 0.35),
-      0 6px 12px rgb(3 42 58 / 0.25);
+    background-color: var(--color-surf-100);
   }
 
   /* Ghost — text-only, menus and tertiary actions */
@@ -290,7 +240,7 @@
     padding: 1.0625rem;
   }
 
-  /* Disabled — vinyl peeled off */
+  /* Disabled */
   .btn-primary:disabled,
   .btn-secondary:disabled,
   .btn-teal:disabled,
@@ -302,8 +252,6 @@
   .btn-disabled {
     opacity: 0.45;
     pointer-events: none;
-    transform: none;
-    box-shadow: 0 2px 0 rgb(3 42 58 / 0.15);
   }
 
   /* ======================================================================
@@ -341,8 +289,8 @@
   .select {
     width: 100%;
     background-color: #fff;
-    border: 2px solid rgb(3 42 58 / 0.16);
-    border-radius: 0.75rem;
+    border: 1px solid rgb(3 42 58 / 0.24);
+    border-radius: var(--radius-ui);
     padding: 0.6875rem 1rem;
     font-family: var(--font-body);
     font-size: 1rem;
@@ -360,14 +308,14 @@
   .input:hover,
   .textarea:hover,
   .select:hover {
-    border-color: rgb(3 42 58 / 0.32);
+    border-color: rgb(3 42 58 / 0.4);
   }
   .input:focus,
   .textarea:focus,
   .select:focus {
     outline: none;
-    border-color: var(--color-surf-500);
-    box-shadow: 0 0 0 4px rgb(13 154 201 / 0.22);
+    border-color: var(--color-surf-600);
+    box-shadow: 0 0 0 3px rgb(13 154 201 / 0.15);
   }
   .input:disabled,
   .textarea:disabled,
@@ -427,14 +375,14 @@
       box-shadow 0.15s ease;
   }
   .checkbox {
-    border-radius: 0.4375rem;
+    border-radius: var(--radius-ui);
   }
   .radio {
     border-radius: 9999px;
   }
   .checkbox:hover,
   .radio:hover {
-    border-color: var(--color-pink-500);
+    border-color: rgb(3 42 58 / 0.5);
   }
   .checkbox:focus-visible,
   .radio:focus-visible,
@@ -507,17 +455,17 @@
      ====================================================================== */
   .panel {
     background-color: #fff;
-    border: 1px solid rgb(3 42 58 / 0.08);
+    border: 1px solid rgb(3 42 58 / 0.1);
     border-radius: var(--radius-blob);
     box-shadow: var(--shadow-panel);
   }
   .panel-hover {
     transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease;
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
   }
   .panel-hover:hover {
-    transform: translateY(-4px);
+    border-color: rgb(3 42 58 / 0.22);
     box-shadow: var(--shadow-panel-lg);
   }
   .panel-header {
@@ -534,14 +482,12 @@
     border-radius: 0 0 var(--radius-blob) var(--radius-blob);
   }
 
-  /* Die-cut sticker panel — for teal washes / photo backgrounds */
+  /* Raised white panel — for teal washes / photo backgrounds */
   .panel-sticker {
     background-color: #fff;
     border: 0;
     border-radius: var(--radius-blob);
-    box-shadow:
-      0 0 0 5px rgb(255 255 255 / 0.4),
-      var(--shadow-sticker);
+    box-shadow: var(--shadow-sticker);
   }
 
   /* Teal callout face */
@@ -553,35 +499,28 @@
     box-shadow: var(--shadow-sticker);
   }
 
-  /* Sign cabinet — the showpiece CTA. Ink rim, pink face, neon tube inset
-     (straight from the logo). Put .panel-cabinet-face inside .panel-cabinet. */
+  /* Sign cabinet — the showpiece CTA. Slim ink rim, flat color face with a
+     hairline retainer. Put .panel-cabinet-face inside .panel-cabinet. */
   .panel-cabinet {
     background-color: var(--color-ink);
-    border-radius: calc(var(--radius-blob) + 0.5rem);
-    padding: 0.5rem;
-    box-shadow: var(--shadow-sticker-lg);
+    border-radius: calc(var(--radius-blob) + 0.25rem);
+    padding: 0.375rem;
+    box-shadow: var(--shadow-sticker);
   }
   .panel-cabinet-face {
-    background:
-      radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.22) 0%, transparent 55%),
-      var(--color-pink-500);
+    background: var(--color-pink-500);
     border-radius: var(--radius-blob);
     color: #fff;
     padding: 2.5rem 2rem;
-    box-shadow:
-      inset 0 0 0 3px rgb(255 255 255 / 0.85),
-      inset 0 0 18px 4px rgb(255 255 255 / 0.35);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.35);
   }
   .panel-cabinet-face.face-teal {
-    background:
-      radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.22) 0%, transparent 55%),
-      var(--color-surf-600);
+    background: var(--color-surf-600);
   }
   .panel-cabinet-face.face-gold {
-    background:
-      radial-gradient(120% 160% at 50% -20%, rgb(255 255 255 / 0.3) 0%, transparent 55%),
-      var(--color-gold-500);
+    background: var(--color-gold-500);
     color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px rgb(3 42 58 / 0.15);
   }
 
   /* ======================================================================
@@ -591,8 +530,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    padding: 0.3125rem 0.75rem;
-    border-radius: 9999px;
+    padding: 0.3125rem 0.625rem;
+    border-radius: var(--radius-ui);
     font-family: var(--font-body);
     font-weight: 900;
     font-size: 0.6875rem;
@@ -642,8 +581,8 @@
     gap: 0.75rem;
     align-items: flex-start;
     padding: 1rem 1.25rem;
-    border-radius: 1rem;
-    border: 2px solid;
+    border-radius: var(--radius-blob);
+    border: 1px solid;
     font-size: 0.9375rem;
     line-height: 1.5;
   }
@@ -671,6 +610,38 @@
     background-color: #fff1f2;
     border-color: rgb(225 29 72 / 0.35);
     color: #881337;
+  }
+
+  /* ======================================================================
+     SITE NAV — sticky white bar. Ink wordmark left, .nav-link items +
+     a small .btn-primary subscribe on the right.
+     ====================================================================== */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: #fff;
+    border-bottom: 1px solid rgb(3 42 58 / 0.1);
+  }
+  .nav-link {
+    display: inline-block;
+    padding: 0.5rem 0.625rem;
+    border-radius: var(--radius-ui);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: background-color 0.15s ease;
+  }
+  .nav-link:hover {
+    background-color: rgb(3 42 58 / 0.06);
+  }
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-surf-400);
+    outline-offset: 2px;
   }
 
   /* ======================================================================
@@ -744,17 +715,20 @@
     color: #fff;
     text-shadow: 0 3px 10px rgb(0 40 55 / 0.45);
   }
+  /* Retired v1 tilt — kept as a no-op so legacy markup stays valid */
   .headline-tilt {
-    transform: rotate(-1.5deg);
+    transform: none;
   }
 
+  /* Eyebrow — small-caps kicker label (v1's marker scrawl retired) */
   .eyebrow {
     display: inline-block;
-    font-family: var(--font-marker);
-    font-size: 1.125rem;
-    letter-spacing: 0.02em;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.8125rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: var(--color-pink-600);
-    transform: rotate(-2deg);
   }
   .eyebrow-gold {
     color: var(--color-gold-500);
@@ -785,8 +759,8 @@
       text-decoration-color 0.15s ease;
   }
   .link:hover {
-    color: var(--color-pink-600);
-    text-decoration-color: var(--color-pink-500);
+    color: var(--color-surf-900);
+    text-decoration-color: var(--color-surf-700);
   }
 
   .divider {
@@ -857,7 +831,7 @@
     flex-shrink: 0;
     width: 3rem;
     height: 3rem;
-    border-radius: 0.875rem;
+    border-radius: var(--radius-blob);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -865,17 +839,14 @@
   .feature-icon-pink {
     background-color: var(--color-pink-500);
     color: #fff;
-    box-shadow: 0 4px 0 var(--color-pink-700);
   }
   .feature-icon-yellow {
     background-color: var(--color-gold-500);
     color: var(--color-ink);
-    box-shadow: 0 4px 0 var(--color-gold-700);
   }
   .feature-icon-cyan {
     background-color: var(--color-surf-600);
     color: #fff;
-    box-shadow: 0 4px 0 var(--color-surf-800);
   }
 }
 
@@ -885,13 +856,13 @@
      Combine with .anim-delay-* for staggered reveals.
      ====================================================================== */
   .anim-zoom-settle {
-    animation: ds-zoom-settle 2s ease-out both;
+    animation: ds-zoom-settle 1.6s ease-out both;
   }
   .anim-drop-in {
-    animation: ds-drop-in 0.7s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    animation: ds-drop-in 0.6s ease-out both;
   }
   .anim-rise-in {
-    animation: ds-rise-in 0.7s ease-out both;
+    animation: ds-rise-in 0.6s ease-out both;
   }
   .anim-delay-1 { animation-delay: 0.15s; }
   .anim-delay-2 { animation-delay: 0.3s; }
@@ -901,23 +872,23 @@
   .anim-delay-6 { animation-delay: 0.9s; }
 
   @keyframes ds-zoom-settle {
-    from { transform: scale(1.06); }
+    from { transform: scale(1.03); }
     to { transform: scale(1); }
   }
   @keyframes ds-drop-in {
     from {
       opacity: 0;
-      transform: translateY(-28px) scale(0.94);
+      transform: translateY(-14px);
     }
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
   }
   @keyframes ds-rise-in {
     from {
       opacity: 0;
-      transform: translateY(22px);
+      transform: translateY(14px);
     }
     to {
       opacity: 1;
