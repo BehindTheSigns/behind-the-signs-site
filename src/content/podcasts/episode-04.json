@@ -19,5 +19,6 @@
     "Listen more than you pitch",
     "Long-term relationships beat short-term transactions"
   ],
-  "featured": false
+  "featured": false,
+  "draft": false
 }

@@ -6,6 +6,7 @@ pubDate: 2024-01-18
 category: "business-tips"
 tags: ["pricing", "business", "growth", "profitability"]
 featured: true
+draft: false
 ---
 
 After 30 years in the sign industry, I've learned that pricing isn't just about covering costs and adding a markup. It's about understanding value, psychology, and positioning. Here are the five strategies that transformed our business.

@@ -19,5 +19,6 @@
     "Shop tours inspire new ideas for layout, workflow, and equipment",
     "Celebrating craftsmanship builds pride and attracts new talent to the trade"
   ],
-  "featured": true
+  "featured": true,
+  "draft": false
 }

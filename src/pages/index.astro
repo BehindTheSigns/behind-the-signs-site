@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../lib/content';
 import heroBg from '../assets/coming-soon/hero-bg.jpg';
 import wordmark from '../assets/coming-soon/wordmark.svg';
 import wordmarkInk from '../assets/wordmark-ink.svg';
@@ -31,7 +31,7 @@ const videos = await fetchLatestVideos(3);
 // 2024-dated files in src/content/blog are dev samples — the date gate keeps
 // them off the landing page and admits real posts as they're published.
 const ARTICLES_LIVE_FROM = new Date('2026-01-01');
-const articles = (await getCollection('blog'))
+const articles = (await getPublishedPosts())
   .filter((post) => post.data.pubDate >= ARTICLES_LIVE_FROM)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 

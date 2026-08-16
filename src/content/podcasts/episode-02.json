@@ -20,5 +20,6 @@
     "Document institutional knowledge before it's lost",
     "A strong reputation takes decades to build — protect it"
   ],
-  "featured": false
+  "featured": false,
+  "draft": false
 }

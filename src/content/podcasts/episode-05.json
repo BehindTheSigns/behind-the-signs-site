@@ -19,5 +19,6 @@
     "Lead with purpose to attract the right team and clients",
     "Track metrics that matter, not vanity numbers"
   ],
-  "featured": false
+  "featured": false,
+  "draft": false
 }

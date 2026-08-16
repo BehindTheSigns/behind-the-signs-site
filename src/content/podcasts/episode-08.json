@@ -20,5 +20,6 @@
     "Document mistakes to prevent repeat issues",
     "A well-handled mistake can create a more loyal customer"
   ],
-  "featured": false
+  "featured": false,
+  "draft": false
 }

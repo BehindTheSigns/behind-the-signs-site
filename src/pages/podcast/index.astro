@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PodcastCard from '../../components/PodcastCard.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedEpisodes } from '../../lib/content';
 
 // Get all podcasts, sorted by episode number (newest first)
-const allPodcasts = await getCollection('podcasts');
+const allPodcasts = await getPublishedEpisodes();
 const sortedPodcasts = allPodcasts.sort((a, b) => b.data.episode - a.data.episode);
 
 // Get featured episode (latest or specifically marked)

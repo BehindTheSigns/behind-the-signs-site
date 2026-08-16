@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../../lib/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
@@ -15,7 +15,7 @@ const post = Astro.props;
 const { Content } = await post.render();
 
 // Get related posts (same category, excluding current)
-const allPosts = await getCollection('blog');
+const allPosts = await getPublishedPosts();
 const relatedPosts = allPosts
   .filter(p => p.data.category === post.data.category && p.slug !== post.slug)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())

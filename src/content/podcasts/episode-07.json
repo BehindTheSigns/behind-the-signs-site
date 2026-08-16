@@ -19,5 +19,6 @@
     "Follow up after resolution to ensure satisfaction",
     "Use mistakes as training opportunities for the whole team"
   ],
-  "featured": false
+  "featured": false,
+  "draft": false
 }

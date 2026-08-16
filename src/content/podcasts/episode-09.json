@@ -19,5 +19,6 @@
     "Educate clients on the design process and time investment",
     "Build design costs into your pricing if you won't charge separately"
   ],
-  "featured": false
+  "featured": false,
+  "draft": false
 }

@@ -12,6 +12,7 @@ const blog = defineCollection({
     category: z.enum(['business-tips', 'technical-guides', 'industry-news', 'case-studies']),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
   }),
 });
 
@@ -28,6 +29,7 @@ const podcasts = defineCollection({
     topics: z.array(z.string()),
     keyTakeaways: z.array(z.string()),
     featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
   }),
 });
 

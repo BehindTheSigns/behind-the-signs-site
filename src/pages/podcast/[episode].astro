@@ -1,10 +1,22 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedEpisodes } from '../../lib/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PodcastCard from '../../components/PodcastCard.astro';
 
 export async function getStaticPaths() {
-  const episodes = await getCollection('podcasts');
+  const episodes = await getPublishedEpisodes();
+  // Episode numbers are the URLs — a reused number would silently collide routes.
+  const seen = new Map<number, string>();
+  for (const e of episodes) {
+    const dup = seen.get(e.data.episode);
+    if (dup) {
+      throw new Error(
+        `Duplicate podcast episode number ${e.data.episode}: "${dup}" and "${e.id}". ` +
+          'Episode numbers must be unique — they are the /podcast/ URLs.'
+      );
+    }
+    seen.set(e.data.episode, e.id);
+  }
   return episodes.map((episode) => ({
     params: { episode: episode.data.episode.toString() },
     props: { episode },
@@ -14,7 +26,7 @@ export async function getStaticPaths() {
 const { episode } = Astro.props;
 
 // Get other episodes for recommendations
-const allEpisodes = await getCollection('podcasts');
+const allEpisodes = await getPublishedEpisodes();
 const otherEpisodes = allEpisodes
   .filter(e => e.data.episode !== episode.data.episode)
   .sort((a, b) => b.data.episode - a.data.episode)

@@ -3,10 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import BlogCard from '../components/BlogCard.astro';
 import PodcastCard from '../components/PodcastCard.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts, getPublishedEpisodes } from '../lib/content';
 
 // Get real podcast episodes from content collection
-const allPodcasts = await getCollection('podcasts');
+const allPodcasts = await getPublishedEpisodes();
 const featuredPodcasts = allPodcasts
   .sort((a, b) => b.data.episode - a.data.episode)
   .slice(0, 3)
@@ -24,7 +24,7 @@ const featuredPodcasts = allPodcasts
 const latestEpisode = allPodcasts.sort((a, b) => b.data.episode - a.data.episode)[0];
 
 // Get real blog posts from content collection
-const allPosts = await getCollection('blog');
+const allPosts = await getPublishedPosts();
 const featuredPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3)
