@@ -1,0 +1,238 @@
+# Pages CMS configuration (app.pagescms.org).
+# Defines what Joe can edit: blog posts, podcast episodes, and the landing
+# page's sponsor/association cards. Saves become commits to main; Netlify
+# deploys them automatically.
+
+media:
+  - name: blog
+    label: Blog images
+    input: public/images/blog
+    output: /images/blog
+    extensions: [png, jpg, jpeg, webp, gif]
+  - name: landing
+    label: Landing page logos
+    input: src/assets/landing
+    output: /src/assets/landing
+    extensions: [png, jpg, jpeg, svg, webp]
+
+content:
+  - name: blog
+    label: Blog posts
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [title, category, pubDate, draft, featured]
+      primary: title
+      sort: [pubDate, title]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: "Also becomes the post's web address, so pick it carefully. It can't be changed later without help."
+      - name: description
+        label: Summary
+        type: text
+        required: true
+        description: "1-2 sentences shown on blog cards and in search results."
+      - name: author
+        label: Author
+        type: string
+        default: Behind the Signs
+      - name: pubDate
+        label: Publish date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: updatedDate
+        label: Updated date
+        type: date
+        options:
+          format: yyyy-MM-dd
+        description: "Only set this when you significantly revise an already-published post."
+      - name: heroImage
+        label: Hero image
+        type: image
+        options:
+          media: blog
+        description: "Wide landscape image, roughly 1200x675. Optional."
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values:
+            - value: business-tips
+              label: Business Tips
+            - value: technical-guides
+              label: Technical Guides
+            - value: industry-news
+              label: Industry News
+            - value: case-studies
+              label: Case Studies
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+      - name: draft
+        label: Draft (hidden from the site)
+        type: boolean
+        default: true
+        description: "New posts start as drafts. Turn this OFF to publish."
+      - name: body
+        label: Body
+        type: rich-text
+    operations:
+      rename: false
+
+  - name: podcasts
+    label: Podcast episodes
+    type: collection
+    path: src/content/podcasts
+    format: json
+    filename: 'episode-{fields.episode}.json'
+    view:
+      fields: [episode, title, pubDate, draft, featured]
+      primary: title
+      sort: [episode, pubDate]
+      default:
+        sort: episode
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+      - name: episode
+        label: Episode number
+        type: number
+        required: true
+        description: "MUST be unique. It becomes the page address (/podcast/14). Next episode = last episode + 1; never reuse a number."
+      - name: pubDate
+        label: Publish date
+        type: date
+        required: true
+        options:
+          time: true
+          format: "yyyy-MM-dd'T'HH:mm:ss'Z'"
+      - name: youtubeId
+        label: YouTube video ID
+        type: string
+        required: true
+        pattern:
+          regex: '^[A-Za-z0-9_-]{11}$'
+          message: "Just the 11-character ID from the YouTube URL (the part after watch?v=), not the full link."
+        description: "The episode thumbnail and player come from this automatically."
+      - name: duration
+        label: Duration
+        type: string
+        required: true
+        pattern:
+          regex: '^\d+:\d{2}(:\d{2})?$'
+          message: "Use minutes:seconds, for example 52:08"
+      - name: guest
+        label: Guest
+        type: string
+      - name: topics
+        label: Topics
+        type: string
+        list: true
+        required: true
+      - name: keyTakeaways
+        label: Key takeaways
+        type: string
+        list: true
+        required: true
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+        description: "The featured episode is the big player at the top of the podcast page. Turn the old one OFF when you turn a new one ON."
+      - name: draft
+        label: Draft (hidden from the site)
+        type: boolean
+        default: true
+        description: "New episodes start as drafts. Turn this OFF to publish."
+    operations:
+      rename: false
+
+  - name: sponsors
+    label: 'Landing page: Sponsors'
+    type: file
+    path: src/data/sponsors.json
+    format: json
+    fields:
+      - name: sponsors
+        label: Sponsors (drag to reorder; this is the homepage order)
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: logo
+            label: Logo
+            type: image
+            required: true
+            options:
+              media: landing
+          - name: href
+            label: Website link
+            type: string
+            required: true
+            pattern:
+              regex: '^https://'
+              message: "Must be a full web address starting with https://"
+          - name: blurb
+            label: Blurb
+            type: string
+            required: true
+
+  - name: associations
+    label: 'Landing page: Associations'
+    type: file
+    path: src/data/associations.json
+    format: json
+    fields:
+      - name: associations
+        label: Associations (drag to reorder; this is the homepage order)
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: logo
+            label: Logo
+            type: image
+            required: true
+            options:
+              media: landing
+          - name: href
+            label: Membership link
+            type: string
+            required: true
+            pattern:
+              regex: '^https://'
+              message: "Must be a full web address starting with https://"
+          - name: featured
+            label: Featured (full-width card)
+            type: boolean
+            default: false
+            description: "Only ONE association should be featured at a time (currently ISA)."
