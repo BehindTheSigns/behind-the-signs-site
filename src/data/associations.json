@@ -1,0 +1,34 @@
+{
+  "associations": [
+    {
+      "name": "International Sign Association",
+      "logo": "/src/assets/landing/assoc-isa.png",
+      "href": "https://signs.org/isamembership/",
+      "featured": true
+    },
+    {
+      "name": "Texas Sign Association",
+      "logo": "/src/assets/landing/assoc-tsa.png",
+      "href": "https://txsigns.org/tsa-membership/join-tsa/",
+      "featured": false
+    },
+    {
+      "name": "Mid-South Sign Association",
+      "logo": "/src/assets/landing/assoc-mssa.png",
+      "href": "https://mssa.memberclicks.net/mssa-membership-app",
+      "featured": false
+    },
+    {
+      "name": "Sign Association of Canada",
+      "logo": "/src/assets/landing/assoc-sac.png",
+      "href": "https://sac-ace.ca/membership/",
+      "featured": false
+    },
+    {
+      "name": "CO — by U.S. Chamber of Commerce",
+      "logo": "/src/assets/landing/assoc-co.png",
+      "href": "https://www.uschamber.com/",
+      "featured": false
+    }
+  ]
+}

@@ -7,18 +7,11 @@ import wordmark from '../assets/coming-soon/wordmark.svg';
 import wordmarkInk from '../assets/wordmark-ink.svg';
 import hostJoe from '../assets/landing/host-joe.png';
 import hostLiz from '../assets/landing/host-liz.png';
-import assocIsa from '../assets/landing/assoc-isa.png';
-import assocTsa from '../assets/landing/assoc-tsa.png';
-import assocMssa from '../assets/landing/assoc-mssa.png';
-import assocSac from '../assets/landing/assoc-sac.png';
-import assocCo from '../assets/landing/assoc-co.png';
-import sponsorSigntracker from '../assets/landing/sponsor-signtracker.png';
-import sponsorReece from '../assets/landing/sponsor-reece.png';
-import sponsorClarity from '../assets/landing/sponsor-clarity.png';
-import sponsorOmg from '../assets/landing/sponsor-omg.png';
-import sponsorPrintavo from '../assets/landing/sponsor-printavo.png';
-import sponsorSbi from '../assets/landing/sponsor-sbi.png';
 import { fetchLatestVideos } from '../lib/youtube';
+// Association ("Membership Matters") and sponsor cards are edited through
+// Pages CMS in src/data/{associations,sponsors}.json — list order there is
+// display order here. Logos resolve back to optimized assets in landing-data.
+import { sponsors, associations } from '../lib/landing-data';
 
 const YOUTUBE_CHANNEL = 'https://www.youtube.com/@BehindTheSigns';
 const PODCAST_PLAYLIST = 'https://www.youtube.com/playlist?list=PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk';
@@ -60,61 +53,6 @@ const icons: Record<string, string> = {
     '<path d="M4.5 9.5 6 4h12l1.5 5.5"/><path d="M3.5 9.5h17"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-5.5h5V20"/>',
   chat: '<path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5v8A2.5 2.5 0 0 0 4.5 17H7v4l5-4h7.5a2.5 2.5 0 0 0 2.5-2.5v-8A2.5 2.5 0 0 0 19.5 4Z"/><circle cx="7.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/>',
 };
-
-// "Membership Matters" — association friends from Joe's mockup, each linking
-// to its membership page. ISA gets the featured spot.
-const associations = [
-  {
-    name: 'International Sign Association',
-    logo: assocIsa,
-    href: 'https://signs.org/isamembership/',
-    featured: true,
-  },
-  { name: 'Texas Sign Association', logo: assocTsa, href: 'https://txsigns.org/tsa-membership/join-tsa/' },
-  { name: 'Mid-South Sign Association', logo: assocMssa, href: 'https://mssa.memberclicks.net/mssa-membership-app' },
-  { name: 'Sign Association of Canada', logo: assocSac, href: 'https://sac-ace.ca/membership/' },
-  { name: 'CO — by U.S. Chamber of Commerce', logo: assocCo, href: 'https://www.uschamber.com/' },
-];
-
-// Sponsor blurbs come straight from the show's own episode descriptions.
-const sponsors = [
-  {
-    name: 'SignTracker',
-    logo: sponsorSigntracker,
-    href: 'https://www.sign-tracker.com/',
-    blurb: 'Project management & quoting made for sign shops.',
-  },
-  {
-    name: 'Reece Supply Company',
-    logo: sponsorReece,
-    href: 'https://www.reecesupply.com/',
-    blurb: 'Supplies for sign and print shops.',
-  },
-  {
-    name: 'ClarityGo',
-    logo: sponsorClarity,
-    href: 'https://clarity-software.com/clarity-go/',
-    blurb: 'Project management & quoting made for sign shops in the UK.',
-  },
-  {
-    name: 'OrderMyGear',
-    logo: sponsorOmg,
-    href: 'https://www.ordermygear.com/',
-    blurb: 'Tools to help you sell more merch.',
-  },
-  {
-    name: 'Printavo',
-    logo: sponsorPrintavo,
-    href: 'https://www.printavo.com/',
-    blurb: 'Business tools for print, promo, and sign professionals.',
-  },
-  {
-    name: 'Sign Builder Illustrated',
-    logo: sponsorSbi,
-    href: 'https://www.signshop.com/',
-    blurb: 'Home of our monthly "Behind the Signs" column.',
-  },
-];
 
 // Footer social row — Joe's channel list, in his order.
 const socialLinks = [

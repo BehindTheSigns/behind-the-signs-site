@@ -1,0 +1,40 @@
+{
+  "sponsors": [
+    {
+      "name": "SignTracker",
+      "logo": "/src/assets/landing/sponsor-signtracker.png",
+      "href": "https://www.sign-tracker.com/",
+      "blurb": "Project management & quoting made for sign shops."
+    },
+    {
+      "name": "Reece Supply Company",
+      "logo": "/src/assets/landing/sponsor-reece.png",
+      "href": "https://www.reecesupply.com/",
+      "blurb": "Supplies for sign and print shops."
+    },
+    {
+      "name": "ClarityGo",
+      "logo": "/src/assets/landing/sponsor-clarity.png",
+      "href": "https://clarity-software.com/clarity-go/",
+      "blurb": "Project management & quoting made for sign shops in the UK."
+    },
+    {
+      "name": "OrderMyGear",
+      "logo": "/src/assets/landing/sponsor-omg.png",
+      "href": "https://www.ordermygear.com/",
+      "blurb": "Tools to help you sell more merch."
+    },
+    {
+      "name": "Printavo",
+      "logo": "/src/assets/landing/sponsor-printavo.png",
+      "href": "https://www.printavo.com/",
+      "blurb": "Business tools for print, promo, and sign professionals."
+    },
+    {
+      "name": "Sign Builder Illustrated",
+      "logo": "/src/assets/landing/sponsor-sbi.png",
+      "href": "https://www.signshop.com/",
+      "blurb": "Home of our monthly \"Behind the Signs\" column."
+    }
+  ]
+}
