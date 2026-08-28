@@ -253,6 +253,39 @@
     opacity: 0.45;
     pointer-events: none;
   }
+  /* Busy — a disabled button that is working (submit in flight): keep it
+     solid so the spinner reads, but block further clicks. Set with
+     `disabled` + `aria-busy="true"` from the submit handler. */
+  .btn-primary[aria-busy="true"],
+  .btn-secondary[aria-busy="true"],
+  .btn-teal[aria-busy="true"],
+  .btn-gold[aria-busy="true"],
+  .btn-highlight[aria-busy="true"],
+  .btn-dark[aria-busy="true"],
+  .btn-white[aria-busy="true"],
+  .btn-ghost[aria-busy="true"] {
+    opacity: 0.85;
+    cursor: progress;
+    pointer-events: none;
+  }
+
+  /* Spinner — inline ring in the current text color; drop inside a button
+     next to its label (`.spinner-sm` for `.btn-sm`). */
+  .spinner {
+    display: inline-block;
+    width: 1.125em;
+    height: 1.125em;
+    flex: none;
+    border: 0.1875em solid color-mix(in srgb, currentColor 30%, transparent);
+    border-top-color: currentColor;
+    border-radius: 9999px;
+    animation: ds-spin 0.7s linear infinite;
+  }
+  .spinner-sm {
+    width: 0.875em;
+    height: 0.875em;
+    border-width: 0.15em;
+  }
 
   /* ======================================================================
      FORMS — chunky 2px borders, teal focus ring. Rule of thumb:
@@ -871,6 +904,9 @@
   .anim-delay-5 { animation-delay: 0.75s; }
   .anim-delay-6 { animation-delay: 0.9s; }
 
+  @keyframes ds-spin {
+    to { transform: rotate(360deg); }
+  }
   @keyframes ds-zoom-settle {
     from { transform: scale(1.03); }
     to { transform: scale(1); }
@@ -919,6 +955,10 @@
     .animate-float,
     .animate-pulse-slow {
       animation: none;
+    }
+    /* Keep the spinner turning (it's the only busy signal) but slow it down. */
+    .spinner {
+      animation-duration: 1.6s;
     }
   }
 

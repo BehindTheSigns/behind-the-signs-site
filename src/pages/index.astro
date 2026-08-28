@@ -571,7 +571,10 @@ const description =
             autocomplete="email"
             placeholder="you@yourshop.com"
           />
-          <button type="submit" class="btn-primary shrink-0">Subscribe</button>
+          <button type="submit" class="btn-primary shrink-0" data-subscribe-submit>
+            <span class="spinner hidden" data-spinner aria-hidden="true"></span>
+            <span data-label>Subscribe</span>
+          </button>
         </form>
 
         <ul class="mt-10 flex flex-wrap justify-center gap-3">
@@ -639,6 +642,46 @@ const description =
         ).observe(heroMark);
       } else {
         brand.classList.remove('opacity-0', 'pointer-events-none');
+      }
+    </script>
+
+    <script>
+      // Subscribe form: lock the button on first submit so a double click can't
+      // post twice, and show a spinner so the click visibly did something.
+      const form = document.querySelector<HTMLFormElement>('form[name="subscribe"]');
+      const button = form?.querySelector<HTMLButtonElement>('[data-subscribe-submit]');
+      if (form && button) {
+        const spinner = button.querySelector<HTMLElement>('[data-spinner]')!;
+        const label = button.querySelector<HTMLElement>('[data-label]')!;
+        const email = form.querySelector<HTMLInputElement>('input[name="email"]')!;
+        let resetTimer: number | undefined;
+
+        const setBusy = (busy: boolean) => {
+          button.disabled = busy;
+          button.setAttribute('aria-busy', String(busy));
+          spinner.classList.toggle('hidden', !busy);
+          label.textContent = busy ? 'Subscribing…' : 'Subscribe';
+          email.readOnly = busy;
+          form.dataset.submitting = busy ? 'true' : '';
+          window.clearTimeout(resetTimer);
+          // Safety valve: if the network hangs and we never navigate away,
+          // give the button back after 20s so the user isn't stuck.
+          if (busy) resetTimer = window.setTimeout(() => setBusy(false), 20000);
+        };
+
+        form.addEventListener('submit', (event) => {
+          if (form.dataset.submitting) {
+            event.preventDefault();
+            return;
+          }
+          setBusy(true);
+        });
+
+        // Coming back via the back button can restore the page from bfcache
+        // with the busy state still applied — undo it.
+        window.addEventListener('pageshow', (event) => {
+          if (event.persisted) setBusy(false);
+        });
       }
     </script>
 

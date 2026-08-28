@@ -369,11 +369,17 @@ const navLinks = [
                 <button class="btn-icon btn-primary" aria-label="Search">
                   <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
                 </button>
+                <button class="btn-primary" disabled aria-busy="true">
+                  <span class="spinner" aria-hidden="true"></span>
+                  Subscribing…
+                </button>
                 <button class="btn-primary" disabled>Disabled</button>
                 <button class="btn-secondary" disabled>Disabled</button>
               </div>
               <div class="panel-footer flex flex-wrap gap-2">
                 <code class="spec">.btn-icon</code>
+                <code class="spec">.spinner</code>
+                <code class="spec">:disabled[aria-busy="true"]</code>
                 <code class="spec">:disabled</code>
               </div>
             </div>
