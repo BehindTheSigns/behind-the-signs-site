@@ -1,20 +1,2 @@
-# Netlify Redirects Configuration
-# Block common bot and scanner paths
-
-# Block common vulnerability scanners
-/wp-admin/* /404 404
-/wp-login.php /404 404
-/wordpress/* /404 404
-/.env /404 404
-/admin/* /404 404
-/administrator/* /404 404
-/phpmyadmin/* /404 404
-/.git/* /404 404
-/config/* /404 404
-/.well-known/* /404 404
-
-# Block common bot paths
-/robots.txt /robots.txt 200
-/sitemap.xml /404 404
-/feed/* /404 404
-/rss/* /404 404
+# Consolidate the Netlify subdomain onto the primary domain
+https://behind-the-signs.netlify.app/* https://behindthesigns.com/:splat 301!
