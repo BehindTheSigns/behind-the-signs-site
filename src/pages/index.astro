@@ -143,6 +143,12 @@ const structuredData = {
     <title>Behind the Signs | Elevating the Sign Industry Together</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL('/', Astro.site)} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Behind the Signs"
+      href={new URL('/rss.xml', Astro.site)}
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL('/', Astro.site)} />
