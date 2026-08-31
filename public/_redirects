@@ -1,2 +1,13 @@
 # Consolidate the Netlify subdomain onto the primary domain
 https://behind-the-signs.netlify.app/* https://behindthesigns.com/:splat 301!
+
+# Retired pages (site simplified to the single landing page, 2026-08-31)
+/home                                /            301
+/about                               /#about      301
+/resources                           /            301
+/newsletter-preview                  /            301
+/blog                                /#blog       301
+/blog/led-channel-letters-guide      /#blog       301
+/blog/pricing-strategies-sign-shop   /#blog       301
+/podcast                             /#podcast    301
+/podcast/*                           /#podcast    301
