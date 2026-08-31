@@ -11,3 +11,6 @@ https://behind-the-signs.netlify.app/* https://behindthesigns.com/:splat 301!
 /blog/pricing-strategies-sign-shop   /#blog       301
 /podcast                             /#podcast    301
 /podcast/*                           /#podcast    301
+
+# Old share image URL still cached by social platforms
+/og-coming-soon.jpg  /og-image.jpg  301

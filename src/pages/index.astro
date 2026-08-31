@@ -1,4 +1,5 @@
 ---
+import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
 import { getPublishedPosts } from '../lib/content';
@@ -90,6 +91,43 @@ const socialLinks = [
 
 const description =
   'Behind the Signs brings the sign industry together. Real conversations with the people shaping the industry, behind-the-scenes Shop Tours, and a community of thousands of sign professionals.';
+
+// Structured data: who we are + the site itself. Kept in @graph so the
+// WebSite node can reference the Organization as its publisher.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://behindthesigns.com/#organization',
+      name: 'Behind the Signs',
+      url: 'https://behindthesigns.com/',
+      logo: { '@type': 'ImageObject', url: 'https://behindthesigns.com/logo.png', width: 512, height: 512 },
+      description,
+      founder: [
+        { '@type': 'Person', name: 'Joe Arenella', jobTitle: 'Host & Founder' },
+        { '@type': 'Person', name: 'Elizabeth Arenella Toynes', jobTitle: 'Host' },
+      ],
+      sameAs: [
+        'https://www.youtube.com/@BehindTheSigns',
+        'https://www.facebook.com/profile.php?id=61561938735595',
+        'https://www.facebook.com/groups/behindthesigns/',
+        'https://www.instagram.com/behindthesignspodcast/',
+        'https://www.tiktok.com/@behind_the_signs',
+        'https://podcasts.apple.com/us/podcast/behind-the-signs-podcast/id1813842104',
+        'https://open.spotify.com/show/53qvCb4Pqj6f5TP35RzJ8A',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://behindthesigns.com/#website',
+      url: 'https://behindthesigns.com/',
+      name: 'Behind the Signs',
+      description,
+      publisher: { '@id': 'https://behindthesigns.com/#organization' },
+    },
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -104,13 +142,24 @@ const description =
 
     <title>Behind the Signs | Elevating the Sign Industry Together</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={new URL('/', Astro.site)} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL('/', Astro.site)} />
     <meta property="og:title" content="Behind the Signs | Elevating the Sign Industry Together" />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL('/og-coming-soon.jpg', Astro.site)} />
+    <meta property="og:image" content={new URL('/og-image.jpg', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Behind the Signs wordmark over a sign-shop photo" />
     <meta property="og:site_name" content="Behind the Signs" />
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Behind the Signs | Elevating the Sign Industry Together" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.jpg', Astro.site)} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <Analytics />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
