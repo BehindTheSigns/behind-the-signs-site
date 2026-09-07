@@ -524,13 +524,13 @@ const structuredData = {
             {
               associations.map((a) => (
                 <li class={a.featured ? 'sm:col-span-2 lg:col-span-4' : ''}>
-                  <div class={`panel panel-hover h-full flex items-center gap-6 px-6 py-5 ${a.featured ? 'sm:px-10 sm:py-7 flex-col sm:flex-row sm:justify-between' : 'flex-col text-center py-7'}`}>
+                  <div class={`panel panel-hover h-full flex items-center gap-6 px-6 py-5 ${a.featured ? 'sm:px-10 sm:py-7 flex-col sm:flex-row sm:justify-between' : 'flex-col text-center'}`}>
                     <Image
                       src={a.logo}
                       alt={`${a.name} logo`}
-                      class={`w-auto object-contain ${a.featured ? 'h-16 sm:h-20 max-w-full' : 'h-[4.5rem] max-w-[230px]'}`}
-                      widths={[a.featured ? 800 : 400]}
-                      sizes={a.featured ? '600px' : '210px'}
+                      class={`w-auto object-contain ${a.featured ? 'h-20 sm:h-24 max-w-full' : 'h-[5.5rem] max-w-[min(280px,90%)]'}`}
+                      widths={[a.featured ? 1000 : 560]}
+                      sizes={a.featured ? '700px' : '280px'}
                     />
                     <a
                       href={a.href}
