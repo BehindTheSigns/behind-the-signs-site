@@ -520,23 +520,25 @@ const structuredData = {
             </p>
           </div>
 
+          <!-- Featured (ISA) owns its own row but renders as a bigger centered card
+               two columns wide, not a full-width strip (Joe's Sep 2026 feedback). -->
           <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {
               associations.map((a) => (
                 <li class={a.featured ? 'sm:col-span-2 lg:col-span-4' : ''}>
-                  <div class={`panel panel-hover h-full flex items-center gap-6 px-6 py-5 ${a.featured ? 'sm:px-10 sm:py-7 flex-col sm:flex-row sm:justify-between' : 'flex-col text-center'}`}>
+                  <div class={`panel panel-hover h-full flex flex-col items-center text-center ${a.featured ? 'gap-8 px-8 py-9 sm:px-10 sm:py-10 mx-auto lg:w-[calc(50%-0.75rem)]' : 'gap-6 px-6 py-5'}`}>
                     <Image
                       src={a.logo}
                       alt={`${a.name} logo`}
-                      class={`w-auto object-contain ${a.featured ? 'h-20 sm:h-24 max-w-full' : 'h-[5.5rem] max-w-[min(280px,90%)]'}`}
-                      widths={[a.featured ? 1000 : 560]}
-                      sizes={a.featured ? '700px' : '280px'}
+                      class={`w-auto object-contain ${a.featured ? 'h-24 sm:h-28 max-w-full' : 'h-[5.5rem] max-w-[min(280px,90%)]'}`}
+                      widths={[a.featured ? 1100 : 560]}
+                      sizes={a.featured ? '520px' : '280px'}
                     />
                     <a
                       href={a.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class={`btn-teal shrink-0 ${a.featured ? '' : 'btn-sm'}`}
+                      class={`btn-teal shrink-0 ${a.featured ? 'btn-lg' : 'btn-sm'}`}
                       aria-label={`Join ${a.name}`}
                     >
                       Join
