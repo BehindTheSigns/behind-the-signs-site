@@ -1,43 +1,51 @@
 /**
- * Build-time YouTube data for the landing page.
+ * Build-time YouTube data for the landing page's "The Latest" section.
  *
- * Pulls the most recent videos across the two curated playlists (Podcast +
- * Shop Tours) from YouTube's public RSS feeds — no API key required. This
- * runs during `astro build`, so every Netlify deploy refreshes the list.
- * If YouTube is unreachable the SNAPSHOT below keeps the build green.
+ * Reads two curated playlists from YouTube's public RSS feeds (no API key)
+ * during `astro build`, so every Netlify deploy refreshes the list. If
+ * YouTube is unreachable the SNAPSHOT below keeps the build green.
+ *
+ * Slot rules (Daniel, 2026-09-08):
+ *   1. newest video in the Shop Tours playlist
+ *   2. newest video in the "Sign Shop Owners & Industry Pros" playlist
+ *   3. the newest video left over from either playlist
+ * A video that appears in both playlists is only shown once.
  */
 
 export interface LatestVideo {
   id: string;
   title: string;
   published: Date;
-  source: 'podcast' | 'shop-tours';
+  source: 'shop-tours' | 'industry-pros';
 }
 
-const PLAYLISTS: Array<{ id: string; source: LatestVideo['source'] }> = [
-  { id: 'PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk', source: 'podcast' },
-  { id: 'PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg', source: 'shop-tours' },
-];
+const PLAYLISTS: Record<LatestVideo['source'], string> = {
+  'shop-tours': 'PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg',
+  'industry-pros': 'PLWFiBORpfpiAGtgYr544uRc4K8UBeXGGR',
+};
 
-/** Last known-good data (2026-07-26), used only when the feeds fail. */
+/** One fixed slot per playlist, in landing-page order; remaining slots are filled by date. */
+const SLOT_ORDER: LatestVideo['source'][] = ['shop-tours', 'industry-pros'];
+
+/** Last known-good result (2026-09-08), used only when the feeds fail. */
 const SNAPSHOT: LatestVideo[] = [
   {
-    id: 'rk5BBUAMr4k',
-    title: 'Why This 45-Year-Old Sign Company Sold All Its Equipment',
-    published: new Date('2026-07-21'),
-    source: 'podcast',
-  },
-  {
-    id: '8cKlk1p01TU',
-    title: 'Kong Screen Printing Shop Tour: From a $60K Press to a $200K Line',
-    published: new Date('2026-07-07'),
+    id: 'p__QYZPG1r0',
+    title: 'Behind the Signs: The Dream It, Build It Moment',
+    published: new Date('2026-08-17'),
     source: 'shop-tours',
   },
   {
-    id: 'nx6FW4WUjSM',
-    title: "Why Sign Shops Can't Find Good Employees — And What's Finally Changing",
-    published: new Date('2026-06-24'),
-    source: 'podcast',
+    id: 'nmlCiAm_cnk',
+    title: 'Why Water Jet Cutting Is Worth the Investment!',
+    published: new Date('2026-09-08'),
+    source: 'industry-pros',
+  },
+  {
+    id: 'njLnI_WBqD0',
+    title: 'How Steel Art Built a 72-Year Legacy: Join us for the full Behind The Signs Shop Tour',
+    published: new Date('2026-08-13'),
+    source: 'shop-tours',
   },
 ];
 
@@ -52,10 +60,17 @@ function decodeEntities(text: string): string {
     .replace(/&amp;/g, '&');
 }
 
-async function fetchPlaylist(
-  playlistId: string,
-  source: LatestVideo['source'],
-): Promise<LatestVideo[]> {
+/** Shorts often carry a trail of "#hashtags" in the title; drop them for the card. */
+function cleanTitle(raw: string): string {
+  return decodeEntities(raw)
+    .replace(/(\s*#[\p{L}\p{N}_-]+)+\s*$/u, '')
+    .trim();
+}
+
+const byNewest = (a: LatestVideo, b: LatestVideo) => b.published.valueOf() - a.published.valueOf();
+
+async function fetchPlaylist(source: LatestVideo['source']): Promise<LatestVideo[]> {
+  const playlistId = PLAYLISTS[source];
   const res = await fetch(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`, {
     signal: AbortSignal.timeout(10_000),
   });
@@ -69,21 +84,35 @@ async function fetchPlaylist(
       const title = entry.match(/<title>([^<]*)<\/title>/)?.[1];
       const published = entry.match(/<published>([^<]+)<\/published>/)?.[1];
       if (!id || !title || !published) return null;
-      return { id, title: decodeEntities(title), published: new Date(published), source };
+      return { id, title: cleanTitle(title), published: new Date(published), source };
     })
-    .filter((v): v is LatestVideo => v !== null);
+    .filter((v): v is LatestVideo => v !== null)
+    .sort(byNewest);
 }
 
 export async function fetchLatestVideos(count = 3): Promise<LatestVideo[]> {
   try {
-    const feeds = await Promise.all(PLAYLISTS.map((p) => fetchPlaylist(p.id, p.source)));
+    const sources = Object.keys(PLAYLISTS) as LatestVideo['source'][];
+    const feeds = Object.fromEntries(
+      await Promise.all(sources.map(async (s) => [s, await fetchPlaylist(s)] as const)),
+    ) as Record<LatestVideo['source'], LatestVideo[]>;
+
+    const picked: LatestVideo[] = [];
     const seen = new Set<string>();
-    const videos = feeds
-      .flat()
-      .sort((a, b) => b.published.valueOf() - a.published.valueOf())
-      .filter((v) => (seen.has(v.id) ? false : (seen.add(v.id), true)));
-    if (videos.length === 0) throw new Error('feeds returned no entries');
-    return videos.slice(0, count);
+    const take = (v: LatestVideo | undefined) => {
+      if (v && !seen.has(v.id) && picked.length < count) {
+        seen.add(v.id);
+        picked.push(v);
+      }
+    };
+
+    // Fixed slots first, one per playlist in landing-page order.
+    for (const source of SLOT_ORDER) take(feeds[source].find((v) => !seen.has(v.id)));
+    // Then the newest of whatever is left, from either playlist.
+    for (const v of Object.values(feeds).flat().sort(byNewest)) take(v);
+
+    if (picked.length === 0) throw new Error('feeds returned no entries');
+    return picked;
   } catch (err) {
     console.warn(
       `[youtube] Falling back to snapshot data: ${err instanceof Error ? err.message : err}`,
