@@ -50,8 +50,8 @@ const navLinks = [
 
 const icons: Record<string, string> = {
   mic: '<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v3.5"/><path d="M8.5 21.5h7"/>',
-  gears:
-    '<circle cx="9.5" cy="9" r="4"/><circle cx="9.5" cy="9" r="1.5"/><path d="M13.5 9h1.9M12.33 11.83l1.34 1.34M9.5 13v1.9M6.67 11.83l-1.34 1.34M5.5 9h-1.9M6.67 6.17l-1.34-1.34M9.5 5v-1.9M12.33 6.17l1.34-1.34"/><circle cx="17.5" cy="17" r="2.75"/><circle cx="17.5" cy="17" r="1"/><path d="M19.88 18.38l1.21.7M17.5 19.75v1.4M15.12 18.38l-1.21.7M15.12 15.63l-1.21-.7M17.5 14.25v-1.4M19.88 15.63l1.21-.7"/>',
+  store:
+    '<path d="M4.5 9.5 6 4h12l1.5 5.5"/><path d="M3.5 9.5h17"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-5.5h5V20"/>',
   chat: '<path d="M19.5 4h-15A2.5 2.5 0 0 0 2 6.5v8A2.5 2.5 0 0 0 4.5 17H7v4l5-4h7.5a2.5 2.5 0 0 0 2.5-2.5v-8A2.5 2.5 0 0 0 19.5 4Z"/><circle cx="7.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="12" cy="10.5" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.5" cy="10.5" r="1.15" fill="currentColor" stroke="none"/>',
 };
 
@@ -372,7 +372,7 @@ const structuredData = {
             >
               <div class="panel-cabinet h-full flex">
                 <div class="panel-cabinet-face face-teal w-full flex flex-col items-center text-center gap-3.5 px-6 py-9 sm:px-8">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-9 w-9 text-white/95" set:html={icons.gears} />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="h-9 w-9 text-white/95" set:html={icons.store} />
                   <h3 class="headline headline-light text-2xl sm:text-3xl">Shop Tours</h3>
                   <p class="text-white/90 leading-relaxed max-w-sm">
                     Behind-the-scenes tours of the industry's best shops.
