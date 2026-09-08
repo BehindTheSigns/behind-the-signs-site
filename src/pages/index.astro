@@ -15,7 +15,6 @@ import { fetchLatestVideos } from '../lib/youtube';
 import { sponsors, associations } from '../lib/landing-data';
 
 const YOUTUBE_CHANNEL = 'https://www.youtube.com/@BehindTheSigns';
-const PODCAST_PLAYLIST = 'https://www.youtube.com/playlist?list=PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk';
 const SHOP_TOURS_PLAYLIST = 'https://www.youtube.com/playlist?list=PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg';
 const FACEBOOK_GROUP = 'https://www.facebook.com/groups/behindthesigns';
 
@@ -344,7 +343,7 @@ const structuredData = {
           <div class="grid gap-8 md:grid-cols-2 lg:gap-10">
             <a
               id="podcast"
-              href={PODCAST_PLAYLIST}
+              href={YOUTUBE_CHANNEL}
               target="_blank"
               rel="noopener noreferrer"
               class="dest block scroll-mt-24 focus-visible:outline-none"
