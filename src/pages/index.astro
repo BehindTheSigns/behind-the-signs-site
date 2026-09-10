@@ -29,8 +29,9 @@ const articles = (await getPublishedPosts())
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const sourceMeta = {
+  interviews: { label: 'Guest Interview', badge: 'badge badge-pink' },
+  topics: { label: 'Topics & Trends', badge: 'badge badge-gold' },
   'shop-tours': { label: 'Shop Tour', badge: 'badge badge-teal' },
-  'industry-pros': { label: 'Industry Pros', badge: 'badge badge-pink' },
 } as const;
 
 const fmt = (d: Date) =>

@@ -1,45 +1,46 @@
 /**
  * Build-time YouTube data for the landing page's "The Latest" section.
  *
- * Reads two curated playlists from YouTube's public RSS feeds (no API key)
+ * Reads three curated playlists from YouTube's public RSS feeds (no API key)
  * during `astro build`, so every Netlify deploy refreshes the list. If
  * YouTube is unreachable the SNAPSHOT below keeps the build green.
  *
- * Slot rules (Daniel, 2026-09-08):
- *   1. newest video in the Shop Tours playlist
- *   2. newest video in the "Sign Shop Owners & Industry Pros" playlist
- *   3. the newest video left over from either playlist
- * A video that appears in both playlists is only shown once.
+ * Slot rules (Daniel + Joe, 2026-09-10) — one slot per playlist, in order:
+ *   1. newest video in "Behind The Signs Guest Interviews"
+ *   2. newest video in "Sign Industry Topics & Trends"
+ *   3. newest video in "Behind the Signs Shop Tours"
+ * A video that appears in more than one playlist is shown once. If a playlist
+ * is empty or unreachable, its slot is filled by the newest leftover video
+ * from the other playlists so the section never shows a gap.
  */
 
 export interface LatestVideo {
   id: string;
   title: string;
   published: Date;
-  source: 'shop-tours' | 'industry-pros';
+  source: 'interviews' | 'topics' | 'shop-tours';
 }
 
+/** Landing-page slot order = key order. */
 const PLAYLISTS: Record<LatestVideo['source'], string> = {
+  interviews: 'PLWFiBORpfpiAlcKW7w-zNKCetpwtm1ckk',
+  topics: 'PLWFiBORpfpiCuvmldX1ipkrVfk7ofRTzd',
   'shop-tours': 'PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg',
-  'industry-pros': 'PLWFiBORpfpiAGtgYr544uRc4K8UBeXGGR',
 };
 
-/** One fixed slot per playlist, in landing-page order; remaining slots are filled by date. */
-const SLOT_ORDER: LatestVideo['source'][] = ['shop-tours', 'industry-pros'];
-
-/** Last known-good result (2026-09-08), used only when the feeds fail. */
+/** Last known-good result (2026-09-10), used only when every feed fails. */
 const SNAPSHOT: LatestVideo[] = [
   {
-    id: 'p__QYZPG1r0',
-    title: 'Behind the Signs: The Dream It, Build It Moment',
-    published: new Date('2026-08-17'),
-    source: 'shop-tours',
+    id: 'DRu9xUCggVk',
+    title: 'Where to Start With AI in Your Sign Shop (Without Losing What Makes You Good)',
+    published: new Date('2026-08-26'),
+    source: 'interviews',
   },
   {
-    id: 'nmlCiAm_cnk',
-    title: 'Why Water Jet Cutting Is Worth the Investment!',
-    published: new Date('2026-09-08'),
-    source: 'industry-pros',
+    id: 'Sx9MCX7B378',
+    title: 'Where imposter syndrome actually comes from...self belief!',
+    published: new Date('2026-08-11'),
+    source: 'topics',
   },
   {
     id: 'njLnI_WBqD0',
@@ -90,33 +91,37 @@ async function fetchPlaylist(source: LatestVideo['source']): Promise<LatestVideo
     .sort(byNewest);
 }
 
-export async function fetchLatestVideos(count = 3): Promise<LatestVideo[]> {
+/** One playlist failing (deleted, renamed, offline) must not blank the section. */
+async function fetchPlaylistOrEmpty(source: LatestVideo['source']): Promise<LatestVideo[]> {
   try {
-    const sources = Object.keys(PLAYLISTS) as LatestVideo['source'][];
-    const feeds = Object.fromEntries(
-      await Promise.all(sources.map(async (s) => [s, await fetchPlaylist(s)] as const)),
-    ) as Record<LatestVideo['source'], LatestVideo[]>;
-
-    const picked: LatestVideo[] = [];
-    const seen = new Set<string>();
-    const take = (v: LatestVideo | undefined) => {
-      if (v && !seen.has(v.id) && picked.length < count) {
-        seen.add(v.id);
-        picked.push(v);
-      }
-    };
-
-    // Fixed slots first, one per playlist in landing-page order.
-    for (const source of SLOT_ORDER) take(feeds[source].find((v) => !seen.has(v.id)));
-    // Then the newest of whatever is left, from either playlist.
-    for (const v of Object.values(feeds).flat().sort(byNewest)) take(v);
-
-    if (picked.length === 0) throw new Error('feeds returned no entries');
-    return picked;
+    return await fetchPlaylist(source);
   } catch (err) {
-    console.warn(
-      `[youtube] Falling back to snapshot data: ${err instanceof Error ? err.message : err}`,
-    );
+    console.warn(`[youtube] ${source}: ${err instanceof Error ? err.message : err}`);
+    return [];
+  }
+}
+
+export async function fetchLatestVideos(count = 3): Promise<LatestVideo[]> {
+  const sources = Object.keys(PLAYLISTS) as LatestVideo['source'][];
+  const feeds = await Promise.all(sources.map(fetchPlaylistOrEmpty));
+
+  const picked: LatestVideo[] = [];
+  const seen = new Set<string>();
+  const take = (v: LatestVideo | undefined) => {
+    if (v && !seen.has(v.id) && picked.length < count) {
+      seen.add(v.id);
+      picked.push(v);
+    }
+  };
+
+  // One fixed slot per playlist, in landing-page order.
+  for (const feed of feeds) take(feed.find((v) => !seen.has(v.id)));
+  // Any slot still open (playlist missing/empty) takes the newest leftover.
+  for (const v of feeds.flat().sort(byNewest)) take(v);
+
+  if (picked.length === 0) {
+    console.warn('[youtube] Every feed failed; falling back to snapshot data');
     return SNAPSHOT.slice(0, count);
   }
+  return picked;
 }
