@@ -1,6 +1,9 @@
 # Pages CMS configuration (app.pagescms.org).
-# Defines what Joe can edit: blog posts, podcast episodes, and the landing
-# page's sponsor/association cards. Saves become commits to main; Netlify
+# Defines what Joe can edit: blog posts and the landing page's
+# sponsor/association cards. Podcast episodes are deliberately NOT exposed:
+# the homepage's "The Latest" pulls from YouTube playlists at build time
+# (src/lib/youtube.ts), and src/content/podcasts is unused until an episode
+# archive page exists. Saves become commits to main; Netlify
 # deploys them automatically.
 
 media:
@@ -39,7 +42,7 @@ content:
         label: Summary
         type: text
         required: true
-        description: "1-2 sentences shown on blog cards and in search results."
+        description: "1-2 sentences used for search results, social shares, and the RSS feed. Not shown on the homepage list."
       - name: author
         label: Author
         type: string
@@ -92,81 +95,6 @@ content:
       - name: body
         label: Body
         type: rich-text
-    operations:
-      rename: false
-
-  - name: podcasts
-    label: Podcast episodes
-    type: collection
-    path: src/content/podcasts
-    format: json
-    filename: 'episode-{fields.episode}.json'
-    view:
-      fields: [episode, title, pubDate, draft, featured]
-      primary: title
-      sort: [episode, pubDate]
-      default:
-        sort: episode
-        order: desc
-    fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: description
-        label: Description
-        type: text
-        required: true
-      - name: episode
-        label: Episode number
-        type: number
-        required: true
-        description: "MUST be unique. It becomes the page address (/podcast/14). Next episode = last episode + 1; never reuse a number."
-      - name: pubDate
-        label: Publish date
-        type: date
-        required: true
-        options:
-          time: true
-          format: "yyyy-MM-dd'T'HH:mm:ss'Z'"
-      - name: youtubeId
-        label: YouTube video ID
-        type: string
-        required: true
-        pattern:
-          regex: '^[A-Za-z0-9_-]{11}$'
-          message: "Just the 11-character ID from the YouTube URL (the part after watch?v=), not the full link."
-        description: "The episode thumbnail and player come from this automatically."
-      - name: duration
-        label: Duration
-        type: string
-        required: true
-        pattern:
-          regex: '^\d+:\d{2}(:\d{2})?$'
-          message: "Use minutes:seconds, for example 52:08"
-      - name: guest
-        label: Guest
-        type: string
-      - name: topics
-        label: Topics
-        type: string
-        list: true
-        required: true
-      - name: keyTakeaways
-        label: Key takeaways
-        type: string
-        list: true
-        required: true
-      - name: featured
-        label: Featured
-        type: boolean
-        default: false
-        description: "The featured episode is the big player at the top of the podcast page. Turn the old one OFF when you turn a new one ON."
-      - name: draft
-        label: Draft (hidden from the site)
-        type: boolean
-        default: true
-        description: "New episodes start as drafts. Turn this OFF to publish."
     operations:
       rename: false
 
