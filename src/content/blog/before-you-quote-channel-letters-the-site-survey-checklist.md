@@ -11,7 +11,7 @@ description: " Written by a sign-industry veteran who built a $10 million sign
 author: Joe Arenella & Liz Arenell Toynes
 pubDate: 2026-01-15
 updatedDate: 2026-09-13
-heroImage: /images/blog/Screenshot 2026-09-13 at 5.42.15 PM-1.png
+heroImage: /images/blog/Screenshot 2026-09-13 at 5.47.40 PM.png
 category: technical-guides
 tags:
   - "#signshop"
@@ -58,13 +58,15 @@ I also started to understand that if I focused on organizing people by putting s
 
 I highly recommend reading The E-Myth Revisited by Michael Gerber. The book explains why many businesses fail: owners focus too much on doing the technical work (like making signs) and not enough on implementing systems and managing the business. Gerber outlines three essential roles in any business:
 
-	**1.	The Entrepreneur** – The visionary who plans for the future.
+```
+1.	The Entrepreneur – The visionary who plans for the future.
 
-	**2.	The Manager** – The organizer who keeps everything running smoothly.
+2.	The Manager – The organizer who keeps everything running smoothly.
 
-	**3.	The Technician** – The hands-on worker who gets the job done.
+3.	The Technician – The hands-on worker who gets the job done.
 
-		To start a successful business, you need to balance all three roles. Most importantly, you need to work on your business (implementing systems and processes), not just in it (doing all the work yourself).
+	To start a successful business, you need to balance all three roles. Most importantly, you need to work on your business (implementing systems and processes), not just in it (doing all the work yourself).
+```
 
 **Applying the E-Myth to the Sign Industry**
 
