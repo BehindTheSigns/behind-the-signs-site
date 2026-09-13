@@ -6,8 +6,7 @@ author: Joe Arenella
 pubDate: 2026-09-13
 updatedDate: 2026-09-13
 category: industry-news
-featured: false
-draft: false
+draft: true
 ---
 I've been in the sign business for more than thirty years. I've run a shop, built software for shops, sat on association boards, and walked through more fabrication floors than I can count. And the thing that still surprises me is how much of what we know never gets written down.
 
