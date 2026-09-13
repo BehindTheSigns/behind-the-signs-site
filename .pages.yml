@@ -26,7 +26,7 @@ content:
     format: yaml-frontmatter
     filename: '{primary}.md'
     view:
-      fields: [title, category, pubDate, draft, featured]
+      fields: [title, category, pubDate, draft]
       primary: title
       sort: [pubDate, title]
       default:
@@ -83,10 +83,6 @@ content:
         label: Tags
         type: string
         list: true
-      - name: featured
-        label: Featured
-        type: boolean
-        default: false
       - name: draft
         label: Draft (hidden from the site)
         type: boolean
