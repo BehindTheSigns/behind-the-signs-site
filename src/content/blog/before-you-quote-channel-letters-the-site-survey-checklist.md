@@ -104,7 +104,13 @@ With patience, persistence, and a focus on improving one job at a time, you’ll
 
 **If I can do it, so can you. Believe in yourself! You’ve got this!**
 
+**Special thanks to our sponsors:** 
 
+**[SignTracker](https://www.sign-tracker.com/)** 
 
-**Special thanks to our sponsor SignTracker (sign-tracker.com)**
+**[ClairityGo](https://clarity-software.com/)**
+
+**[Printavo](https://www.printavo.com/)**
+
+**[Order My Gear](https://www.ordermygear.com)**
 
