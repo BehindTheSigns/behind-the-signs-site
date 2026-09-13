@@ -108,9 +108,25 @@ With patience, persistence, and a focus on improving one job at a time, you’ll
 
 **[SignTracker](https://www.sign-tracker.com/)**
 
+**Affordable sign shop management software**
+
+SignTracker helps with job management, file organization, team tasks, quoting, customer contracts that perfectly syncs with QuickBooks - try it free for 14 days.
+
 **[ClairityGo](https://clarity-software.com/)**
+
+**Keep every sign job and install on schedule**
+
+Clarity Software helps UK and European print and sign businesses quote faster, manage jobs better, and keep production, delivery, and reporting connected.
 
 **[Printavo](https://www.printavo.com/)**
 
+**Keep every print, apparel, and sign job moving on schedule**
+
+Printavo centralizes quotes, orders, customer payments, and production management so decorated apparel and sign shops can streamline operations, stay on schedule, and deliver a better customer experience.
+
 **[Order My Gear](https://www.ordermygear.com)**
+
+**Sell branded merchandise online with a solution built for the industry**
+
+OrderMyGear's integrated solutions help more than 16,000 promotional products distributors, apparel decorators, and team dealers grow and sell every day.
 
