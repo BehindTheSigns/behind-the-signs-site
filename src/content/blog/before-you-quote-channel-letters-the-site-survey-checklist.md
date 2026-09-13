@@ -106,5 +106,11 @@ With patience, persistence, and a focus on improving one job at a time, you’ll
 
 **Special thanks to our sponsors:** 
 
-**[SignTracker          ClairityGo          Printavo          Order My Gear](https://www.ordermygear.com)**
+**[SignTracker](https://www.sign-tracker.com/)**
+
+**[ClairityGo](https://clarity-software.com/)**
+
+**[Printavo](https://www.printavo.com/)**
+
+**[Order My Gear](https://www.ordermygear.com)**
 
