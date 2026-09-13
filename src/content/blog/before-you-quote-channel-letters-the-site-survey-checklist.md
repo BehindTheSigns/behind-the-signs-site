@@ -104,12 +104,6 @@ With patience, persistence, and a focus on improving one job at a time, you’ll
 
 **If I can do it, so can you. Believe in yourself! You’ve got this!**
 
-
-
----
-
----
-
 ---
 
 ***Special thanks to our sponsors:*** 
