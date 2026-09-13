@@ -11,7 +11,7 @@ description: " Written by a sign-industry veteran who built a $10 million sign
 author: Joe Arenella & Liz Arenell Toynes
 pubDate: 2026-01-15
 updatedDate: 2026-09-13
-heroImage: /images/blog/Screenshot 2026-09-13 at 5.47.40 PM.png
+heroImage: /images/blog/Blog Header.png
 category: technical-guides
 tags:
   - "#signshop"
