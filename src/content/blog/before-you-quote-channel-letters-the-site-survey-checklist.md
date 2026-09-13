@@ -9,8 +9,7 @@ heroImage: /images/blog/channels4_banner.jpg
 category: technical-guides
 tags:
   - welcome
-featured: true
-draft: false
+draft: true
 ---
 Channel letters are one of the best jobs a shop can land. Good margin, repeat customers, and a sign that makes your work visible on the street for years. They're also where a lot of shops get hurt, and almost always for the same reason: something about the site wasn't known until install day.
 
