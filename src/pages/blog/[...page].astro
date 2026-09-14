@@ -1,0 +1,63 @@
+---
+/**
+ * /blog archive: every published article, ten per page, titles only.
+ * Page 1 is /blog/, later pages are /blog/2/, /blog/3/ ...
+ * Individual posts are served by the sibling [slug].astro route, which
+ * takes priority over this rest-param route for single segments.
+ */
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { getArticles } from '../../lib/content';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getArticles();
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const isFirst = page.currentPage === 1;
+const title = isFirst ? 'The Blog' : `The Blog, page ${page.currentPage}`;
+---
+
+<BaseLayout
+  title={title}
+  description="Every Behind the Signs article. One long-form piece a month on running and growing a sign business."
+>
+  <section class="section section-white">
+    <div class="container-custom max-w-3xl">
+      <p class="eyebrow">Articles</p>
+      <h1 class="headline text-3xl sm:text-4xl lg:text-5xl mt-3">The Blog</h1>
+      <p class="lead mt-4">
+        One long-form article a month. Straight talk on running and growing a sign business,
+        and it goes out as the newsletter, too.
+      </p>
+
+      <ArticleList posts={page.data} class="mt-10" />
+
+      {
+        page.lastPage > 1 && (
+          <nav class="mt-8 flex items-center justify-between gap-4" aria-label="Article pages">
+            {page.url.prev ? (
+              <a href={page.url.prev} class="btn-secondary btn-sm">
+                Newer
+              </a>
+            ) : (
+              <span />
+            )}
+            <span class="text-sm font-medium text-slate-500">
+              Page {page.currentPage} of {page.lastPage}
+            </span>
+            {page.url.next ? (
+              <a href={page.url.next} class="btn-secondary btn-sm">
+                Older
+              </a>
+            ) : (
+              <span />
+            )}
+          </nav>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

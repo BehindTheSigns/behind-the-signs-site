@@ -1,0 +1,43 @@
+---
+/**
+ * Title-only list of blog posts, used by the homepage "The Blog" section and
+ * the /blog archive. No dates on purpose (Joe: dates make posts look old);
+ * the date shows once you open the article. Hairline rows + a trailing
+ * arrow give the bare titles the structure of a real index.
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  class?: string;
+}
+
+const { posts, class: className = '' } = Astro.props;
+---
+
+<ul class:list={['divide-y divide-slate-200 border-y border-slate-200', className]}>
+  {
+    posts.map((post) => (
+      <li>
+        <a
+          href={`/blog/${post.slug}/`}
+          class="group flex items-center justify-between gap-6 py-5 transition-colors hover:text-pink-600 focus-visible:text-pink-600"
+        >
+          <span class="font-black text-lg sm:text-xl leading-snug">{post.data.title}</span>
+          <svg
+            class="h-5 w-5 shrink-0 text-slate-400 transition-colors group-hover:text-pink-600"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 10h12M11 5l5 5-5 5" />
+          </svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>

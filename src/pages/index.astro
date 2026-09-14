@@ -2,7 +2,8 @@
 import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
-import { getPublishedPosts } from '../lib/content';
+import { getArticles } from '../lib/content';
+import ArticleList from '../components/ArticleList.astro';
 import heroBg from '../assets/coming-soon/hero-bg.jpg';
 import wordmark from '../assets/coming-soon/wordmark.svg';
 import wordmarkInk from '../assets/wordmark-ink.svg';
@@ -20,13 +21,12 @@ const FACEBOOK_GROUP = 'https://www.facebook.com/groups/behindthesigns';
 
 const videos = await fetchLatestVideos(3);
 
-// Real articles start landing in 2026 (one long-form piece a month). The two
-// 2024-dated files in src/content/blog are dev samples — the date gate keeps
-// them off the landing page and admits real posts as they're published.
-const ARTICLES_LIVE_FROM = new Date('2026-01-01');
-const articles = (await getPublishedPosts())
-  .filter((post) => post.data.pubDate >= ARTICLES_LIVE_FROM)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// The homepage shows the newest ten titles; the full archive lives at /blog
+// (paginated). Per Joe, no dates in the list so posts never look stale.
+const HOMEPAGE_ARTICLE_LIMIT = 10;
+const allArticles = await getArticles();
+const articles = allArticles.slice(0, HOMEPAGE_ARTICLE_LIMIT);
+const hasMoreArticles = allArticles.length > HOMEPAGE_ARTICLE_LIMIT;
 
 const sourceMeta = {
   interviews: { label: 'Guest Interview', badge: 'badge badge-pink' },
@@ -417,22 +417,14 @@ const structuredData = {
 
           {
             articles.length > 0 ? (
-              <ul class="mt-10 grid gap-7">
-                {articles.map((post) => (
-                  <li>
-                    <article>
-                      <h3 class="font-black text-xl sm:text-2xl leading-snug">
-                        <a href={`/blog/${post.slug}/`} class="transition-colors hover:text-pink-600">
-                          {post.data.title}
-                        </a>
-                      </h3>
-                      <time class="text-sm font-medium text-slate-500" datetime={post.data.pubDate.toISOString()}>
-                        {fmt(post.data.pubDate)}
-                      </time>
-                    </article>
-                  </li>
-                ))}
-              </ul>
+              <>
+                <ArticleList posts={articles} class="mt-10" />
+                {hasMoreArticles && (
+                  <div class="mt-8">
+                    <a href="/blog/" class="btn-secondary">View more articles</a>
+                  </div>
+                )}
+              </>
             ) : (
               <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 border-l-4 border-gold-500 bg-gold-50 rounded-r-md px-6 py-5">
                 <p class="text-slate-700">
