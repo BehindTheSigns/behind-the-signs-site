@@ -9,7 +9,7 @@ description: " Written by a sign-industry veteran who built a $10 million sign
   emphasizes clarifying your motivation, mastering one product or service before
   expanding, and gradually building systems and a skilled team so the business
   can grow beyond your personal effort."
-author: Joe Arenella & Liz Arenell Toynes
+author: Joe Arenella & Liz Arenella Toynes
 pubDate: 2026-01-15
 updatedDate: 2026-09-13
 heroImage: /images/blog/Blog Header-1.png
