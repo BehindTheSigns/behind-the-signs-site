@@ -15,13 +15,13 @@ updatedDate: 2026-09-13
 heroImage: /images/blog/Blog Header-1.png
 category: technical-guides
 tags:
-  - "#signshop"
-  - "#signs"
-  - "#signshopmanagement"
-  - "#signquoting"
+  - signshop
+  - signs
+  - signshopmanagement
+  - signquoting
 draft: false
 ---
-**So, You Want to Start a Sign Company?**
+## **So, You Want to Start a Sign Company?**
 
 Are you currently working at a sign shop, convinced you could run your own shop better? Maybe you’re exploring a second career and considering a sign franchise. Or perhaps you simply love all things signage and want to dive into the industry.
 
@@ -49,13 +49,13 @@ And just like that, my journey in the sign industry began.
 
 Whether you’re diving into this industry out of passion or necessity, the journey is full of challenges and incredible opportunities. My hope is to help you navigate the path more smoothly, so you can turn your vision into a thriving business. Let’s get started!
 
-**Identifying Your “Why”**
+## **Identifying Your “Why”**
 
 This might sound a little cliché, but it’s important: why do you want to start a sign business? Is it to be your own boss? To do things your way? Whatever your reason, remember that entrepreneurship isn’t easy—especially in the sign industry. Margins can be tight, staffing can be tough, and competition is fierce. But if you truly believe this is what you’re meant to do, nothing will stop you from succeeding. I decided to jump out on my own because I was frustrated with the lack of organization at the shop, had some experience running a small business, and had a strong sense I could do this a little better. 
 
 I also started to understand that if I focused on organizing people by putting systems in place for them to succeed, and encouraged them to do their best to ensure customers are happy, then we would do ok. Also, a few business books helped me to understand what I needed to work on, which never ends in case you are wondering.  
 
-**A Must-Read for Sign Shop Owners**
+## **A Must-Read for Sign Shop Owners**
 
 I highly recommend reading The E-Myth Revisited by Michael Gerber. The book explains why many businesses fail: owners focus too much on doing the technical work (like making signs) and not enough on implementing systems and managing the business. Gerber outlines three essential roles in any business:
 
@@ -69,11 +69,11 @@ I highly recommend reading The E-Myth Revisited by Michael Gerber. The book expl
 	To start a successful business, you need to balance all three roles. Most importantly, you need to work on your business (implementing systems and processes), not just in it (doing all the work yourself).
 ```
 
-**Applying the E-Myth to the Sign Industry**
+## **Applying the E-Myth to the Sign Industry**
 
 In my experience, the sign shops that struggle the most are the ones where the owner tries to do everything—making signs, handling installations, pricing all the jobs in their head and struggling to manage every little detail. This usually leads to overwhelm and early burnout, often resulting in costly mistakes. 
 
-**Your Role as a Leader**
+## **Your Role as a Leader**
 
 To grow your business, focus on building a strong team and implementing the right systems that support them in their work.
 
@@ -81,7 +81,7 @@ Letting go and trusting others can be tough, but it’s necessary. As you train 
 
 You don’t need to master every task. Your job is to hire skilled people, provide systems, and ensure your business consistently makes customers happy. This is what it means to “work on your business, not just in it.” Focus on the big picture, and your business will grow.
 
-**Picking Your Niche (Spoiler: You Can’t Do Everything)**
+## **Picking Your Niche (Spoiler: You Can’t Do Everything)**
 
 When starting out, don’t try to sell every type of sign, promotional item, printed material, or garment all at once. Instead, ask yourself: what kind of jobs do you really want to work on? Do you want to handle large development projects? Create online T-shirt shops for schools? Design and sell banners?
 
@@ -91,7 +91,7 @@ When I started my first sign shop, it was out of a small study in my house. Our 
 
 Your first few sales will be your best teachers. Focus on delivering excellent results, and let those experiences guide the direction of your growth.
 
-**Starting Small and Smart**
+## **Starting Small and Smart**
 
 You don’t need to break the bank to get started—your niche will guide what resources you need.
 
