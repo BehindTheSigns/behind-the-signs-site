@@ -14,3 +14,6 @@ https://behind-the-signs.netlify.app/* https://behindthesigns.com/:splat 301!
 
 # Old share image URL still cached by social platforms
 /og-coming-soon.jpg  /og-image.jpg  301
+
+# Blog posts whose address was changed after publishing (keep old links working)
+/blog/before-you-quote-channel-letters-the-site-survey-checklist  /blog/so-you-want-to-start-a-sign-company  301

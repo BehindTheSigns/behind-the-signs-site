@@ -1,5 +1,6 @@
 ---
 title: So, You Want to Start a Sign Company?
+slug: so-you-want-to-start-a-sign-company
 description: " Written by a sign-industry veteran who built a $10 million sign
   company from scratch, this guide urges aspiring sign shop owners to avoid the
   trap of being a \"technician\" who does everything themselves, and instead

@@ -26,7 +26,7 @@ content:
     format: yaml-frontmatter
     filename: '{primary}.md'
     view:
-      fields: [title, category, pubDate, draft]
+      fields: [title, slug, category, pubDate, draft]
       primary: title
       sort: [pubDate, title]
       default:
@@ -37,7 +37,13 @@ content:
         label: Title
         type: string
         required: true
-        description: "Also becomes the post's web address, so pick it carefully. It can't be changed later without help."
+      - name: slug
+        label: Web address (slug)
+        type: string
+        pattern:
+          regex: '^[a-z0-9]+(-[a-z0-9]+)*$'
+          message: "Lowercase letters, numbers and hyphens only, for example so-you-want-to-start-a-sign-company"
+        description: "The last part of the post's URL: behindthesigns.com/blog/<this>/. Leave blank and it comes from the title you first saved. Set it when you rename a post so the address matches. Changing it after people have the link breaks the old link."
       - name: description
         label: Summary
         type: text
