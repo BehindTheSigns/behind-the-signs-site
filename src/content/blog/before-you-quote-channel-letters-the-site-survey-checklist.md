@@ -105,6 +105,8 @@ With patience, persistence, and a focus on improving one job at a time, you’ll
 
 **If I can do it, so can you. Believe in yourself! You’ve got this!**
 
+![mqdefault.jpg](/images/blog/mqdefault.jpg)
+
 ![](https://i9.ytimg.com/vi/ZEBmPr17Y6U/mqdefault.jpg?v=67bc892c&sqp=CNy_oNUG&rs=AOn4CLBRs0oZQD2iL_cg47V_rj3rjOXU7A)
 
 Watch the video discussion here:  [https://youtu.be/ZEBmPr17Y6U](https://youtu.be/ZEBmPr17Y6U)
