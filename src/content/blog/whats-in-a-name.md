@@ -58,13 +58,15 @@ Before falling in love with a name, ensure it’s not already trademarked or bei
 
 If you unintentionally use a trademarked name, you could face:
 
-	•	Cease-and-desist letters
+```
+•	Cease-and-desist letters
 
-	•	Costly rebranding (changing your business name, logo, and marketing materials)
+•	Costly rebranding (changing your business name, logo, and marketing materials)
 
-	•	Legal fees or fines
+•	Legal fees or fines
 
-	•	In extreme cases, loss of profits earned under the infringing name
+•	In extreme cases, loss of profits earned under the infringing name
+```
 
 I (This is Joe again; Liz is too smart to make this mistake!) learned this lesson the hard way when I started my second sign shop. I was sued for using a trademarked word in the name. While our lawyer thought we had a good shot at winning, it still cost me over $40,000 in legal fees to settle. On top of that, I had to spend significant time, money, and energy rebranding the entire business.
 
