@@ -88,9 +88,7 @@ Be sure to check out the podcast discussion: [https://youtu.be/1a8_8Byb3pY](http
 
 ---
 
----
-
-***Special thanks to our sponsors:***
+***Special thanks to our friends & sponsors:***
 
 ++**[SignTracker](https://www.sign-tracker.com/)**++
 
@@ -115,3 +113,4 @@ Printavo centralizes quotes, orders, customer payments, and production managemen
 **Sell branded merchandise online with a solution built for the industry** 
 
 OrderMyGear’s integrated solutions help more than 16,000 promotional products distributors, apparel decorators, and team dealers grow and sell every day.
+
