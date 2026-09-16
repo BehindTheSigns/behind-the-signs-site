@@ -90,7 +90,7 @@ Be sure to check out the podcast discussion: [https://youtu.be/1a8_8Byb3pY](http
 
 ***Special thanks to our friends & sponsors:***
 
-++**[SignTracker](https://sign-tracker.com)**++
+[SignTracker](https://sign-tracker.com)
 
 **Affordable sign shop management software**
 
