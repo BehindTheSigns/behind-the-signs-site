@@ -80,6 +80,10 @@ The process of choosing a business name in the sign industry requires careful co
 
 You’ve got this! Believe in your ability to succeed! Now go and build a great sign business!
 
+![mqdefault-1.jpg](/images/blog/mqdefault-1.jpg)
+
+Be sure to check out the podcast discussion: [https://youtu.be/1a8_8Byb3pY](https://youtu.be/1a8_8Byb3pY)
+
 
 
 ---
