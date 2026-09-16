@@ -96,7 +96,7 @@ Be sure to check out the podcast discussion: [https://youtu.be/1a8_8Byb3pY](http
 
 SignTracker helps with job management, file organization, team tasks, quoting, customer contracts that perfectly syncs with QuickBooks - try it free for 14 days.
 
-++**[ClairityGo](https://clarity-software.com/)**++
+++**[ClarityGo](https://clarity-software.com/)**++
 
 **Keep every sign job and install on schedule**
 
