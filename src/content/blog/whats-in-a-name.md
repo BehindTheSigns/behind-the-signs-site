@@ -96,19 +96,19 @@ Be sure to check out the podcast discussion: [https://youtu.be/1a8_8Byb3pY](http
 
 SignTracker helps with job management, file organization, team tasks, quoting, customer contracts that perfectly syncs with QuickBooks - try it free for 14 days.
 
-++**[ClarityGo](https://clarity-software.com/)**++
+[ClarityGo](https://clarity-software.com/)
 
 **Keep every sign job and install on schedule**
 
 Clarity Software helps UK and European print and sign businesses quote faster, manage jobs better, and keep production, delivery, and reporting connected.
 
-++**[Printavo](https://www.printavo.com/)**++
+[Printavo](https://www.printavo.com/)
 
 **Keep every print, apparel, and sign job moving on schedule**
 
 Printavo centralizes quotes, orders, customer payments, and production management so decorated apparel and sign shops can streamline operations, stay on schedule, and deliver a better customer experience.
 
-++**[Order My Gear](https://www.ordermygear.com/)**++
+[Order My Gear](https://www.ordermygear.com/)
 
 **Sell branded merchandise online with a solution built for the industry** 
 
