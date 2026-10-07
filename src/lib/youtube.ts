@@ -4,6 +4,9 @@
  * Reads three curated playlists from YouTube's public RSS feeds (no API key)
  * during `astro build`, so every Netlify deploy refreshes the list. If
  * YouTube is unreachable the SNAPSHOT below keeps the build green.
+ * New uploads trigger a deploy on their own: the hourly scheduled function
+ * `netlify/functions/refresh-latest.mts` compares these picks with the live
+ * homepage and calls the Netlify build hook when they differ.
  *
  * Slot rules (Daniel + Joe, 2026-09-10) — one slot per playlist, in order:
  *   1. newest video in "Behind The Signs Guest Interviews"
@@ -101,7 +104,12 @@ async function fetchPlaylistOrEmpty(source: LatestVideo['source']): Promise<Late
   }
 }
 
-export async function fetchLatestVideos(count = 3): Promise<LatestVideo[]> {
+/**
+ * The slot picks straight from the feeds, without the snapshot fallback
+ * (empty if every feed failed). Shared with the scheduled
+ * `netlify/functions/refresh-latest` check so both agree on what "current" is.
+ */
+export async function fetchFeedPicks(count = 3): Promise<LatestVideo[]> {
   const sources = Object.keys(PLAYLISTS) as LatestVideo['source'][];
   const feeds = await Promise.all(sources.map(fetchPlaylistOrEmpty));
 
@@ -118,7 +126,11 @@ export async function fetchLatestVideos(count = 3): Promise<LatestVideo[]> {
   for (const feed of feeds) take(feed.find((v) => !seen.has(v.id)));
   // Any slot still open (playlist missing/empty) takes the newest leftover.
   for (const v of feeds.flat().sort(byNewest)) take(v);
+  return picked;
+}
 
+export async function fetchLatestVideos(count = 3): Promise<LatestVideo[]> {
+  const picked = await fetchFeedPicks(count);
   if (picked.length === 0) {
     console.warn('[youtube] Every feed failed; falling back to snapshot data');
     return SNAPSHOT.slice(0, count);
