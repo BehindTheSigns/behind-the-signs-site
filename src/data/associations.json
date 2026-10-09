@@ -23,12 +23,6 @@
       "logo": "/src/assets/landing/assoc-sac.png",
       "href": "https://sac-ace.ca/membership/",
       "featured": false
-    },
-    {
-      "name": "CO — by U.S. Chamber of Commerce",
-      "logo": "/src/assets/landing/assoc-co.png",
-      "href": "https://www.uschamber.com/",
-      "featured": false
     }
   ]
 }
