@@ -9,7 +9,6 @@ description: Sign pricing and estimating software helps sign and wrap shops
 author: Behind the Signs
 pubDate: 2026-10-14
 updatedDate: 2026-10-14
-heroImage: /images/blog/too_busy_text_design.png
 category: business-tips
 tags:
   - sign shop pricing
