@@ -162,3 +162,4 @@ The drilled-hole story didn’t take a new machine, a new hire, or a new market.
 
 ![](https://i.ytimg.com/vi/p-kbfT6zeEs/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCvWhDITL9kQlx47tfZAnyx_0KxaA)
 
+[https://youtu.be/p-kbfT6zeEs](https://youtu.be/p-kbfT6zeEs)
