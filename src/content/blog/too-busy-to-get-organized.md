@@ -17,7 +17,7 @@ tags:
   - sign shop estimating
 draft: false
 ---
-# **Too Busy to Get Organized? How Sign Pricing Software Puts Money Back in Your Shop**
+# **How Sign Pricing Software Puts Money Back in Your Shop**
 
 I joined a sales demo on Google Meet and found a dozen employees seated in front of a zoomed-out camera, with the owner standing behind them. His introduction: “The only reason I’m here is my staff said they’re going to quit if we don’t get organized around some software.”
 
