@@ -518,11 +518,13 @@ const structuredData = {
           </div>
 
           <!-- Featured (ISA) is a full-width strip: logo centered in the card,
-               Join button pinned right (three-column grid from sm up). -->
-          <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+               Join button pinned right (three-column grid from sm up).
+               The rest wrap up to 2 (sm) / 4 (lg) per row and grow to fill
+               it, so any count Joe sets in the CMS spans the full width. -->
+          <ul class="mt-10 flex flex-wrap gap-6">
             {
               associations.map((a) => (
-                <li class={a.featured ? 'sm:col-span-2 lg:col-span-4' : ''}>
+                <li class={a.featured ? 'basis-full' : 'grow basis-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(25%-1.125rem)]'}>
                   <div class={`panel panel-hover h-full flex flex-col items-center text-center ${a.featured ? 'gap-6 px-6 py-7 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-10 sm:py-8' : 'gap-6 px-6 py-5'}`}>
                     <Image
                       src={a.logo}
