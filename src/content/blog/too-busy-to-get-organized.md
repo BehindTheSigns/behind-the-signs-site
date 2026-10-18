@@ -15,7 +15,7 @@ tags:
   - sign shop pricing
   - sign shop software
   - sign shop estimating
-draft: true
+draft: false
 ---
 # **How Sign Pricing Software Puts Money Back in Your Shop**
 
