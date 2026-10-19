@@ -1,43 +1,33 @@
-# Astro Starter Kit: Minimal
+# Behind the Signs
+
+**[behindthesigns.com](https://behindthesigns.com/)** · Elevating the sign industry together.
+
+The website for Behind the Signs, the podcast and community for sign industry
+professionals, hosted by Joe Arenella and Liz Toynes: guest interviews, shop
+tours, industry topics, and articles for sign designers, fabricators, installers,
+and shop owners.
+
+**Watch & listen:**
+[YouTube](https://www.youtube.com/@BehindTheSigns) ·
+[Apple Podcasts](https://podcasts.apple.com/us/podcast/behind-the-signs-podcast/id1813842104) ·
+[Spotify](https://open.spotify.com/show/53qvCb4Pqj6f5TP35RzJ8A) ·
+[Facebook Group](https://www.facebook.com/groups/behindthesigns/) ·
+[Instagram](https://www.instagram.com/behindthesignspodcast/) ·
+[TikTok](https://www.tiktok.com/@behind_the_signs)
+
+## Local development
+
+Requires Node 20+.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # production build to ./dist/
+npm run preview   # serve the production build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Credits
 
-## 🚀 Project Structure
+Built and maintained by [Daniel Ochoa](https://technowizard.io/).
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+© Behind the Signs. All rights reserved.
