@@ -35,6 +35,13 @@
       "logo": "/src/assets/landing/sponsor-sbi.png",
       "href": "https://www.signshop.com/",
       "blurb": "Home of our monthly \"Behind the Signs\" column."
-    }
+    },
+    {
+      "name": "Sign Craft",
+      "logo": "/src/assets/landing/signcraft-logo.svg",
+      "href": "https://signcraft.com/",
+      "blurb": "Sign Industry \"How To\" Magazine"
+    },
+    {}
   ]
 }
