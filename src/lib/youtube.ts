@@ -31,18 +31,18 @@ const PLAYLISTS: Record<LatestVideo['source'], string> = {
   'shop-tours': 'PLWFiBORpfpiB1tOaQVYl2_9JO0PXCT3xg',
 };
 
-/** Last known-good result (2026-09-10), used only when every feed fails. */
+/** Last known-good result (2026-10-26), used only when every feed fails. */
 const SNAPSHOT: LatestVideo[] = [
   {
-    id: 'DRu9xUCggVk',
-    title: 'Where to Start With AI in Your Sign Shop (Without Losing What Makes You Good)',
-    published: new Date('2026-08-26'),
+    id: 'ycaOk4vYbh4',
+    title: "Me, Myself and AI: What Sign Shops Should (and Shouldn't) Use AI For",
+    published: new Date('2026-10-01'),
     source: 'interviews',
   },
   {
-    id: 'Sx9MCX7B378',
-    title: 'Where imposter syndrome actually comes from...self belief!',
-    published: new Date('2026-08-11'),
+    id: '0CPdlJwzQDg',
+    title: '3 Systems That Keep the Small Stuff From Running Your Sign Shop',
+    published: new Date('2026-10-26'),
     source: 'topics',
   },
   {
