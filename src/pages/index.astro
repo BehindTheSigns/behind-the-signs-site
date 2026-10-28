@@ -526,14 +526,18 @@ const structuredData = {
               associations.map((a) => (
                 <li class={a.featured ? 'basis-full' : 'grow basis-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(25%-1.125rem)]'}>
                   <div class={`panel panel-hover h-full flex flex-col items-center text-center ${a.featured ? 'gap-6 px-6 py-7 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-10 sm:py-8' : 'gap-6 px-6 py-5'}`}>
-                    <Image
-                      src={a.logo}
-                      alt={`${a.name} logo`}
-                      class={`w-auto object-contain ${a.featured ? 'h-20 sm:h-24 lg:h-28 max-w-full sm:col-start-2' : 'h-[5.5rem] max-w-[min(280px,90%)]'}`}
-                      widths={[a.featured ? 1100 : 560]}
-                      sizes={a.featured ? '520px' : '280px'}
-                    />
-                    <a
+                    {a.logo ? (
+                      <Image
+                        src={a.logo}
+                        alt={`${a.name} logo`}
+                        class={`w-auto object-contain ${a.featured ? 'h-20 sm:h-24 lg:h-28 max-w-full sm:col-start-2' : 'h-[5.5rem] max-w-[min(280px,90%)]'}`}
+                        widths={[a.featured ? 1100 : 560]}
+                        sizes={a.featured ? '520px' : '280px'}
+                      />
+                    ) : (
+                      <p class={`headline text-2xl ${a.featured ? 'sm:col-start-2' : ''}`}>{a.name}</p>
+                    )}
+                    {a.href && <a
                       href={a.href}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -541,7 +545,7 @@ const structuredData = {
                       aria-label={`Join ${a.name}`}
                     >
                       Join
-                    </a>
+                    </a>}
                   </div>
                 </li>
               ))
@@ -564,30 +568,40 @@ const structuredData = {
             The friends who keep the mics on and the cameras rolling.
           </p>
 
-          <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- 1 / 2 / 3 per row; a short last row is centered at 3 columns
+               (lg) and left-aligned at 2 (sm). Logo and link are optional so
+               a half-finished CMS entry still renders. -->
+          <ul class="mt-10 flex flex-wrap gap-6 lg:justify-center">
             {
-              sponsors.map((s) => (
-                <li>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="panel panel-hover h-full flex flex-col items-center text-center gap-4 px-6 py-6 no-underline"
-                  >
-                    <span class="grid h-24 place-items-center">
-                      <Image
-                        src={s.logo}
-                        alt={`${s.name} logo`}
-                        class="h-[5.5rem] w-auto max-w-[280px] object-contain"
-                        widths={[560]}
-                        sizes="280px"
-                      />
-                    </span>
-                    <p class="text-slate-600 leading-relaxed">{s.blurb}</p>
-                    <span class="link text-sm mt-auto" aria-hidden="true">Visit {s.name} ↗</span>
-                  </a>
-                </li>
-              ))
+              sponsors.map((s) => {
+                const Tag = s.href ? 'a' : 'div';
+                return (
+                  <li class="basis-full sm:basis-[calc(50%-0.75rem)] lg:basis-[calc((100%-3rem)/3)]">
+                    <Tag
+                      href={s.href}
+                      target={s.href && '_blank'}
+                      rel={s.href && 'noopener noreferrer'}
+                      class={`panel h-full flex flex-col items-center text-center gap-4 px-6 py-6 no-underline ${s.href ? 'panel-hover' : ''}`}
+                    >
+                      <span class="grid h-24 place-items-center">
+                        {s.logo ? (
+                          <Image
+                            src={s.logo}
+                            alt={`${s.name} logo`}
+                            class="h-[5.5rem] w-auto max-w-[280px] object-contain"
+                            widths={[560]}
+                            sizes="280px"
+                          />
+                        ) : (
+                          <span class="headline text-2xl">{s.name}</span>
+                        )}
+                      </span>
+                      {s.blurb && <p class="text-slate-600 leading-relaxed">{s.blurb}</p>}
+                      {s.href && s.name && <span class="link text-sm mt-auto" aria-hidden="true">Visit {s.name} ↗</span>}
+                    </Tag>
+                  </li>
+                );
+              })
             }
           </ul>
         </div>

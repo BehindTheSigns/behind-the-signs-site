@@ -1,4 +1,3 @@
-import { z } from 'astro/zod';
 import type { ImageMetadata } from 'astro';
 import sponsorsJson from '../data/sponsors.json';
 import associationsJson from '../data/associations.json';
@@ -6,42 +5,32 @@ import associationsJson from '../data/associations.json';
 // The landing page's sponsor and association lists are edited through Pages CMS
 // (src/data/*.json). Logos are stored as repo paths so the CMS can manage them,
 // then resolved here back to imported assets so <Image> optimization still applies.
+//
+// Nothing here may fail the build: a CMS save can include an empty row ("add
+// item" clicked, then saved), which is dropped, and any other entry renders
+// with whatever it has (a missing or deleted logo just means no logo).
 const logos = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/landing/*.{png,jpg,jpeg,svg,webp}',
   { eager: true }
 );
 
-function resolveLogo(path: string): ImageMetadata {
-  const key = path.startsWith('/') ? path : `/${path}`;
-  const mod = logos[key];
-  if (!mod) {
-    throw new Error(
-      `Landing logo "${path}" not found in src/assets/landing. Known logos:\n${Object.keys(logos).join('\n')}`
-    );
-  }
-  return mod.default;
+type Entry = { name?: string; logo?: string; href?: string; blurb?: string; featured?: boolean };
+
+function clean(items: Entry[]) {
+  return items
+    .filter((e) => e && Object.values(e).some((v) => (typeof v === 'string' ? v.trim() !== '' : v)))
+    .map((e) => {
+      const path = e.logo ? (e.logo.startsWith('/') ? e.logo : `/${e.logo}`) : '';
+      return {
+        name: e.name?.trim() ?? '',
+        href: e.href?.trim() || undefined,
+        blurb: e.blurb?.trim() ?? '',
+        featured: e.featured === true,
+        logo: logos[path]?.default as ImageMetadata | undefined,
+      };
+    });
 }
 
-const sponsorSchema = z.object({
-  name: z.string().min(1),
-  logo: z.string().min(1),
-  href: z.string().url(),
-  blurb: z.string().min(1),
-});
+export const sponsors = clean(sponsorsJson.sponsors as Entry[]);
 
-const associationSchema = z.object({
-  name: z.string().min(1),
-  logo: z.string().min(1),
-  href: z.string().url(),
-  featured: z.boolean().default(false),
-});
-
-export const sponsors = z
-  .array(sponsorSchema)
-  .parse(sponsorsJson.sponsors)
-  .map((s) => ({ ...s, logo: resolveLogo(s.logo) }));
-
-export const associations = z
-  .array(associationSchema)
-  .parse(associationsJson.associations)
-  .map((a) => ({ ...a, logo: resolveLogo(a.logo) }));
+export const associations = clean(associationsJson.associations as Entry[]);
