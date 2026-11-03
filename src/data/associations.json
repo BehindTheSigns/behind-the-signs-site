@@ -25,15 +25,15 @@
       "featured": false
     },
     {
-      "name": "Midwest Sign Association",
-      "logo": "/src/assets/landing/MSA Logo High Res.jpg",
-      "href": "https://msassn.org/membership",
-      "featured": false
-    },
-    {
       "name": "British Sign & Graphics Association",
       "logo": "/src/assets/landing/BSGA Main White background use only-1.png",
       "href": "https://uksigns.org/how-to-join/isa-uk-subscription-scales/",
+      "featured": false
+    },
+    {
+      "name": "Midwest Sign Association",
+      "logo": "/src/assets/landing/MSA Logo High Res.jpg",
+      "href": "https://msassn.org/membership",
       "featured": false
     }
   ]
