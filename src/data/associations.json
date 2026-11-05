@@ -41,6 +41,12 @@
       "logo": "/src/assets/landing/BSGA Main White background use only-1.png",
       "href": "https://uksigns.org/how-to-join/isa-uk-subscription-scales",
       "featured": false
+    },
+    {
+      "name": "Australian Sign & Graphics Association",
+      "logo": "/src/assets/landing/ASGA LOGO_2022_TRANSPARENT-PNG-1000px.png",
+      "href": "https://signs.org.au/",
+      "featured": false
     }
   ]
 }
