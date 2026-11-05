@@ -19,21 +19,27 @@
       "featured": false
     },
     {
-      "name": "Sign Association of Canada",
-      "logo": "/src/assets/landing/assoc-sac.png",
-      "href": "https://sac-ace.ca/membership/",
-      "featured": false
-    },
-    {
       "name": "Midwest Sign Association",
       "logo": "/src/assets/landing/MSA Logo High Res.jpg",
       "href": "https://msassn.org/membership",
       "featured": false
     },
     {
+      "name": "Sign Association of Canada",
+      "logo": "/src/assets/landing/assoc-sac.png",
+      "href": "https://sac-ace.ca/membership/",
+      "featured": false
+    },
+    {
       "name": "British Sign & Graphics Association",
       "logo": "/src/assets/landing/BSGA Main White background use only-1.png",
       "href": "https://uksigns.org/how-to-join/isa-uk-subscription-scales/",
+      "featured": false
+    },
+    {
+      "name": "Ontario Sign Association",
+      "logo": "/src/assets/landing/OSA Horizontal Logo.jpg",
+      "href": "https://ontariosignassociation.com/Why-Join",
       "featured": false
     }
   ]
