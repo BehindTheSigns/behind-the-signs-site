@@ -67,15 +67,15 @@
       "featured": false
     },
     {
-      "name": "Utah Sign Association",
-      "logo": "/src/assets/landing/USA-logo_Transparent.webp",
-      "href": "https://www.utahsign.org/",
-      "featured": false
-    },
-    {
       "name": "Nevada Sign Association",
       "logo": "/src/assets/landing/NSA-Logo.png",
       "href": "https://nevadasign.org/",
+      "featured": false
+    },
+    {
+      "name": "Utah Sign Association",
+      "logo": "/src/assets/landing/USA-logo_Transparent.webp",
+      "href": "https://www.utahsign.org/",
       "featured": false
     },
     {
