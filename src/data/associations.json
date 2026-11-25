@@ -77,6 +77,12 @@
       "logo": "/src/assets/landing/NZSDA-Logo.png",
       "href": "https://nzsda.org.nz/",
       "featured": false
+    },
+    {
+      "name": "Colorado Sign Association",
+      "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
+      "href": "https://cosigns.org/",
+      "featured": false
     }
   ]
 }
