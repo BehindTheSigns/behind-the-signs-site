@@ -43,6 +43,12 @@
       "featured": false
     },
     {
+      "name": "Colorado Sign Association",
+      "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
+      "href": "https://cosigns.org/",
+      "featured": false
+    },
+    {
       "name": "Sign Association of Canada",
       "logo": "/src/assets/landing/assoc-sac.png",
       "href": "https://sac-ace.ca/membership/",
@@ -76,12 +82,6 @@
       "name": "New Zealand Sign & Display Association",
       "logo": "/src/assets/landing/NZSDA-Logo.png",
       "href": "https://nzsda.org.nz/",
-      "featured": false
-    },
-    {
-      "name": "Colorado Sign Association",
-      "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
-      "href": "https://cosigns.org/",
       "featured": false
     }
   ]
