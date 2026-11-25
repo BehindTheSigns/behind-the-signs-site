@@ -37,15 +37,15 @@
       "featured": false
     },
     {
-      "name": "Northeast States Sign Association",
-      "logo": "/src/assets/landing/nssa.png",
-      "href": "https://nssasign.org/",
-      "featured": false
-    },
-    {
       "name": "Colorado Sign Association",
       "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
       "href": "https://cosigns.org/",
+      "featured": false
+    },
+    {
+      "name": "Northeast States Sign Association",
+      "logo": "/src/assets/landing/nssa.png",
+      "href": "https://nssasign.org/",
       "featured": false
     },
     {
