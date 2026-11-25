@@ -25,6 +25,12 @@
       "featured": false
     },
     {
+      "name": "Great Lake Sign Association",
+      "logo": "/src/assets/landing/unnamed.png",
+      "href": "https://www.greatlakessign.org/ ",
+      "featured": false
+    },
+    {
       "name": "Sign Association of Canada",
       "logo": "/src/assets/landing/assoc-sac.png",
       "href": "https://sac-ace.ca/membership/",
