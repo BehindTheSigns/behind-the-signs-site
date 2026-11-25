@@ -61,6 +61,12 @@
       "featured": false
     },
     {
+      "name": "Utah Sign Association",
+      "logo": "/src/assets/landing/USA-logo_Transparent.webp",
+      "href": "https://www.utahsign.org/",
+      "featured": false
+    },
+    {
       "name": "Sign Association of Canada",
       "logo": "/src/assets/landing/assoc-sac.png",
       "href": "https://sac-ace.ca/membership/",
