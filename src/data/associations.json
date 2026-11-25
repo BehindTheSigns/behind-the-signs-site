@@ -37,15 +37,15 @@
       "featured": false
     },
     {
-      "name": "Colorado Sign Association",
-      "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
-      "href": "https://cosigns.org/",
-      "featured": false
-    },
-    {
       "name": "Southern States Sign Association (SSSA)",
       "logo": "/src/assets/landing/SSSA-LOGO_COLOR.jpg",
       "href": "https://southernstatessigns.org/",
+      "featured": false
+    },
+    {
+      "name": "Colorado Sign Association",
+      "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
+      "href": "https://cosigns.org/",
       "featured": false
     },
     {
