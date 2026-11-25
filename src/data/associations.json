@@ -25,15 +25,15 @@
       "featured": false
     },
     {
-      "name": "Midwest Sign Association",
-      "logo": "/src/assets/landing/midwest.png",
-      "href": "https://msassn.org/membership",
-      "featured": false
-    },
-    {
       "name": "Great Lakes Sign Association",
       "logo": "/src/assets/landing/Screenshot 2026-11-25 at 3.22.39 PM.png",
       "href": "https://www.greatlakessign.org/ ",
+      "featured": false
+    },
+    {
+      "name": "Midwest Sign Association",
+      "logo": "/src/assets/landing/midwest.png",
+      "href": "https://msassn.org/membership",
       "featured": false
     },
     {
