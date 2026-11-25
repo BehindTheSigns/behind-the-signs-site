@@ -43,6 +43,12 @@
       "featured": false
     },
     {
+      "name": "California Sign Association (CSA)",
+      "logo": "/src/assets/landing/UiTGpXrd_400x400.png",
+      "href": "https://calsign.org/",
+      "featured": false
+    },
+    {
       "name": "Colorado Sign Association",
       "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
       "href": "https://cosigns.org/",
