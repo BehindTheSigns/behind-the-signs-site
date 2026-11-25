@@ -37,6 +37,12 @@
       "featured": false
     },
     {
+      "name": "Alberta Sign Association",
+      "logo": "/src/assets/landing/ASA_Logo.jpg",
+      "href": "https://www.albertasigns.com/",
+      "featured": false
+    },
+    {
       "name": "Ontario Sign Association",
       "logo": "/src/assets/landing/OSA Horizontal Logo.jpg",
       "href": "https://ontariosignassociation.com/Why-Join",
