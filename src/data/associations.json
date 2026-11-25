@@ -43,6 +43,12 @@
       "featured": false
     },
     {
+      "name": "Southern States Sign Association (SSSA)",
+      "logo": "/src/assets/landing/SSSA-LOGO_COLOR.jpg",
+      "href": "https://southernstatessigns.org/",
+      "featured": false
+    },
+    {
       "name": "Northeast States Sign Association",
       "logo": "/src/assets/landing/nssa.png",
       "href": "https://nssasign.org/",
