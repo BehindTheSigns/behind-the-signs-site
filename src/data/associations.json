@@ -49,6 +49,12 @@
       "featured": false
     },
     {
+      "name": "Northwest Sign Council",
+      "logo": "/src/assets/landing/NWSC-Logo.webp",
+      "href": "https://www.nwsigncouncil.org/",
+      "featured": false
+    },
+    {
       "name": "Northeast States Sign Association",
       "logo": "/src/assets/landing/nssa.png",
       "href": "https://nssasign.org/",
@@ -88,12 +94,6 @@
       "name": "New Zealand Sign & Display Association",
       "logo": "/src/assets/landing/NZSDA-Logo.png",
       "href": "https://nzsda.org.nz/",
-      "featured": false
-    },
-    {
-      "name": "Northwest Sign Council",
-      "logo": "/src/assets/landing/NWSC-Logo.webp",
-      "href": "https://www.nwsigncouncil.org/",
       "featured": false
     }
   ]
