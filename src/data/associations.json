@@ -107,6 +107,12 @@
       "logo": "/src/assets/landing/NZSDA-Logo.png",
       "href": "https://nzsda.org.nz/",
       "featured": false
+    },
+    {
+      "name": "Arizona Sign Association",
+      "logo": "/src/assets/landing/images-1.jpg",
+      "href": "https://arizonasign.org/",
+      "featured": false
     }
   ]
 }
