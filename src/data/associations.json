@@ -49,6 +49,12 @@
       "featured": false
     },
     {
+      "name": "Arizona Sign Association",
+      "logo": "/src/assets/landing/images-1.jpg",
+      "href": "https://arizonasign.org/",
+      "featured": false
+    },
+    {
       "name": "Colorado Sign Association",
       "logo": "/src/assets/landing/CSA-cropped-448x190.jpg",
       "href": "https://cosigns.org/",
@@ -106,12 +112,6 @@
       "name": "New Zealand Sign & Display Association",
       "logo": "/src/assets/landing/NZSDA-Logo.png",
       "href": "https://nzsda.org.nz/",
-      "featured": false
-    },
-    {
-      "name": "Arizona Sign Association",
-      "logo": "/src/assets/landing/images-1.jpg",
-      "href": "https://arizonasign.org/",
       "featured": false
     }
   ]
