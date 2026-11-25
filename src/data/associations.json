@@ -37,6 +37,12 @@
       "featured": false
     },
     {
+      "name": "Northeast States Sign Association",
+      "logo": "/src/assets/landing/nssa.png",
+      "href": "https://nssasign.org/",
+      "featured": false
+    },
+    {
       "name": "Sign Association of Canada",
       "logo": "/src/assets/landing/assoc-sac.png",
       "href": "https://sac-ace.ca/membership/",
