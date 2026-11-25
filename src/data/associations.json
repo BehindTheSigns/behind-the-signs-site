@@ -113,6 +113,12 @@
       "logo": "/src/assets/landing/NZSDA-Logo.png",
       "href": "https://nzsda.org.nz/",
       "featured": false
+    },
+    {
+      "name": "Nevada Sign Association",
+      "logo": "/src/assets/landing/NSA-Logo.png",
+      "href": "https://nevadasign.org/",
+      "featured": false
     }
   ]
 }
