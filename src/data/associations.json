@@ -55,15 +55,15 @@
       "featured": false
     },
     {
-      "name": "Northeast States Sign Association",
-      "logo": "/src/assets/landing/nssa.png",
-      "href": "https://nssasign.org/",
-      "featured": false
-    },
-    {
       "name": "Utah Sign Association",
       "logo": "/src/assets/landing/USA-logo_Transparent.webp",
       "href": "https://www.utahsign.org/",
+      "featured": false
+    },
+    {
+      "name": "Northeast States Sign Association",
+      "logo": "/src/assets/landing/nssa.png",
+      "href": "https://nssasign.org/",
       "featured": false
     },
     {
