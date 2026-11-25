@@ -19,6 +19,12 @@
       "featured": false
     },
     {
+      "name": "Tri-State Sign Association",
+      "logo": "/src/assets/landing/TSSA_Logo.svg",
+      "href": "https://tristatesign.org/",
+      "featured": false
+    },
+    {
       "name": "Midwest Sign Association",
       "logo": "/src/assets/landing/MSA Logo High Res.jpg",
       "href": "https://msassn.org/membership",
